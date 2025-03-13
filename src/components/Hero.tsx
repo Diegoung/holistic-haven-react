@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
             <Button className="holistic-btn-primary">Reserva tu sesión</Button>
             <Button variant="outline" className="border-holistic-purple text-holistic-purple hover:bg-holistic-purple hover:text-white">
-              Conoce nuestros servicios
+              Conoce nuestros serviciosxxx
             </Button>
           </div>
         </div>
