@@ -11,10 +11,10 @@ const Footer: React.FC = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <Leaf className="h-6 w-6 text-holistic-purple" />
-              <span className="font-serif text-xl font-semibold">HolisticHaven</span>
+              <span className="font-serif text-xl font-semibold">Escuela Holistica DMF</span>
             </div>
             <p className="text-white/70">
-              Centro holístico dedicado a promover el bienestar integral a través de terapias 
+              Escuela holística dedicada a promover el bienestar integral a través de terapias 
               naturales y prácticas ancestrales.
             </p>
             <div className="flex space-x-4">
@@ -107,14 +107,14 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center space-x-3">
                 <Mail size={18} className="text-holistic-purple" />
-                <span className="text-white/70">info@holistichaven.com</span>
+                <span className="text-white/70">info@escuelaholisticadmf.com</span>
               </li>
             </ul>
           </div>
         </div>
         
         <div className="border-t border-white/10 mt-10 pt-6 text-center text-white/50 text-sm">
-          <p>© {new Date().getFullYear()} HolisticHaven. Todos los derechos reservados.</p>
+          <p>© {new Date().getFullYear()} Escuela Holistica DMF. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>

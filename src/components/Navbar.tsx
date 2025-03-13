@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
       <div className="holistic-container flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
           <Leaf className="h-6 w-6 text-holistic-purple" />
-          <span className="font-serif text-xl font-semibold text-holistic-dark">HolisticHaven</span>
+          <span className="font-serif text-xl font-semibold text-holistic-dark">Escuela Holistica DMF</span>
         </Link>
 
         {/* Desktop Navigation */}

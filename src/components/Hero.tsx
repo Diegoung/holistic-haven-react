@@ -8,7 +8,7 @@ const Hero: React.FC = () => {
       <div className="holistic-container">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="holistic-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Encuentra el equilibrio para tu cuerpo y mente
+            Escuela Holistica DMF
           </h1>
           <p className="text-lg md:text-xl text-holistic-dark/80 mb-8">
             Descubre nuestro enfoque holístico para la salud y el bienestar. 
