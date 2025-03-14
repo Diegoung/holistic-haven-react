@@ -159,3 +159,4 @@ const Contact: React.FC = () => {
 
 export default Contact;
 
+>>>>>>> fd0d2451f5fb18196b5f8d6ba0eb7cccc49482c7
