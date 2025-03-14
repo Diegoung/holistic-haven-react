@@ -46,7 +46,7 @@ const Contact: React.FC = () => {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="contacto@terapiasholisticasdmf.com"
+                      placeholder="email"
                       className="bg-white border-holistic-lavender focus:border-holistic-purple"
                       required
                     />
