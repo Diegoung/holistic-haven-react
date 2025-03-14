@@ -1,71 +1,15 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
-import { useToast } from "@/hooks/use-toast";
-import emailjs from 'emailjs-com';
 
 const Contact: React.FC = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [id]: value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      // Configura aquí tus IDs de EmailJS
-      const serviceId = 'default_service'; // Deberás crear un servicio en EmailJS
-      const templateId = 'template_id'; // Deberás crear una plantilla en EmailJS
-      const userId = 'user_id'; // Tu User ID de EmailJS
-      
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message
-      };
-
-      await emailjs.send(serviceId, templateId, templateParams, userId);
-      
-      toast({
-        title: "Mensaje enviado",
-        description: "Tu mensaje ha sido enviado correctamente. Nos pondremos en contacto contigo pronto.",
-      });
-      
-      // Limpiar el formulario
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-    } catch (error) {
-      console.error('Error al enviar el mensaje:', error);
-      toast({
-        title: "Error",
-        description: "No se pudo enviar tu mensaje. Por favor, inténtalo de nuevo más tarde.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Aquí iría la lógica para enviar el formulario
+    console.log('Formulario enviado');
   };
 
   return (
@@ -93,8 +37,6 @@ const Contact: React.FC = () => {
                       placeholder="Tu nombre"
                       className="bg-white border-holistic-lavender focus:border-holistic-purple"
                       required
-                      value={formData.name}
-                      onChange={handleChange}
                     />
                   </div>
                   <div className="space-y-2">
@@ -107,8 +49,6 @@ const Contact: React.FC = () => {
                       placeholder="email"
                       className="bg-white border-holistic-lavender focus:border-holistic-purple"
                       required
-                      value={formData.email}
-                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -122,8 +62,6 @@ const Contact: React.FC = () => {
                     placeholder="Asunto de tu mensaje"
                     className="bg-white border-holistic-lavender focus:border-holistic-purple"
                     required
-                    value={formData.subject}
-                    onChange={handleChange}
                   />
                 </div>
                 
@@ -136,17 +74,11 @@ const Contact: React.FC = () => {
                     placeholder="Escribe tu mensaje aquí..."
                     className="min-h-[150px] bg-white border-holistic-lavender focus:border-holistic-purple"
                     required
-                    value={formData.message}
-                    onChange={handleChange}
                   />
                 </div>
                 
-                <Button 
-                  type="submit" 
-                  className="holistic-btn-primary w-full"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
+                <Button type="submit" className="holistic-btn-primary w-full">
+                  Enviar Mensaje
                 </Button>
               </form>
             </CardContent>
