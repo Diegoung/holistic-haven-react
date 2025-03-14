@@ -14,9 +14,9 @@ const Contact: React.FC = () => {
 
   return (
     <section className="py-16 bg-holistic-mint">
-      <div className="holistic-container">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="holistic-heading text-3xl md:text-4xl font-bold mb-4">Contáctanos</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-holistic-dark">Contáctanos</h2>
           <p className="text-lg text-holistic-dark/80 max-w-2xl mx-auto">
             Estamos aquí para ayudarte en tu camino hacia el bienestar integral. Envíanos un mensaje
             y te responderemos a la brevedad.
@@ -24,7 +24,7 @@ const Contact: React.FC = () => {
         </div>
         
         <div className="max-w-3xl mx-auto">
-          <Card className="holistic-card">
+          <Card className="bg-white shadow-md">
             <CardContent className="p-6">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -46,7 +46,7 @@ const Contact: React.FC = () => {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="email"
+                      placeholder="tu@email.com"
                       className="bg-white border-holistic-lavender focus:border-holistic-purple"
                       required
                     />
@@ -77,7 +77,10 @@ const Contact: React.FC = () => {
                   />
                 </div>
                 
-                <Button type="submit" className="holistic-btn-primary w-full">
+                <Button 
+                  type="submit" 
+                  className="w-full bg-holistic-purple hover:bg-holistic-purple/90 text-white"
+                >
                   Enviar Mensaje
                 </Button>
               </form>
