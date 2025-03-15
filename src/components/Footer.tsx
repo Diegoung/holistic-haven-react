@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <Leaf className="h-6 w-6 text-holistic-purple" />
-              <span className="font-serif text-xl font-semibold">Escuela Holistica DMF</span>
+              <span className="font-serif text-xl font-semibold">Escuela Holistica DMF </span>
             </div>
             <p className="text-white/70">
               Escuela holística dedicada a promover el bienestar integral a través de terapias 
@@ -98,16 +98,16 @@ const Footer: React.FC = () => {
               <li className="flex items-center space-x-3">
                 <MapPin size={18} className="text-holistic-purple" />
                 <span className="text-white/70">
-                  Calle Serenidad 123, Ciudad Jardín
+                 Argentina
                 </span>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone size={18} className="text-holistic-purple" />
-                <span className="text-white/70">+34 123 456 789</span>
+                <span className="text-white/70">+54 9 3413883926</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail size={18} className="text-holistic-purple" />
-                <span className="text-white/70">info@escuelaholisticadmf.com</span>
+                <span className="text-white/70">contacto@terapiasholisticasdmf.com</span>
               </li>
             </ul>
           </div>
