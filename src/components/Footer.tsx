@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Leaf, Mail, Phone, MapPin, Instagram, Facebook, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -75,10 +74,20 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/testimonios" className="text-white/70 hover:text-holistic-purple transition-colors">
-                  Testimonios
-                </Link>
-              </li>
+  <a
+    href="#testimonios"
+    onClick={(e) => {
+      e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+      const testimoniosSection = document.getElementById("testimonios");
+      if (testimoniosSection) {
+        testimoniosSection.scrollIntoView({ behavior: "smooth" }); // Desplazamiento suave
+      }
+    }}
+    className="text-white/70 hover:text-holistic-purple transition-colors"
+  >
+    Testimonios
+  </a>
+</li>
               <li>
                 <Link to="/blog" className="text-white/70 hover:text-holistic-purple transition-colors">
                   Blog

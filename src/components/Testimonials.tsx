@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -24,7 +23,7 @@ const TestimonialCard: React.FC<TestimonialProps> = ({ content, name, role, avat
       <CardFooter className="border-t border-holistic-mint pt-4">
         <div className="flex items-center space-x-4">
           <Avatar>
-            <AvatarImage src={avatar} alt={name} />
+            <AvatarImage src={avatar} alt={`Avatar de ${name}`} /> {/* Mejora en el alt */}
             <AvatarFallback>{name.charAt(0)}</AvatarFallback>
           </Avatar>
           <div>
@@ -60,7 +59,7 @@ const Testimonials: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 bg-holistic-light">
+    <section id="testimonios" className="py-16 bg-holistic-light">
       <div className="holistic-container">
         <div className="text-center mb-12">
           <h2 className="holistic-heading text-3xl md:text-4xl font-bold mb-4">Lo que dicen nuestros clientes</h2>

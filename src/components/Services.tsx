@@ -19,8 +19,7 @@ const ServiceCard: React.FC<{
       </CardHeader>
       <CardContent>
         <p className="text-sm text-holistic-dark/80">
-          Nuestras terapias están diseñadas para brindar bienestar completo y aliviar
-          malestares físicos y emocionales.
+          
         </p>
       </CardContent>
     </Card>
@@ -31,34 +30,42 @@ const Services: React.FC = () => {
   const services = [
     {
       icon: <Flower className="h-6 w-6 text-holistic-purple" />,
-      title: "Terapias Naturales",
-      description: "Tratamientos basados en elementos naturales para restaurar el equilibrio."
+      title: "Pack holistico 22 cursos",
+      description: "Runas,Magia e interpretación con velas, Registros akashicos, Vidas pasadas kharma y Dharma, Limpieza energetica, Corte de cordones energéticos, Constestaciones familiares, Los Chakas y aura, Radiestesia, Hoponopono, Gemoterapia, Sanación con ángeles, Pendulo hebreo, Sanación árbol genealógico, Flores de Bach, Rocio auricos y sahumos, Sanación niño interior, Ayurveda, Sanación popular, Magia wicca, Biodescodificacion, Sanación linaje femenino y rito del útero."
     },
+
+    
     {
       icon: <Heart className="h-6 w-6 text-holistic-purple" />,
-      title: "Meditación Guiada",
-      description: "Sesiones para calmar la mente y conectar con tu esencia interior."
+      title: "Taller aprender a meditar",
+      description: "Descubre cómo meditar con técnicas simples para calmar la mente, reducir el estrés y conectar contigo."
     },
     {
       icon: <Sun className="h-6 w-6 text-holistic-purple" />,
-      title: "Yoga Terapéutico",
-      description: "Posturas y respiración para fortalecer cuerpo y espíritu."
+      title: "Yoga",
+      description: "Aprende yoga con técnicas para equilibrar cuerpo y mente, mejorar tu bienestar y conectar contigo."
     },
     {
       icon: <Moon className="h-6 w-6 text-holistic-purple" />,
-      title: "Aromaterapia",
-      description: "Esencias naturales para equilibrar emociones y energía vital."
+      title: "Barras de access",
+      description: "Descubre Barras de Access para liberar bloqueos, relajar la mente y potenciar el bienestar en tu vida."
     },
     {
       icon: <FlowerIcon className="h-6 w-6 text-holistic-purple" />,
-      title: "Masaje Holístico",
-      description: "Técnicas ancestrales para liberar tensiones y bloqueos energéticos."
+      title: "Reflexologia",
+      description: "Descubre la Reflexología para aliviar tensiones, mejorar tu bienestar y equilibrar tu energía a través de los pies."
     },
     {
       icon: <HeartPulse className="h-6 w-6 text-holistic-purple" />,
-      title: "Nutrición Consciente",
-      description: "Alimentación enfocada en nutrir cuerpo, mente y espíritu."
+      title: "Astrologia y Numerologia",
+      description: "Explora Astrología y Numerología para comprender tu energía, descubrir tu propósito y armonizar tu vida."
     },
+    {
+      icon: <HeartPulse className="h-6 w-6 text-holistic-purple" />,
+      title: "Reiki",
+      description: "Experimenta Reiki para equilibrar tu energía, reducir el estrés y promover sanación y bienestar integral."
+    },
+
   ];
 
   return (
