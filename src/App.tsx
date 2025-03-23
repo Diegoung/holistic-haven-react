@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Contact from "./components/Contact";
+import Testimonials from "./components/Testimonials"; // Importa el componente Testimonials
 import WhatsAppButton from "./components/WhatsAppButton.tsx";
 
 const queryClient = new QueryClient();
@@ -22,7 +23,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/servicios" element={<Contact />} />
-          {/* Eliminamos la ruta /testimonios */}
+          <Route path="/testimonios" element={<Testimonials />} /> {/* Agrega la ruta /testimonios */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

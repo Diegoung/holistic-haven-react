@@ -10,25 +10,37 @@ const Footer: React.FC = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <Leaf className="h-6 w-6 text-holistic-purple" />
-              <span className="font-serif text-xl font-semibold">Escuela Holistica DMF </span>
+              <span className="font-serif text-xl font-semibold">Escuela Holistica DMF</span>
             </div>
             <p className="text-white/70">
               Escuela holística dedicada a promover el bienestar integral a través de terapias 
               naturales y prácticas ancestrales.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-white/70 hover:text-holistic-purple transition-colors">
+              <a
+                href="https://instagram.com/tuperfil"
+                className="text-white/70 hover:text-holistic-purple transition-colors"
+                aria-label="Instagram"
+              >
                 <Instagram size={20} />
               </a>
-              <a href="#" className="text-white/70 hover:text-holistic-purple transition-colors">
+              <a
+                href="https://facebook.com/tuperfil"
+                className="text-white/70 hover:text-holistic-purple transition-colors"
+                aria-label="Facebook"
+              >
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-white/70 hover:text-holistic-purple transition-colors">
+              <a
+                href="https://twitter.com/tuperfil"
+                className="text-white/70 hover:text-holistic-purple transition-colors"
+                aria-label="Twitter"
+              >
                 <Twitter size={20} />
               </a>
             </div>
           </div>
-          
+
           <div>
             <h3 className="font-serif text-lg font-semibold mb-4">Servicios</h3>
             <ul className="space-y-2">
@@ -59,7 +71,7 @@ const Footer: React.FC = () => {
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-serif text-lg font-semibold mb-4">Enlaces Rápidos</h3>
             <ul className="space-y-2">
@@ -74,20 +86,10 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-  <a
-    href="#testimonios"
-    onClick={(e) => {
-      e.preventDefault(); // Evita el comportamiento predeterminado del enlace
-      const testimoniosSection = document.getElementById("testimonios");
-      if (testimoniosSection) {
-        testimoniosSection.scrollIntoView({ behavior: "smooth" }); // Desplazamiento suave
-      }
-    }}
-    className="text-white/70 hover:text-holistic-purple transition-colors"
-  >
-    Testimonios
-  </a>
-</li>
+                <Link to="/testimonios" className="text-white/70 hover:text-holistic-purple transition-colors">
+                  Testimonios
+                 </Link>
+              </li>
               <li>
                 <Link to="/blog" className="text-white/70 hover:text-holistic-purple transition-colors">
                   Blog
@@ -100,15 +102,13 @@ const Footer: React.FC = () => {
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-serif text-lg font-semibold mb-4">Contacto</h3>
             <ul className="space-y-3">
               <li className="flex items-center space-x-3">
                 <MapPin size={18} className="text-holistic-purple" />
-                <span className="text-white/70">
-                 Argentina
-                </span>
+                <span className="text-white/70">Argentina</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone size={18} className="text-holistic-purple" />
@@ -121,7 +121,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
         </div>
-        
+
         <div className="border-t border-white/10 mt-10 pt-6 text-center text-white/50 text-sm">
           <p>© {new Date().getFullYear()} Escuela Holistica DMF. Todos los derechos reservados.</p>
         </div>
