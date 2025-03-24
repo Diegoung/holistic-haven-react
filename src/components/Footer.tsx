@@ -39,61 +39,43 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="font-serif text-lg font-semibold mb-4">Servicios</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/terapias" className="text-white/70 hover:text-holistic-purple transition-colors">
-                  Terapias Naturales
-                </Link>
-              </li>
-              <li>
-                <Link to="/meditacion" className="text-white/70 hover:text-holistic-purple transition-colors">
-                  Meditación Guiada
-                </Link>
-              </li>
-              <li>
-                <Link to="/yoga" className="text-white/70 hover:text-holistic-purple transition-colors">
-                  Yoga Terapéutico
-                </Link>
-              </li>
-              <li>
-                <Link to="/aromaterapia" className="text-white/70 hover:text-holistic-purple transition-colors">
-                  Aromaterapia
-                </Link>
-              </li>
-              <li>
-                <Link to="/masajes" className="text-white/70 hover:text-holistic-purple transition-colors">
-                  Masaje Holístico
-                </Link>
-              </li>
-            </ul>
-          </div>
+  <h3 className="font-serif text-lg font-semibold mb-4">Servicios</h3>
+  <ul className="space-y-2">
+    <li>
+      <p className="text-white/70">Consultas Personalizadas</p>
+    </li>
+    <li>
+      <p className="text-white/70">Seguimiento de estudio</p>
+    </li>
+    <li>
+      <p className="text-white/70">Profesores en línea</p>
+    </li>
+    <li>
+      <p className="text-white/70">Material de estudio en PDF y Videos</p>
+    </li>
+    <li>
+      <p className="text-white/70">Material enviado por correo o Whatsapp</p>
+    </li>
+  </ul>
+</div>
 
           <div>
             <h3 className="font-serif text-lg font-semibold mb-4">Enlaces Rápidos</h3>
             <ul className="space-y-2">
-              <li>
-                <Link to="/" className="text-white/70 hover:text-holistic-purple transition-colors">
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link to="/sobre-nosotros" className="text-white/70 hover:text-holistic-purple transition-colors">
-                  Sobre Nosotros
-                </Link>
-              </li>
+              
+              
               <li>
                 <Link to="/testimonios" className="text-white/70 hover:text-holistic-purple transition-colors">
                   Testimonios
                  </Link>
               </li>
               <li>
-                <Link to="/blog" className="text-white/70 hover:text-holistic-purple transition-colors">
-                  Blog
+                <Link to="/Gallery" className="text-white/70 hover:text-holistic-purple transition-colors">
+                  Galeria
                 </Link>
               </li>
               <li>
-                <Link to="/contacto" className="text-white/70 hover:text-holistic-purple transition-colors">
+                <Link to="/contact" className="text-white/70 hover:text-holistic-purple transition-colors">
                   Contacto
                 </Link>
               </li>
