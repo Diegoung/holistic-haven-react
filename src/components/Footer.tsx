@@ -18,26 +18,23 @@ const Footer: React.FC = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="https://instagram.com/tuperfil"
+                href="https://www.instagram.com/invites/contact/?i=anrtygkmnlyw&utm_content=tli3e60"
+                target="_blank"
                 className="text-white/70 hover:text-holistic-purple transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram size={20} />
               </a>
               <a
-                href="https://facebook.com/tuperfil"
-                className="text-white/70 hover:text-holistic-purple transition-colors"
-                aria-label="Facebook"
+                 href="https://www.facebook.com/profile.php?id=100087199578566&mibextid=ZbWKwL"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="text-white/70 hover:text-holistic-purple transition-colors"
+                 aria-label="Facebook"
               >
-                <Facebook size={20} />
-              </a>
-              <a
-                href="https://twitter.com/tuperfil"
-                className="text-white/70 hover:text-holistic-purple transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter size={20} />
-              </a>
+                 <Facebook size={20} />
+               </a>
+              
             </div>
           </div>
 
