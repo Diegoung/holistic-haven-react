@@ -34,7 +34,7 @@ const Index: React.FC = () => {
             <div className="space-y-6">
               <h3 className="holistic-heading text-2xl font-semibold">Nuestro Enfoque</h3>
               <p className="text-holistic-dark/80">
-                En HolisticHaven, entendemos que cada persona es única, con necesidades y 
+                En Terapias Holisticas DMF, entendemos que cada persona es única, con necesidades y 
                 experiencias distintas. Por eso, adaptamos nuestras terapias para ofrecer un 
                 tratamiento personalizado que aborde tus necesidades específicas.
               </p>
