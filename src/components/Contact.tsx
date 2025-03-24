@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -9,55 +8,38 @@ import emailjs from '@emailjs/browser';;
 
 const Contact: React.FC = () => {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
+  const form = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [id]: value
-    }));
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // Configura aquí tus IDs de EmailJS
-      const serviceId = 'default_service'; // Deberás crear un servicio en EmailJS
-      const templateId = 'template_id'; // Deberás crear una plantilla en EmailJS
-      const userId = 'user_id'; // Tu User ID de EmailJS
-      
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message
-      };
+      if (!form.current) {
+        throw new Error("Form reference not found");
+      }
 
-      await emailjs.send(serviceId, templateId, templateParams, userId);
-      
+      const formData = new FormData(form.current);
+      console.log("Datos enviados:", Object.fromEntries(formData.entries()));
+
+      const result = await emailjs.sendForm(
+        'default_service',   // Service ID
+        'template_3q72zol', // Template ID
+        form.current,       // Form reference
+        'aMWCtUQZtlShW2nBN' // Public API Key
+      );
+
+      console.log('EmailJS response:', result);
+
       toast({
         title: "Mensaje enviado",
         description: "Tu mensaje ha sido enviado correctamente. Nos pondremos en contacto contigo pronto.",
       });
-      
-      // Limpiar el formulario
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
+
+      form.current.reset();
     } catch (error) {
-      console.error('Error al enviar el mensaje:', error);
+      console.error('Error completo:', error);
       toast({
         title: "Error",
         description: "No se pudo enviar tu mensaje. Por favor, inténtalo de nuevo más tarde.",
@@ -82,49 +64,33 @@ const Contact: React.FC = () => {
         <div className="max-w-3xl mx-auto">
           <Card className="holistic-card">
             <CardContent className="p-6">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form ref={form} onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label htmlFor="name" className="block text-sm font-medium text-holistic-dark">
+                    <label htmlFor="from_name" className="block text-sm font-medium text-holistic-dark">
                       Nombre
                     </label>
                     <Input
-                      id="name"
-                      placeholder="Tu nombre"
+                      id="from_name"
+                      name="from_name"  // Coincide con {{from_name}} en EmailJS
+                      placeholder="Tu nombre completo"
                       className="bg-white border-holistic-lavender focus:border-holistic-purple"
                       required
-                      value={formData.name}
-                      onChange={handleChange}
                     />
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="email" className="block text-sm font-medium text-holistic-dark">
+                    <label htmlFor="from_email" className="block text-sm font-medium text-holistic-dark">
                       Email
                     </label>
                     <Input
-                      id="email"
+                      id="from_email"
+                      name="from_email"  // Coincide con {{from_email}} en EmailJS
                       type="email"
-                      placeholder="email"
+                      placeholder="tu@email.com"
                       className="bg-white border-holistic-lavender focus:border-holistic-purple"
                       required
-                      value={formData.email}
-                      onChange={handleChange}
                     />
                   </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <label htmlFor="subject" className="block text-sm font-medium text-holistic-dark">
-                    Asunto
-                  </label>
-                  <Input
-                    id="subject"
-                    placeholder="Asunto de tu mensaje"
-                    className="bg-white border-holistic-lavender focus:border-holistic-purple"
-                    required
-                    value={formData.subject}
-                    onChange={handleChange}
-                  />
                 </div>
                 
                 <div className="space-y-2">
@@ -133,11 +99,10 @@ const Contact: React.FC = () => {
                   </label>
                   <Textarea
                     id="message"
+                    name="message"  // Coincide con {{message}} en EmailJS
                     placeholder="Escribe tu mensaje aquí..."
                     className="min-h-[150px] bg-white border-holistic-lavender focus:border-holistic-purple"
                     required
-                    value={formData.message}
-                    onChange={handleChange}
                   />
                 </div>
                 
@@ -158,4 +123,3 @@ const Contact: React.FC = () => {
 };
 
 export default Contact;
-
