@@ -44,19 +44,19 @@ const Index: React.FC = () => {
               <ul className="space-y-2">
                 <li className="flex items-center space-x-2">
                   <div className="w-2 h-2 rounded-full bg-holistic-purple"></div>
-                  <span>Terapias personalizadas según tus necesidades</span>
+                  <span>Terapias personalizadas según tus necesidades.</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <div className="w-2 h-2 rounded-full bg-holistic-purple"></div>
-                  <span>Certificados individuales</span>
+                  <span>Certificados individuales.</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <div className="w-2 h-2 rounded-full bg-holistic-purple"></div>
-                  <span>Profesionales certificados y con experiencia</span>
+                  <span>Profesionales certificados y con experiencia.</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <div className="w-2 h-2 rounded-full bg-holistic-purple"></div>
-                  <span>Productos digitales creados por nosotros</span>
+                  <span>Productos digitales creados por nosotros.</span>
                 </li>
               </ul>
             </div>
