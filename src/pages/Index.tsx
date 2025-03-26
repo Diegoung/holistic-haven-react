@@ -35,8 +35,8 @@ const Index: React.FC = () => {
               <h3 className="holistic-heading text-2xl font-semibold">Nuestro Enfoque</h3>
               <p className="text-holistic-dark/80">
                 En Terapias Holisticas DMF, entendemos que cada persona es única, con necesidades y 
-                experiencias distintas. Por eso, adaptamos nuestras terapias para ofrecer un 
-                tratamiento personalizado que aborde tus necesidades específicas.
+                experiencias distintas. Por eso, adaptamos nuestros cursos para ofrecer una 
+                enseñanza personalizada que aborde tus necesidades específicas.
               </p>
               <p className="text-holistic-dark/80">
               Combinamos sabiduría ancestral con metodologías modernas en un entorno virtual, donde podrás reconectar contigo mismo, aprender y alcanzar equilibrio desde cualquier lugar.
