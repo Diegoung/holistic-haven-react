@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-holistic-light py-4 px-4 animate-fade-in">
           <div className="flex flex-col space-y-4">
-            <Link to="/servicios" className="text-holistic-dark hover:text-holistic-purple transition-colors py-2">Servicios</Link>
+            <Link to="/servicios" className="text-holistic-dark hover:text-holistic-purple transition-colors py-2">Contactanos</Link>
             <Link to="/cursos" className="text-holistic-dark hover:text-holistic-purple transition-colors py-2">Cursos</Link> {/* Cambiado de /terapias a /cursos */}
             <Link to="/testimonios" className="text-holistic-dark hover:text-holistic-purple transition-colors py-2">Testimonios</Link>
 

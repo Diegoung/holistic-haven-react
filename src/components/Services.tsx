@@ -162,10 +162,10 @@ const Services: React.FC = () => {
     <section className="py-16 bg-holistic-beige">
       <div className="holistic-container">
         <div className="text-center mb-12">
-          <h2 className="holistic-heading text-3xl md:text-4xl font-bold mb-4">Nuestros Servicios</h2>
+          <h2 className="holistic-heading text-3xl md:text-4xl font-bold mb-4">Nuestros Cursos</h2>
           <p className="text-lg text-holistic-dark/80 max-w-2xl mx-auto">
-            Ofrecemos una variedad de terapias y servicios holísticos para nutrir tu cuerpo,
-            mente y espíritu. Cada servicio está diseñado para promover la sanación y el bienestar integral.
+            Ofrecemos una variedad de cursos holísticos para nutrir tu cuerpo,
+            mente y espíritu. Cada uno está diseñado para promover la sanación y el bienestar integral.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

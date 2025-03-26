@@ -42,19 +42,19 @@ const Footer: React.FC = () => {
   <h3 className="font-serif text-lg font-semibold mb-4">Servicios</h3>
   <ul className="space-y-2">
     <li>
-      <p className="text-white/70">Consultas Personalizadas</p>
+      <p className="text-white/70">Consultas Personalizadas.</p>
     </li>
     <li>
-      <p className="text-white/70">Seguimiento de estudio</p>
+      <p className="text-white/70">Seguimiento de estudio.</p>
     </li>
     <li>
-      <p className="text-white/70">Profesores en línea</p>
+      <p className="text-white/70">Profesores en línea.</p>
     </li>
     <li>
-      <p className="text-white/70">Material de estudio en PDF y Videos</p>
+      <p className="text-white/70">Material de estudio en PDF y Videos.</p>
     </li>
     <li>
-      <p className="text-white/70">Material enviado por correo o Whatsapp</p>
+      <p className="text-white/70">El material se envia por correo, Whatsapp o ambos.</p>
     </li>
   </ul>
 </div>

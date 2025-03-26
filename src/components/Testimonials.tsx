@@ -80,7 +80,7 @@ const Testimonials: React.FC = () => {
             Lo que dicen nuestros Alumnos
           </h2>
           <p className="text-lg text-holistic-dark/80 max-w-2xl mx-auto">
-            Descubre cómo nuestras terapias holísticas han transformado la vida
+            Descubre cómo nuestros cursos holísticos han transformado la vida
             de quienes han confiado en nosotros.
           </p>
         </div>
