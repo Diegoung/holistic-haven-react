@@ -77,7 +77,7 @@ const Testimonials: React.FC = () => {
       <div className="holistic-container">
         <div className="text-center mb-12">
           <h2 className="holistic-heading text-3xl md:text-4xl font-bold mb-4">
-            Lo que dicen nuestros clientes
+            Lo que dicen nuestros Alumnos
           </h2>
           <p className="text-lg text-holistic-dark/80 max-w-2xl mx-auto">
             Descubre cómo nuestras terapias holísticas han transformado la vida

@@ -48,7 +48,7 @@ const Index: React.FC = () => {
                 </li>
                 <li className="flex items-center space-x-2">
                   <div className="w-2 h-2 rounded-full bg-holistic-purple"></div>
-                  <span>Ambiente tranquilo y acogedor</span>
+                  <span>Certificados individuales</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <div className="w-2 h-2 rounded-full bg-holistic-purple"></div>
