@@ -39,8 +39,7 @@ const Index: React.FC = () => {
                 tratamiento personalizado que aborde tus necesidades específicas.
               </p>
               <p className="text-holistic-dark/80">
-                Combinamos técnicas ancestrales con conocimientos modernos para crear un 
-                espacio de sanación donde puedas reconectar contigo mismo y encontrar equilibrio.
+              Combinamos sabiduría ancestral con metodologías modernas en un entorno virtual, donde podrás reconectar contigo mismo, aprender y alcanzar equilibrio desde cualquier lugar.
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center space-x-2">

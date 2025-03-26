@@ -51,21 +51,21 @@ const Testimonials: React.FC = () => {
   const testimonials: TestimonialProps[] = [
     {
       content:
-        "Las sesiones de meditación han transformado mi vida por completo. Ahora manejo mejor el estrés y duermo profundamente cada noche.",
+        "Gracias a la Reflexología, he logrado aliviar tensiones y mejorar mi bienestar general. Siento una profunda relajación y un equilibrio energético renovado.",
       name: "María García",
       role: "Profesora",
       avatar: "https://randomuser.me/api/portraits/women/1.jpg",
     },
     {
       content:
-        "El masaje holístico alivió mi dolor crónico de espalda después de años de tratamientos convencionales sin resultados.",
+        "El curso de Biomagnetismo me ha permitido conocer una técnica increíble para restaurar la salud y equilibrar el cuerpo de manera natural. ¡Una experiencia transformadora!",
       name: "Carlos Rodríguez",
       role: "Ingeniero",
       avatar: "https://randomuser.me/api/portraits/men/2.jpg",
     },
     {
       content:
-        "La aromaterapia y las técnicas de respiración me ayudaron a superar mi ansiedad. Estoy muy agradecida por esta experiencia.",
+        "La Activación de la Glándula Pineal ha expandido mi percepción y claridad mental. Me siento más conectado con mi intuición y con una energía renovada.",
       name: "Laura Martínez",
       role: "Diseñadora",
       avatar: "https://randomuser.me/api/portraits/women/3.jpg",

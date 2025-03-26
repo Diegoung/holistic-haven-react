@@ -5,30 +5,42 @@ const Gallery: React.FC = () => {
   const images = [
     {
       url: "https://images.unsplash.com/photo-1600618528240-fb9fc964b853?q=80&w=1170",
-      title: "Masaje Relajante"
+      title: "Meditacion"
     },
     {
-      url: "https://images.unsplash.com/photo-1557977275-d261356f567f?q=80&w=1169",
-      title: "Meditación Guiada"
+      url: "/Auriculoterapia.jpg",
+      title: "Auriculoterapia"
     },
     {
       url: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1220",
-      title: "Yoga Terapéutico"
+      title: "Yoga"
     },
     {
-      url: "https://images.unsplash.com/photo-1620207418302-439b387441b0?q=80&w=1374",
-      title: "Aromaterapia"
+      url: "/Flores de bach.jpg",
+      title: "Flores de Bach"
     },
     {
       url: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1374",
       title: "Terapia con Cristales"
     },
     {
-      url: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1470",
-      title: "Nutrición Consciente"
-    }
+      url: "/Feng Shui.jpg",
+      title: "Feng Shui"
+    },
+    {
+      url: "/Pendulo hebreo.jpg",
+      title: "Pendulo Hebreo"
+    },
+    {
+      url: "/Tarot Marsella.jpg",
+      title: "Tarot Marsella"
+    },
+    {
+      url: "/Radiestesia.jpg",
+      title: "Radiestesia"
+    },
   ];
-
+  
   return (
     <section className="py-16 bg-holistic-beige/50">
       <div className="holistic-container">

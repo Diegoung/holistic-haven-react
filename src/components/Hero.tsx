@@ -7,7 +7,7 @@ const Hero: React.FC = () => {
     <section 
       className="relative py-20 md:py-32 overflow-hidden min-h-screen flex items-center justify-center"
       style={{
-        backgroundImage: 'url(/escuela.jpg)', // Ruta directa desde la carpeta public
+        backgroundImage: 'url(/Terapiasholisticas.jpg)', // Ruta directa desde la carpeta public
         backgroundSize: 'cover', // Ajusta el tamaño para cubrir toda la sección
         backgroundPosition: 'center', // Centra la imagen
         backgroundRepeat: 'no-repeat', // Evita que se repita
