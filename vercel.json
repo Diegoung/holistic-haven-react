@@ -12,8 +12,8 @@
             "value": "true"
           },
           {
-            "key": "SameSite",
-            "value": "None; Secure"
+            "key": "Set-Cookie",
+            "value": "Secure; SameSite=None; Path=/"
           }
         ]
       }
