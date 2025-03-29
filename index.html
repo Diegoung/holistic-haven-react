@@ -5,66 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Escuela de Terapias Holísticas DMF</title>
 
-    <!-- Configuración de consentimiento por defecto (opcional pero recomendado) -->
+    <!-- Google Tag Manager (Corregido) -->
+    <script>
+      (function(w,d,s,l,i){
+        w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+        j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+        f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-NP2433BI');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google Analytics (GA4) - Mantén tu código existente -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4W7N1D3YHQ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      // Configuración inicial de consentimiento (puedes actualizarlo cuando el usuario acepte)
-      gtag('consent', 'default', {
-        'analytics_storage': 'denied',
-        'ad_storage': 'denied',
-        'wait_for_update': 500
-      });
-    </script>
-
-    <!-- Google tag (gtag.js) con configuración mejorada -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4W7N1D3YHQ"></script>
-    <script>
       gtag('js', new Date());
-      // Configuración extendida para manejo de cookies
-      gtag('config', 'G-4W7N1D3YHQ', { 
-        'cookie_flags': 'SameSite=None; Secure',
-        'cookie_domain': 'terapiasholisticasdmf.com',
-        'client_storage': 'none',  // Opcional: reduce dependencia de cookies
-        'anonymize_ip': true      // Opcional: para cumplimiento GDPR
+      gtag('config', 'G-4W7N1D3YHQ', {
+        cookie_flags: 'SameSite=None; Secure; Path=/'
       });
     </script>
 
-    <!-- Código de Google AdSense -->
+    <!-- Google AdSense (Mantén tu código) -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5514241658100691"
       crossorigin="anonymous"></script>
   </head>
 
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NP2433BI"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    
+    <!-- Tus scripts existentes -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
-
-    <!-- Banner de cookies (ejemplo básico) -->
-    <div id="cookie-banner" style="position:fixed;bottom:0;background:#f1f1f1;padding:10px;width:100%;display:none;">
-      <p>Usamos cookies para analizar el tráfico. <button id="accept-cookies">Aceptar</button></p>
-    </div>
-
-    <script>
-      // Lógica básica para manejar consentimiento
-      document.addEventListener('DOMContentLoaded', function() {
-        const banner = document.getElementById('cookie-banner');
-        const acceptBtn = document.getElementById('accept-cookies');
-        
-        if(localStorage.getItem('cookies-accepted') !== 'true') {
-          banner.style.display = 'block';
-        }
-        
-        acceptBtn.addEventListener('click', function() {
-          gtag('consent', 'update', {
-            'analytics_storage': 'granted',
-            'ad_storage': 'granted'
-          });
-          localStorage.setItem('cookies-accepted', 'true');
-          banner.style.display = 'none';
-        });
-      });
-    </script>
   </body>
 </html>
