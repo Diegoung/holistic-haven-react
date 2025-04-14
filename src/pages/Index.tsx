@@ -26,7 +26,7 @@ const Index: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
               <img 
-                src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=1470" 
+                src="Profesor.png" 
                 alt="Bienestar holístico" 
                 className="rounded-lg shadow-md"
               />
