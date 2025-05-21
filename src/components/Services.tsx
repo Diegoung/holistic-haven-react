@@ -155,6 +155,11 @@ const Services: React.FC = () => {
       icon: <Star className="h-6 w-6 text-holistic-purple" />,
       title: "Cirugía Astral",
       description: "Explora la Cirugía Astral para limpiar energías densas, sanar bloqueos y elevar tu vibración espiritual."
+    },
+    {
+      icon: <Eye className="h-6 w-6 text-holistic-purple" />,
+      title: "Parapsicologia",
+      description: "Descubrí la Parapsicología para activar tu intuición, expandir tu mente y potenciar tu energía."
     }
   ];
 
