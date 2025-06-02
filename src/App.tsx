@@ -10,6 +10,7 @@ import Testimonials from "./components/Testimonials"; // Importa el componente T
 import WhatsAppButton from "./components/WhatsAppButton.tsx";
 import Services from "./components/Services"; // Importa el nuevo componente
 import Gallery from "./components/Gallery";
+import PreguntasFrecuentes from './components/PreguntasFrecuentes.tsx';
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/cursos" element={<Services />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/Contact" element={<Contact />} />
+          <Route path="/PreguntasFrecuentes" element={<PreguntasFrecuentes />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

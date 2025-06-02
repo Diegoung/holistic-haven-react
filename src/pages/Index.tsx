@@ -7,6 +7,8 @@ import Gallery from '@/components/Gallery';
 import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import PreguntasFrecuentes from '@/components/PreguntasFrecuentes'; // ✅ Importado
+
 
 const Index: React.FC = () => {
   return (
@@ -63,6 +65,7 @@ const Index: React.FC = () => {
           </div>
         </div>
       </div>
+      <PreguntasFrecuentes />
       <Gallery />
       <Testimonials />
       <Contact />

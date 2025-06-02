@@ -79,6 +79,11 @@ const Footer: React.FC = () => {
                   Contacto
                 </Link>
               </li>
+              <li>
+                <Link to="/PreguntasFrecuentes" className="text-white/70 hover:text-holistic-purple transition-colors">
+                  Preguntas Frecuentes
+                 </Link>
+              </li>
             </ul>
           </div>
 
