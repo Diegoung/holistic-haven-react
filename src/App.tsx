@@ -11,6 +11,7 @@ import WhatsAppButton from "./components/WhatsAppButton.tsx";
 import Services from "./components/Services"; // Importa el nuevo componente
 import Gallery from "./components/Gallery";
 import PreguntasFrecuentes from './components/PreguntasFrecuentes.tsx';
+import Checkout from "./components/Checkout";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,9 @@ const App = () => (
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/PreguntasFrecuentes" element={<PreguntasFrecuentes />} />
+          <Route path="/checkout" element={<Checkout />} />
+
+        
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

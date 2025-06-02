@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { ShoppingCart } from 'lucide-react'; // Importamos el ícono
 
 const Hero: React.FC = () => {
   return (
@@ -14,27 +16,16 @@ const Hero: React.FC = () => {
       {/* Overlay oscuro para mejorar la legibilidad del texto */}
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
-      {/* Botones de pago arriba a la derecha */}
-      <div className="absolute top-4 right-4 z-50 flex space-x-3">
-        {/* Botón Mercado Pago */}
-        <a 
-          href="https://link.mercadopago.com.ar/articulosvariosss"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-all duration-300"
+      {/* Carrito arriba a la derecha */}
+      <div className="absolute top-4 right-4 z-50 flex items-center space-x-3">
+        {/* Icono carrito */}
+        <Link
+          to="/checkout"
+          className="bg-white hover:bg-gray-200 text-black font-bold py-2 px-3 rounded-full shadow-lg transition-all duration-300 flex items-center"
+          title="Ver carrito"
         >
-          Mercado Pago
-        </a>
-
-        {/* Botón PayPal */}
-        <a 
-          href="https://www.paypal.com/ncp/payment/WPSLPY9WJ5TMJ"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-lg shadow-lg transition-all duration-300"
-        >
-          PayPal
-        </a>
+          <ShoppingCart className="w-6 h-6" />
+        </Link>
       </div>
 
       {/* Contenido principal */}
