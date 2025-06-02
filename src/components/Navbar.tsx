@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
             <Link to="/servicios" className="text-holistic-dark hover:text-holistic-purple transition-colors py-2">Contactanos</Link>
             <Link to="/cursos" className="text-holistic-dark hover:text-holistic-purple transition-colors py-2">Cursos</Link> {/* Cambiado de /terapias a /cursos */}
             <Link to="/testimonios" className="text-holistic-dark hover:text-holistic-purple transition-colors py-2">Testimonios</Link>
-
+            <Link to="/PreguntasFrecuentes" className="text-holistic-dark hover:text-holistic-purple transition-colors py-2">Preguntas Frecuentes</Link>
             {/* Botón de PayPal en versión móvil */}
             <a 
               href="https://www.paypal.com/ncp/payment/WPSLPY9WJ5TMJ" 
