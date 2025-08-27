@@ -37,7 +37,7 @@ const Services: React.FC = () => {
           <li>Vidas pasadas, karma y Dharma</li>
           <li>Limpieza energética</li>
           <li>Corte de cordones energéticos</li>
-          <li>Constestaciones familiares</li>
+          <li>Constelaciones familiares</li>
           <li>Los Chakras y aura</li>
           <li>Radiestesia</li>
           <li>Hoponopono</li>
