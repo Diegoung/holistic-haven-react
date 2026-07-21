@@ -1,62 +1,54 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Inicializar cliente de Supabase usando variables de entorno
-const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY; 
-
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
+const supabase = createClient(
+  process.env.VITE_SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY // O process.env.SUPABASE_ANON_KEY según uses
+);
 
 export default async function handler(req, res) {
-  // Solo permitir solicitudes POST que son las que envía Mercado Pago
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  try {
-    const { type, data } = req.body;
+  const topic = req.query.topic || req.body.type;
 
-    // Verificar si es una notificación de pago
-    if (type === 'payment' && data?.id) {
-      const paymentId = data.id;
+  if (topic === 'payment') {
+    const paymentId = req.query.id || req.body.data?.id;
 
-      // 1. Consultar a la API de Mercado Pago para verificar el estado real del pago
+    try {
+      // 1. Consultar el pago a la API de Mercado Pago
       const mpResponse = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
         headers: {
-          Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`
+          'Authorization': `Bearer ${process.env.MP_ACCESS_TOKEN}`
         }
       });
+      const paymentData = await mpResponse.json();
 
-      const payment = await mpResponse.json();
+      if (paymentData.status === 'approved') {
+        const userId = paymentData.external_reference;
+        const courseId = paymentData.additional_info?.items?.[0]?.id || paymentData.items?.[0]?.id;
 
-      // 2. Si el pago está APROBADO
-      if (payment.status === 'approved') {
-        // Extraemos el ID del usuario y el ID del curso pasados en la preferencia
-        const userId = payment.external_reference; 
-        const cursoId = payment.additional_info?.items?.[0]?.id;
-
-        if (userId && cursoId) {
-          // 3. Insertar o actualizar la compra en Supabase automáticamente
-          const { error } = await supabase.from('compras').upsert([
-            {
-              user_id: userId,
-              curso_id: cursoId,
-              estado: 'approved',
-              payment_id: paymentId,
-              created_at: new Date().toISOString()
-            }
-          ], { onConflict: 'user_id, curso_id' });
+        if (userId && courseId) {
+          // 2. Guardar la compra automáticamente en Supabase
+          const { error } = await supabase
+            .from('compras')
+            .insert([
+              { 
+                user_id: userId, 
+                curso_id: String(courseId), 
+                estado: 'approved' 
+              }
+            ]);
 
           if (error) {
-            console.error('Error al registrar la compra en Supabase:', error);
+            console.error('Error al insertar en Supabase:', error);
           }
         }
       }
+    } catch (err) {
+      console.error('Error procesando webhook:', err);
     }
-
-    // Responder 200 OK a Mercado Pago para confirmar la recepción
-    return res.status(200).send('OK');
-  } catch (error) {
-    console.error('Error en Webhook Mercado Pago:', error);
-    return res.status(500).json({ error: error.message });
   }
+
+  return res.status(200).json({ received: true });
 }
