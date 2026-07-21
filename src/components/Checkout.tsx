@@ -1,9 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { supabase } from '../supabaseClient'; // Asegurate de importar tu cliente de Supabase
 
 interface Course {
+  id: string; // Agregamos un ID único para cada curso
   name: string;
-  mercadoPagoLink: string;
   paypalLink: string;
 }
 
@@ -11,33 +12,68 @@ const priceARS = 5000;
 const priceUSD = 7;
 
 const courses: Course[] = [
-  // ... tus cursos
-  { name: 'Taller Aprender a Meditar', mercadoPagoLink: 'https://mpago.la/1LbCpZn', paypalLink: 'https://www.paypal.com/ncp/payment/7XPKXNWN3977N' },
-  { name: 'Yoga', mercadoPagoLink: 'https://mpago.la/1m6KVs8', paypalLink: 'https://www.paypal.com/ncp/payment/RUP6VSFLMKY2Y' },
-  { name: 'Barras de Access', mercadoPagoLink: 'https://mpago.la/1ArdBA7', paypalLink: 'https://www.paypal.com/ncp/payment/C3GE4KC69HA7Y' },
-  { name: 'Astrología y Numerología', mercadoPagoLink: 'https://mpago.la/19pGEFj', paypalLink: 'https://www.paypal.com/ncp/payment/B2KYWDJPH789S' },
-  { name: 'Reiki', mercadoPagoLink: 'https://mpago.la/2tH8L2Y', paypalLink: 'https://www.paypal.com/ncp/payment/SQ965YBKDK3C6' },
-  { name: 'Reflexología', mercadoPagoLink: 'https://mpago.la/2zeA5gB', paypalLink: 'https://www.paypal.com/ncp/payment/G8T69UP8PVHVY' },
-  { name: 'Mesa Radiónica y Radiestesia', mercadoPagoLink: 'https://mpago.la/1DsFHU4', paypalLink: 'https://www.paypal.com/ncp/payment/E9HGDNC25KQQU' },
-  { name: 'Cuencos Tibetanos y Musicoterapia', mercadoPagoLink: 'https://mpago.la/1bZNBFQ', paypalLink: 'https://www.paypal.com/ncp/payment/KPTNH3KEPVDDJ' },
-  { name: 'Tarot Marsella', mercadoPagoLink: 'https://mpago.la/1iZ8EHP', paypalLink: 'https://www.paypal.com/ncp/payment/QPRGBM4BHVRGG' },
-  { name: 'Sanación Pránica', mercadoPagoLink: 'https://mpago.la/2ah1U7Z', paypalLink: 'https://www.paypal.com/ncp/payment/SHTDZFP2R6X52' },
-  { name: 'Hipnosis y Regresiones', mercadoPagoLink: 'https://mpago.la/13rE4MZ', paypalLink: 'https://www.paypal.com/ncp/payment/5D8GANNHCZG2L' },
-  { name: 'Feng Shui', mercadoPagoLink: 'https://mpago.la/1YYLDtH', paypalLink: 'https://www.paypal.com/ncp/payment/MAXX5NDESQW5L' },
-  { name: 'Biomagnetismo', mercadoPagoLink: 'https://mpago.la/1oADvtX', paypalLink: 'https://www.paypal.com/ncp/payment/PXDYFKJAFP3GE' },
-  { name: 'Tapping EFT', mercadoPagoLink: 'https://mpago.la/2THH2PU', paypalLink: 'https://www.paypal.com/ncp/payment/B4CFHKBMR4ECQ' },
-  { name: 'Velomancia', mercadoPagoLink: 'https://mpago.la/2dvGCpp', paypalLink: 'https://www.paypal.com/ncp/payment/WX7UU3TLQBYHE' },
-  { name: 'Activación de la Glándula Pineal', mercadoPagoLink: 'https://mpago.la/1m6AeRg', paypalLink: 'https://www.paypal.com/ncp/payment/6X5ABNKEJHNQW' },
-  { name: 'Medicina China', mercadoPagoLink: 'https://mpago.la/2JoXxHt', paypalLink: 'https://www.paypal.com/ncp/payment/XLNDR39GCAE6U' },
-  { name: 'Método Yuen', mercadoPagoLink: 'https://mpago.la/2krzPyc', paypalLink: 'https://www.paypal.com/ncp/payment/N7WL6UMMPBKDW' },
-  { name: 'Auriculoterapia', mercadoPagoLink: 'https://mpago.la/1AyFDN3', paypalLink: 'https://www.paypal.com/ncp/payment/NREV9DF9DRT7L' },
-  { name: 'Cirugía Astral', mercadoPagoLink: 'https://mpago.la/1PATZii', paypalLink: 'https://www.paypal.com/ncp/payment/RM5CV8CQYWGUA' },
-  { name: 'Parapsicología', mercadoPagoLink: 'https://mpago.la/2C66Zk2', paypalLink: 'https://www.paypal.com/ncp/payment/Q7KRFGNKM24FW' },
-  { name: 'Pack Holístico (22 cursos)', mercadoPagoLink: 'https://mpago.la/1q3yBXq', paypalLink: 'https://www.paypal.com/ncp/payment/HSS65J96C3KMU' },
+  { id: 'aprender-meditar', name: 'Taller Aprender a Meditar', paypalLink: 'https://www.paypal.com/ncp/payment/7XPKXNWN3977N' },
+  { id: 'yoga', name: 'Yoga', paypalLink: 'https://www.paypal.com/ncp/payment/RUP6VSFLMKY2Y' },
+  { id: 'barras-access', name: 'Barras de Access', paypalLink: 'https://www.paypal.com/ncp/payment/C3GE4KC69HA7Y' },
+  { id: 'astrologia-numerologia', name: 'Astrología y Numerología', paypalLink: 'https://www.paypal.com/ncp/payment/B2KYWDJPH789S' },
+  { id: 'reiki', name: 'Reiki', paypalLink: 'https://www.paypal.com/ncp/payment/SQ965YBKDK3C6' },
+  { id: 'reflexologia', name: 'Reflexología', paypalLink: 'https://www.paypal.com/ncp/payment/G8T69UP8PVHVY' },
+  { id: 'mesa-radionica', name: 'Mesa Radiónica y Radiestesia', paypalLink: 'https://www.paypal.com/ncp/payment/E9HGDNC25KQQU' },
+  { id: 'cuencos-tibetanos', name: 'Cuencos Tibetanos y Musicoterapia', paypalLink: 'https://www.paypal.com/ncp/payment/KPTNH3KEPVDDJ' },
+  { id: 'tarot-marsella', name: 'Tarot Marsella', paypalLink: 'https://www.paypal.com/ncp/payment/QPRGBM4BHVRGG' },
+  { id: 'sanacion-pranica', name: 'Sanación Pránica', paypalLink: 'https://www.paypal.com/ncp/payment/SHTDZFP2R6X52' },
+  { id: 'hipnosis-regresiones', name: 'Hipnosis y Regresiones', paypalLink: 'https://www.paypal.com/ncp/payment/5D8GANNHCZG2L' },
+  { id: 'feng-shui', name: 'Feng Shui', paypalLink: 'https://www.paypal.com/ncp/payment/MAXX5NDESQW5L' },
+  { id: 'biomagnetismo', name: 'Biomagnetismo', paypalLink: 'https://www.paypal.com/ncp/payment/PXDYFKJAFP3GE' },
+  { id: 'tapping-eft', name: 'Tapping EFT', paypalLink: 'https://www.paypal.com/ncp/payment/B4CFHKBMR4ECQ' },
+  { id: 'velomancia', name: 'Velomancia', paypalLink: 'https://www.paypal.com/ncp/payment/WX7UU3TLQBYHE' },
+  { id: 'glandula-pineal', name: 'Activación de la Glándula Pineal', paypalLink: 'https://www.paypal.com/ncp/payment/6X5ABNKEJHNQW' },
+  { id: 'medicina-china', name: 'Medicina China', paypalLink: 'https://www.paypal.com/ncp/payment/XLNDR39GCAE6U' },
+  { id: 'metodo-yuen', name: 'Método Yuen', paypalLink: 'https://www.paypal.com/ncp/payment/N7WL6UMMPBKDW' },
+  { id: 'auriculoterapia', name: 'Auriculoterapia', paypalLink: 'https://www.paypal.com/ncp/payment/NREV9DF9DRT7L' },
+  { id: 'cirugia-astral', name: 'Cirugía Astral', paypalLink: 'https://www.paypal.com/ncp/payment/RM5CV8CQYWGUA' },
+  { id: 'parapsicologia', name: 'Parapsicología', paypalLink: 'https://www.paypal.com/ncp/payment/Q7KRFGNKM24FW' },
+  { id: 'pack-holistico-22', name: 'Pack Holístico (22 cursos)', paypalLink: 'https://www.paypal.com/ncp/payment/HSS65J96C3KMU' },
 ];
 
-
 const Checkout: React.FC = () => {
+
+  const handleMercadoPago = async (course: Course) => {
+    // 1. Obtener el usuario autenticado en Supabase
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+      alert("Por favor iniciá sesión para poder realizar la compra.");
+      return;
+    }
+
+    try {
+      // 2. Generar el checkout llamando a la API
+      const response = await fetch('/api/create-preference', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: course.name,
+          price: priceARS,
+          userId: user.id,
+          courseId: course.id,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.init_point) {
+        // Redirigir al cliente a la pantalla de cobro de MP
+        window.location.href = data.init_point;
+      } else {
+        alert("Ocurrió un error al generar el pago. Intentá nuevamente.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error al conectar con la pasarela de pagos.");
+    }
+  };
+
   return (
     <div
       className="min-h-screen bg-cover bg-center p-6"
@@ -61,16 +97,12 @@ const Checkout: React.FC = () => {
                 <p className="text-sm text-gray-600">USD ${priceUSD}</p>
               </div>
               <div className="mt-4 flex flex-col gap-2">
-                <a
-                  href={course.mercadoPagoLink || '#'}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${
-                    course.mercadoPagoLink ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-300 cursor-not-allowed'
-                  } text-white font-bold py-2 px-4 rounded-lg text-center`}
+                <button
+                  onClick={() => handleMercadoPago(course)}
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-center cursor-pointer transition-colors"
                 >
                   Pagar con Mercado Pago
-                </a>
+                </button>
                 <a
                   href={course.paypalLink || '#'}
                   target="_blank"
@@ -101,5 +133,3 @@ const Checkout: React.FC = () => {
 };
 
 export default Checkout;
-
-
