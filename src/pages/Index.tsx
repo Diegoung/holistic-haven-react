@@ -7,8 +7,8 @@ import Gallery from '@/components/Gallery';
 import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import PreguntasFrecuentes from '@/components/PreguntasFrecuentes'; // ✅ Importado
-
+import PreguntasFrecuentes from '@/components/PreguntasFrecuentes'; 
+import { Auth } from '@/components/Auth'; // ✅ Importación oficial y correcta con llaves
 
 const Index: React.FC = () => {
   return (
@@ -16,6 +16,12 @@ const Index: React.FC = () => {
       <Navbar />
       <Hero />
       <Services />
+      
+      {/* 🔐 Formulario de login de alumnos agregado en la vista */}
+      <div className="py-12 bg-holistic-light">
+        <Auth />
+      </div>
+
       <div className="py-16 bg-white">
         <div className="holistic-container">
           <div className="text-center mb-12">
@@ -41,7 +47,7 @@ const Index: React.FC = () => {
                 enseñanza personalizada que aborde tus necesidades específicas.
               </p>
               <p className="text-holistic-dark/80">
-              Combinamos sabiduría ancestral con metodologías modernas en un entorno virtual, donde podrás reconectar contigo mismo, aprender y alcanzar equilibrio desde cualquier lugar.
+                Combinamos sabiduría ancestral con metodologías modernas en un entorno virtual, donde podrás reconectar contigo mismo, aprender y alcanzar equilibrio desde cualquier lugar.
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center space-x-2">
@@ -65,6 +71,7 @@ const Index: React.FC = () => {
           </div>
         </div>
       </div>
+      
       <PreguntasFrecuentes />
       <Gallery />
       <Testimonials />

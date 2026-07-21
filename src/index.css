@@ -1,115 +1,27 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 40 25% 98%;
-    --foreground: 30 10% 15%;
-
-    --card: 40 25% 98%;
-    --card-foreground: 30 10% 15%;
-
-    --popover: 40 25% 98%;
-    --popover-foreground: 30 10% 15%;
-
-    --primary: 270 85% 75%;
-    --primary-foreground: 40 25% 98%;
-
-    --secondary: 150 15% 80%;
-    --secondary-foreground: 30 10% 15%;
-
-    --muted: 210 20% 96%;
-    --muted-foreground: 30 5% 45%;
-
-    --accent: 150 15% 80%;
-    --accent-foreground: 30 10% 15%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 270 15% 90%;
-    --input: 270 15% 90%;
-    --ring: 270 85% 75%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 40 25% 98%;
-    --sidebar-foreground: 30 10% 15%;
-    --sidebar-primary: 270 85% 75%;
-    --sidebar-primary-foreground: 40 25% 98%;
-    --sidebar-accent: 150 15% 80%;
-    --sidebar-accent-foreground: 30 10% 15%;
-    --sidebar-border: 270 15% 90%;
-    --sidebar-ring: 270 85% 75%;
-  }
-
-  .dark {
-    --background: 30 10% 10%;
-    --foreground: 40 25% 98%;
-
-    --card: 30 10% 12%;
-    --card-foreground: 40 25% 98%;
-
-    --popover: 30 10% 12%;
-    --popover-foreground: 40 25% 98%;
-
-    --primary: 270 85% 75%;
-    --primary-foreground: 40 25% 98%;
-
-    --secondary: 150 15% 30%;
-    --secondary-foreground: 40 25% 98%;
-
-    --muted: 30 10% 20%;
-    --muted-foreground: 40 15% 70%;
-
-    --accent: 150 15% 30%;
-    --accent-foreground: 40 25% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 40 25% 98%;
-
-    --border: 30 10% 25%;
-    --input: 30 10% 25%;
-    --ring: 270 85% 75%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground font-sans;
-  }
-}
-
-@layer components {
-  .holistic-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+@layer utilities {
+  /* Efecto Glassmorphism (Cristal moderno) */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
   }
   
-  .holistic-heading {
-    @apply font-serif text-holistic-dark;
+  .glass-nav {
+    background: rgba(26, 20, 48, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
-  .holistic-card {
-    @apply bg-holistic-light rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden border border-holistic-mint;
-  }
-  
-  .holistic-btn {
-    @apply px-6 py-3 rounded-md transition-colors duration-300 font-medium;
-  }
-  
-  .holistic-btn-primary {
-    @apply holistic-btn bg-holistic-purple text-white hover:bg-opacity-90;
-  }
-  
-  .holistic-btn-secondary {
-    @apply holistic-btn bg-holistic-sage text-holistic-dark hover:bg-opacity-90;
+
+  /* Gradiente místico para títulos y botones */
+  .text-gradient {
+    background: linear-gradient(135deg, #6b21a8 0%, #a855f7 50%, #d97706 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }

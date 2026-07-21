@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ShoppingCart } from 'lucide-react'; // Importamos el ícono
 
 const Hero: React.FC = () => {
   return (
@@ -16,20 +14,8 @@ const Hero: React.FC = () => {
       {/* Overlay oscuro para mejorar la legibilidad del texto */}
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
-      {/* Carrito arriba a la derecha */}
-      <div className="absolute top-4 right-4 z-50 flex items-center space-x-3">
-        {/* Icono carrito */}
-        <Link
-          to="/checkout"
-          className="bg-white hover:bg-gray-200 text-black font-bold py-2 px-3 rounded-full shadow-lg transition-all duration-300 flex items-center"
-          title="Ver carrito"
-        >
-          <ShoppingCart className="w-6 h-6" />
-        </Link>
-      </div>
-
       {/* Contenido principal */}
-      <div className="max-w-3xl mx-auto text-center relative z-10">
+      <div className="max-w-3xl mx-auto text-center relative z-10 px-4">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
           Escuela Holística DMF
         </h1>
