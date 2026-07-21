@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { supabase } from '../supabaseClient'; // Asegurate de importar tu cliente de Supabase
+import { supabase } from '../supabaseClient'; // Asegurate de que la ruta apunte correctamente a tu cliente de Supabase
 
 interface Course {
-  id: string; // Agregamos un ID único para cada curso
+  id: string;
   name: string;
   paypalLink: string;
 }
@@ -39,7 +39,6 @@ const courses: Course[] = [
 const Checkout: React.FC = () => {
 
   const handleMercadoPago = async (course: Course) => {
-    // 1. Obtener el usuario autenticado en Supabase
     const { data: { user } } = await supabase.auth.getUser();
 
     if (!user) {
@@ -48,7 +47,6 @@ const Checkout: React.FC = () => {
     }
 
     try {
-      // 2. Generar el checkout llamando a la API
       const response = await fetch('/api/create-preference', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -63,7 +61,6 @@ const Checkout: React.FC = () => {
       const data = await response.json();
 
       if (data.init_point) {
-        // Redirigir al cliente a la pantalla de cobro de MP
         window.location.href = data.init_point;
       } else {
         alert("Ocurrió un error al generar el pago. Intentá nuevamente.");

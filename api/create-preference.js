@@ -22,9 +22,7 @@ export default async function handler(req, res) {
             currency_id: 'ARS',
           },
         ],
-        // Le avisamos a tu webhook
         notification_url: 'https://terapiasholisticasdmf.com/api/mercadopago',
-        // Vinculamos la compra con el ID del usuario de Supabase
         external_reference: userId,
       }),
     });
