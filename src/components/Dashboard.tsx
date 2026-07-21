@@ -7,7 +7,7 @@ interface Props {
 }
 
 interface Curso {
-  id: number;
+  id: string; // Cambiado a string para admitir IDs como 'aprender-meditar'
   titulo: string;
   descripcion: string;
   precio: number;
@@ -17,11 +17,8 @@ interface Curso {
 export const Dashboard: React.FC<Props> = ({ session, onAbrirAuth }) => {
   const [nombre, setNombre] = useState<string>('');
   const [cursos, setCursos] = useState<Curso[]>([]);
-  const [compras, setCompras] = useState<number[]>([]);
+  const [compras, setCompras] = useState<string[]>([]); // Cambiado a string[] para las compras
   const [loading, setLoading] = useState<boolean>(true);
-
-  // 🔗 Tu link general de cobro de Mercado Pago
-  const LINK_MERCADO_PAGO = "https://www.mercadopago.com.ar"; 
 
   useEffect(() => {
     cargarDatos();
@@ -54,7 +51,7 @@ export const Dashboard: React.FC<Props> = ({ session, onAbrirAuth }) => {
           .eq('user_id', session.user.id);
 
         if (comprasData) {
-          setCompras(comprasData.map((c) => c.curso_id));
+          setCompras(comprasData.map((c) => String(c.curso_id)));
         }
       } else {
         setNombre('');
@@ -64,6 +61,38 @@ export const Dashboard: React.FC<Props> = ({ session, onAbrirAuth }) => {
       console.error(err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // 💳 Función que genera el pago automático con Mercado Pago
+  const handleMercadoPago = async (curso: Curso) => {
+    if (!session?.user) {
+      onAbrirAuth();
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/create-preference', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: curso.titulo,
+          price: curso.precio,
+          userId: session.user.id,
+          courseId: curso.id,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.init_point) {
+        window.location.href = data.init_point;
+      } else {
+        alert("Ocurrió un error al generar el pago. Intentá nuevamente.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error al conectar con la pasarela de pagos.");
     }
   };
 
@@ -118,14 +147,14 @@ export const Dashboard: React.FC<Props> = ({ session, onAbrirAuth }) => {
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <h1 style={{ color: '#1a237e' }}>Formaciones y Cursos Holísticos</h1>
           <p style={{ color: '#666', fontSize: '16px' }}>
-            Explorá nuestro catálogo de cursos. Adquirí el acceso a cada uno de forma individual por $3.500 ARS.
+            Explorá nuestro catálogo de cursos. Adquirí el acceso a cada uno de forma automática.
           </p>
         </div>
 
         {/* 📦 GRILLA DE CURSOS */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '25px' }}>
           {cursos.map((curso) => {
-            const estaComprado = compras.includes(curso.id);
+            const estaComprado = compras.includes(String(curso.id));
 
             return (
               <div 
@@ -177,24 +206,22 @@ export const Dashboard: React.FC<Props> = ({ session, onAbrirAuth }) => {
                       </p>
                       
                       {session ? (
-                        <a 
-                          href={LINK_MERCADO_PAGO} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
+                        <button 
+                          onClick={() => handleMercadoPago(curso)}
                           style={{
-                            display: 'block',
+                            width: '100%',
                             padding: '10px',
                             backgroundColor: '#009ee3',
                             color: 'white',
-                            textDecoration: 'none',
+                            border: 'none',
                             borderRadius: '6px',
-                            textAlign: 'center',
+                            cursor: 'pointer',
                             fontWeight: 'bold',
                             fontSize: '14px'
                           }}
                         >
                           Comprar Curso 💳
-                        </a>
+                        </button>
                       ) : (
                         <button 
                           onClick={onAbrirAuth}
