@@ -1,68 +1,33 @@
-import { createClient } from '@supabase/supabase-js';
-import { MercadoPagoConfig, Payment } from 'mercadopago';
-
-// Inicializamos Supabase con tus credenciales reales
-const supabase = createClient(
-  'https://yzdahaabjghseosuhvzu.supabase.co',
-  'sb_secret_1Fz29r2RZbUaVzije9lfRQ_dtMh8eb_'
-);
-
-// Inicializamos Mercado Pago con tu Access Token real
-const client = new MercadoPagoConfig({ 
-  accessToken: 'APP_USR-5d6423c8-252e-41f1-a849-abebcf1a502b' 
-});
-
 export default async function handler(req, res) {
+  // Mercado Pago envía las notificaciones por método POST
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Método no permitido' });
+    res.setHeader('Allow', 'POST');
+    return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
   try {
-    const body = req.body;
+    const notification = req.body;
 
-    if (body.type === 'payment' || body.action === 'payment.created' || body.action === 'payment.updated') {
-      const paymentId = body.data?.id || body.id;
+    // Aquí podés ver en los logs de Vercel lo que llega desde Mercado Pago
+    console.log('Notificación recibida de Mercado Pago:', JSON.stringify(notification));
+
+    // Validamos el tipo de evento (puede ser payment o ipn según configures)
+    const topic = req.query.topic || notification.type || notification.action;
+
+    if (topic === 'payment' || topic === 'payment.created' || topic === 'payment.updated') {
+      const paymentId = notification.data?.id || notification.id;
 
       if (paymentId) {
-        const payment = new Payment(client);
-        const paymentInfo = await payment.get({ id: paymentId });
-
-        if (paymentInfo.status === 'approved') {
-          const userEmail = paymentInfo.payer?.email || paymentInfo.metadata?.user_email;
-          const courseId = paymentInfo.external_reference || paymentInfo.metadata?.course_id;
-
-          if (userEmail && courseId) {
-            // Buscamos el ID del usuario en Supabase por su email
-            const { data: profileData } = await supabase
-              .from('profiles') // Cambiá esto si tu tabla de usuarios se llama diferente
-              .select('id')
-              .eq('email', userEmail)
-              .single();
-
-            const userId = profileData?.id;
-
-            if (userId) {
-              // Registramos la compra en la tabla de accesos
-              await supabase
-                .from('user_courses') // Cambiá esto por el nombre real de tu tabla de compras
-                .upsert([
-                  { 
-                    user_id: userId, 
-                    course_id: courseId, 
-                    payment_id: paymentId,
-                    created_at: new Date() 
-                  }
-                ], { onConflict: 'user_id,course_id' });
-            }
-          }
-        }
+        // Aquí se procesaría la consulta a la API de Mercado Pago para verificar el pago
+        console.log(`Procesando pago con ID: ${paymentId}`);
       }
     }
 
-    return res.status(200).json({ success: true });
-
+    // Es fundamental responder siempre un 200 OK para que Mercado Pago sepa que se recibió bien
+    return res.status(200).json({ received: true });
+    
   } catch (error) {
-    console.error('Error en el webhook:', error);
-    return res.status(500).json({ error: error.message });
+    console.error('Error al procesar el webhook:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
 }
