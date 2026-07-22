@@ -1,4 +1,7 @@
 {
+  "rewrites": [
+    { "source": "/api/webhook", "destination": "/api/webhook.js" }
+  ],
   "functions": {
     "api/webhook.js": {
       "maxDuration": 30
@@ -15,6 +18,10 @@
         {
           "key": "Access-Control-Allow-Credentials",
           "value": "true"
+        },
+        {
+          "key": "Set-Cookie",
+          "value": "Secure; SameSite=None; Path=/"
         }
       ]
     }
