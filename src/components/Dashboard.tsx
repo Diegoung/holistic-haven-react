@@ -52,10 +52,9 @@ export const Dashboard: React.FC<Props> = ({ session, onAbrirAuth }) => {
           .eq('estado', 'approved');
 
         if (comprasData) {
-          // Limpiamos cualquier comilla o espacio para que coincida perfectamente con el ID del curso
-          setCompras(
-            comprasData.map((c) => String(c.curso_id).replace(/"/g, '').trim())
-          );
+          const listaCompras = comprasData.map((c) => String(c.curso_id).replace(/"/g, '').trim());
+          console.log("IDs de cursos comprados detectados:", listaCompras);
+          setCompras(listaCompras);
         }
       } else {
         setNombre('');
@@ -159,6 +158,7 @@ export const Dashboard: React.FC<Props> = ({ session, onAbrirAuth }) => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '25px' }}>
           {cursos.map((curso) => {
             const estaComprado = compras.includes(String(curso.id));
+            console.log(`Curso ID ${curso.id} (${curso.titulo}) - ¿Está comprado?:`, estaComprado);
 
             return (
               <div 
