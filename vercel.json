@@ -18,10 +18,9 @@
       ]
     }
   ],
-  "rewrites": [
-    {
-      "source": "/api/webhook",
-      "destination": "/api/webhook.js"
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 30
     }
-  ]
+  }
 }
