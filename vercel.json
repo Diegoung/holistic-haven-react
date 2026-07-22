@@ -1,21 +1,26 @@
 {
-    "headers": [
-      {
-        "source": "/(.*)",
-        "headers": [
-          {
-            "key": "Access-Control-Allow-Origin",
-            "value": "https://www.terapiasholisticasdmf.com"
-          },
-          {
-            "key": "Access-Control-Allow-Credentials",
-            "value": "true"
-          },
-          {
-            "key": "Set-Cookie",
-            "value": "Secure; SameSite=None; Path=/"
-          }
-        ]
-      }
-    ]
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://www.terapiasholisticasdmf.com"
+        },
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        },
+        {
+          "key": "Set-Cookie",
+          "value": "Secure; SameSite=None; Path=/"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "api/webhook.js": {
+      "maxDuration": 30
+    }
   }
+}
