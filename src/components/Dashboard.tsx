@@ -7,7 +7,7 @@ interface Props {
 }
 
 interface Curso {
-  id: string; // Cambiado a string para admitir IDs como 'aprender-meditar'
+  id: string | number;
   titulo: string;
   descripcion: string;
   precio: number;
@@ -17,7 +17,7 @@ interface Curso {
 export const Dashboard: React.FC<Props> = ({ session, onAbrirAuth }) => {
   const [nombre, setNombre] = useState<string>('');
   const [cursos, setCursos] = useState<Curso[]>([]);
-  const [compras, setCompras] = useState<string[]>([]); // Cambiado a string[] para las compras
+  const [compras, setCompras] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -48,10 +48,14 @@ export const Dashboard: React.FC<Props> = ({ session, onAbrirAuth }) => {
         const { data: comprasData } = await supabase
           .from('compras')
           .select('curso_id')
-          .eq('user_id', session.user.id);
+          .eq('user_id', session.user.id)
+          .eq('estado', 'approved');
 
         if (comprasData) {
-          setCompras(comprasData.map((c) => String(c.curso_id)));
+          // Limpiamos cualquier comilla o espacio para que coincida perfectamente con el ID del curso
+          setCompras(
+            comprasData.map((c) => String(c.curso_id).replace(/"/g, '').trim())
+          );
         }
       } else {
         setNombre('');
