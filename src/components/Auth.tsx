@@ -5,14 +5,12 @@ export const Auth: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [nombre, setNombre] = useState<string>('');
-  const [telefono, setTelefono] = useState<string>('');
   const [isLogin, setIsLogin] = useState<boolean>(true);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (isLogin) {
-      // 🟢 INICIAR SESIÓN
       const { data, error } = await supabase.auth.signInWithPassword({ 
         email, 
         password 
@@ -25,8 +23,6 @@ export const Auth: React.FC = () => {
         console.log('Usuario autenticado:', data.user);
       }
     } else {
-      // 🔵 REGISTRARSE
-      // 1. Crear el usuario en Supabase Auth
       const { data: authData, error: authError } = await supabase.auth.signUp({ 
         email, 
         password 
@@ -37,15 +33,13 @@ export const Auth: React.FC = () => {
         return;
       }
 
-      // 2. Guardar los datos del perfil en la tabla 'perfiles'
       if (authData?.user) {
         const { error: profileError } = await supabase
           .from('perfiles')
           .insert([
             {
-              id: authData.user.id, // Vincula con el id de auth.users
+              id: authData.user.id,
               nombre: nombre,
-              telefono: telefono,
               rol: 'alumno'
             }
           ]);
@@ -54,7 +48,7 @@ export const Auth: React.FC = () => {
           alert('Error al guardar datos del perfil: ' + profileError.message);
         } else {
           alert('¡Registro exitoso! Ya podés iniciar sesión.');
-          setIsLogin(true); // Cambia automáticamente a la pantalla de Login
+          setIsLogin(true);
         }
       }
     }
@@ -75,25 +69,15 @@ export const Auth: React.FC = () => {
       </h2>
 
       <form onSubmit={handleSubmit}>
-        {/* Campos adicionales para el registro */}
         {!isLogin && (
-          <>
-            <input 
-              type="text" 
-              placeholder="Nombre y Apellido" 
-              value={nombre} 
-              onChange={(e) => setNombre(e.target.value)} 
-              style={{ width: '100%', padding: '10px', margin: '10px 0', borderRadius: '4px', border: '1px solid #ccc', boxSizing: 'border-box' }}
-              required 
-            />
-            <input 
-              type="tel" 
-              placeholder="Teléfono" 
-              value={telefono} 
-              onChange={(e) => setTelefono(e.target.value)} 
-              style={{ width: '100%', padding: '10px', margin: '10px 0', borderRadius: '4px', border: '1px solid #ccc', boxSizing: 'border-box' }}
-            />
-          </>
+          <input 
+            type="text" 
+            placeholder="Nombre y Apellido" 
+            value={nombre} 
+            onChange={(e) => setNombre(e.target.value)} 
+            style={{ width: '100%', padding: '10px', margin: '10px 0', borderRadius: '4px', border: '1px solid #ccc', boxSizing: 'border-box' }}
+            required 
+          />
         )}
 
         <input 
