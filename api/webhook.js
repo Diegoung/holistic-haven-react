@@ -26,21 +26,54 @@ export default async function handler(req, res) {
     const paymentId = notification?.data?.id || notification?.id;
 
     if (topic === 'payment' && paymentId) {
-      console.log(`Procesando pago ID: ${paymentId}`);
+      console.log(`Consultando detalles del pago ID: ${paymentId} en Mercado Pago...`);
 
-      // Insertamos usando las columnas reales de tu tabla 'compras'
-      const { data, error } = await supabase
-        .from('compras')
-        .insert([
-          { 
-            estado: 'approved'
-          }
-        ]);
+      // Consultamos el pago directamente a la API de Mercado Pago para obtener el external_reference
+      const mpResponse = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
+        headers: {
+          'Authorization': `Bearer ${process.env.MP_ACCESS_TOKEN}`
+        }
+      });
 
-      if (error) {
-        console.error('Error al guardar en Supabase:', error);
-      } else {
-        console.log('Compra registrada en Supabase con éxito:', data);
+      if (!mpResponse.ok) {
+        console.error('Error al consultar el pago en Mercado Pago');
+        return res.status(200).json({ received: true });
+      }
+
+      const paymentData = await mpResponse.json();
+      console.log("Datos del pago obtenidos:", JSON.stringify(paymentData));
+
+      // Verificamos si el pago está aprobado
+      if (paymentData.status === 'approved') {
+        const externalReference = paymentData.external_reference; // Aquí viene el userId o userId__cursoId
+        console.log(`External reference encontrado: ${externalReference}`);
+
+        let userId = externalReference;
+        let cursoId = null;
+
+        // Si usaste el formato con dos guiones bajos, los separamos
+        if (externalReference && externalReference.includes('__')) {
+          const parts = externalReference.split('__');
+          userId = parts[0];
+          cursoId = parts[1];
+        }
+
+        // Insertamos los datos reales en tu tabla 'compras'
+        const { data, error } = await supabase
+          .from('compras')
+          .insert([
+            { 
+              user_id: userId,
+              curso_id: cursoId,
+              estado: 'approved'
+            }
+          ]);
+
+        if (error) {
+          console.error('Error al guardar en Supabase:', error);
+        } else {
+          console.log('Compra registrada en Supabase con éxito:', data);
+        }
       }
     }
 
