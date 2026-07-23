@@ -22,8 +22,8 @@ export default async function handler(req, res) {
             currency_id: 'ARS',
           },
         ],
-        notification_url: 'https://terapiasholisticasdmf.com/api/mercadopago',
-        external_reference: userId,
+        notification_url: 'https://terapiasholisticasdmf.com/api/mercadopago', // Asegúrate de que esta URL apunte a tu webhook de Vercel (/api/webhook) si corresponde
+        external_reference: `${userId}__${courseId}`,
       }),
     });
 
