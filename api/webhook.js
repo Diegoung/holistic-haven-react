@@ -29,7 +29,12 @@ export default async function handler(req, res) {
 
 
     console.log(
-      "WEBHOOK MP:",
+      "========== WEBHOOK MERCADO PAGO =========="
+    );
+
+
+    console.log(
+      "BODY RECIBIDO:",
       JSON.stringify(req.body, null, 2)
     );
 
@@ -41,7 +46,8 @@ export default async function handler(req, res) {
 
     const type =
       notification?.type ||
-      notification?.topic;
+      notification?.topic ||
+      notification?.action?.split(".")[0];
 
 
 
@@ -52,13 +58,31 @@ export default async function handler(req, res) {
 
 
     if (!paymentId && notification?.resource) {
+
       paymentId =
         notification.resource.split("/").pop();
+
     }
 
 
 
-    if (type !== "payment" || !paymentId) {
+    console.log(
+      "TIPO:",
+      type
+    );
+
+
+    console.log(
+      "PAYMENT ID:",
+      paymentId
+    );
+
+
+
+    // Ignorar eventos que no sean pagos
+
+    if (!paymentId || type !== "payment") {
+
 
       console.log(
         "Evento ignorado"
@@ -68,8 +92,12 @@ export default async function handler(req, res) {
       return res.status(200).json({
         received: true,
       });
+
     }
 
+
+
+    // Consultar pago en Mercado Pago
 
 
     const mpResponse = await fetch(
@@ -90,13 +118,23 @@ export default async function handler(req, res) {
 
 
     console.log(
-      "Pago:",
+      "ESTADO DEL PAGO:",
       payment.status
     );
 
 
 
+    // Solo guardar pagos aprobados
+
+
     if (payment.status !== "approved") {
+
+
+      console.log(
+        "Pago todavía no aprobado:",
+        payment.status
+      );
+
 
       return res.status(200).json({
         received: true,
@@ -111,12 +149,23 @@ export default async function handler(req, res) {
 
 
 
+    console.log(
+      "EXTERNAL REFERENCE:",
+      externalReference
+    );
+
+
+
     let userId = null;
     let cursoId = null;
 
 
 
-    if (externalReference?.includes("__")) {
+    if (
+      externalReference &&
+      externalReference.includes("__")
+    ) {
+
 
       const partes =
         externalReference.split("__");
@@ -125,21 +174,25 @@ export default async function handler(req, res) {
       userId = partes[0];
       cursoId = partes[1];
 
+
     }
 
 
 
     console.log(
-      "USER:",
+      "USER ID:",
       userId
     );
 
 
     console.log(
-      "CURSO:",
+      "CURSO ID:",
       cursoId
     );
 
+
+
+    // Guardar compra
 
 
     const { data, error } =
@@ -158,6 +211,7 @@ export default async function handler(req, res) {
 
     if (error) {
 
+
       console.error(
         "ERROR SUPABASE:",
         error
@@ -166,7 +220,7 @@ export default async function handler(req, res) {
 
       return res.status(200).json({
         received: true,
-        error: true,
+        supabase_error: true,
       });
 
     }
