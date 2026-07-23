@@ -18,9 +18,11 @@ export default async function handler(req, res) {
 
 
   if (req.method !== "POST") {
+
     return res.status(200).json({
-      message: "Webhook activo",
+      message: "Webhook activo"
     });
+
   }
 
 
@@ -87,21 +89,30 @@ export default async function handler(req, res) {
 
 
       return res.status(200).json({
-        received: true,
+        received:true
       });
+
 
     }
 
 
 
+
     const mpResponse = await fetch(
+
       `https://api.mercadopago.com/v1/payments/${paymentId}`,
+
       {
-        headers: {
+
+        headers:{
+
           Authorization:
-            `Bearer ${process.env.MP_ACCESS_TOKEN}`,
-        },
+          `Bearer ${process.env.MP_ACCESS_TOKEN}`
+
+        }
+
       }
+
     );
 
 
@@ -118,19 +129,21 @@ export default async function handler(req, res) {
 
 
 
-    if (payment.status !== "approved") {
+    if(payment.status !== "approved"){
 
 
       console.log(
-        "Pago no aprobado todavía"
+        "Pago pendiente o rechazado"
       );
 
 
       return res.status(200).json({
-        received: true,
+        received:true
       });
 
+
     }
+
 
 
 
@@ -146,39 +159,29 @@ export default async function handler(req, res) {
 
 
 
+
     let userId = null;
     let cursoId = null;
 
 
 
-    if (
+    if(
       externalReference &&
       externalReference.includes("__")
-    ) {
+    ){
 
 
       const partes =
-        externalReference.split("__");
+      externalReference.split("__");
 
 
       userId = partes[0];
+
       cursoId = partes[1];
 
-    }
-
-
-
-    // UUID de prueba para evitar error de Supabase
-    if (
-      !userId ||
-      userId === "test-user" ||
-      userId === "test"
-    ) {
-
-      userId =
-        "00000000-0000-0000-0000-000000000000";
 
     }
+
 
 
 
@@ -195,21 +198,101 @@ export default async function handler(req, res) {
 
 
 
-    const { data, error } =
-      await supabase
-        .from("compras")
-        .insert([
-          {
-            user_id: userId,
-            curso_id: cursoId || "curso",
-            payment_id: String(paymentId),
-          },
-        ])
-        .select();
+
+
+    // Validación seguridad
+
+    if(!userId || !cursoId){
+
+
+      console.log(
+        "Falta usuario o curso"
+      );
+
+
+      return res.status(200).json({
+        received:true
+      });
+
+
+    }
 
 
 
-    if (error) {
+
+
+
+    // Evitar compras duplicadas
+
+
+    const {data: compraExistente} =
+    await supabase
+    .from("compras")
+    .select("id")
+    .eq(
+      "payment_id",
+      String(paymentId)
+    )
+    .maybeSingle();
+
+
+
+
+
+    if(compraExistente){
+
+
+      console.log(
+        "Compra ya registrada"
+      );
+
+
+      return res.status(200).json({
+
+        received:true,
+
+        duplicate:true
+
+      });
+
+
+    }
+
+
+
+
+
+
+
+    // Guardar compra aprobada
+
+
+    const {data,error} =
+    await supabase
+    .from("compras")
+    .insert([
+
+      {
+
+        user_id:userId,
+
+        curso_id:Number(cursoId),
+
+        payment_id:String(paymentId),
+
+        estado:"approved"
+
+      }
+
+    ])
+    .select();
+
+
+
+
+
+
+    if(error){
 
 
       console.error(
@@ -219,11 +302,19 @@ export default async function handler(req, res) {
 
 
       return res.status(200).json({
-        received: true,
-        error: true,
+
+        received:true,
+
+        error:true
+
       });
 
+
     }
+
+
+
+
 
 
 
@@ -234,14 +325,21 @@ export default async function handler(req, res) {
 
 
 
+
+
     return res.status(200).json({
-      received: true,
-      success: true,
+
+      received:true,
+
+      success:true
+
     });
 
 
 
-  } catch(error) {
+
+
+  }catch(error){
 
 
     console.error(
@@ -251,10 +349,16 @@ export default async function handler(req, res) {
 
 
     return res.status(200).json({
-      received: true,
-      error: true,
+
+      received:true,
+
+      error:true
+
     });
 
+
   }
+
+
 
 }
