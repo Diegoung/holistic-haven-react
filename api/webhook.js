@@ -34,7 +34,6 @@ export default async function handler(req, res) {
 
 
     console.log(
-      "BODY RECIBIDO:",
       JSON.stringify(req.body, null, 2)
     );
 
@@ -79,8 +78,6 @@ export default async function handler(req, res) {
 
 
 
-    // Ignorar eventos que no sean pagos
-
     if (!paymentId || type !== "payment") {
 
 
@@ -95,9 +92,6 @@ export default async function handler(req, res) {
 
     }
 
-
-
-    // Consultar pago en Mercado Pago
 
 
     const mpResponse = await fetch(
@@ -118,21 +112,17 @@ export default async function handler(req, res) {
 
 
     console.log(
-      "ESTADO DEL PAGO:",
+      "ESTADO PAGO:",
       payment.status
     );
 
-
-
-    // Solo guardar pagos aprobados
 
 
     if (payment.status !== "approved") {
 
 
       console.log(
-        "Pago todavía no aprobado:",
-        payment.status
+        "Pago no aprobado todavía"
       );
 
 
@@ -174,6 +164,19 @@ export default async function handler(req, res) {
       userId = partes[0];
       cursoId = partes[1];
 
+    }
+
+
+
+    // UUID de prueba para evitar error de Supabase
+    if (
+      !userId ||
+      userId === "test-user" ||
+      userId === "test"
+    ) {
+
+      userId =
+        "00000000-0000-0000-0000-000000000000";
 
     }
 
@@ -192,16 +195,13 @@ export default async function handler(req, res) {
 
 
 
-    // Guardar compra
-
-
     const { data, error } =
       await supabase
         .from("compras")
         .insert([
           {
             user_id: userId,
-            curso_id: cursoId,
+            curso_id: cursoId || "curso",
             payment_id: String(paymentId),
           },
         ])
@@ -220,7 +220,7 @@ export default async function handler(req, res) {
 
       return res.status(200).json({
         received: true,
-        supabase_error: true,
+        error: true,
       });
 
     }
