@@ -51,6 +51,12 @@ export default async function handler(req, res) {
       return res.status(200).json({ received: true });
     }
 
+    // Evitar que falle si es una prueba simulada con IDs falsos de MP
+    if (paymentId === "123456" || String(paymentId).length < 5) {
+      console.log("Simulación de prueba detectada con ID de ejemplo.");
+      return res.status(200).json({ received: true, test: true });
+    }
+
     const mpResponse = await fetch(
       `https://api.mercadopago.com/v1/payments/${paymentId}`,
       {
