@@ -9,23 +9,15 @@ export default async function handler(req, res) {
   }
 
   if (req.method !== "POST") {
-    return res.status(405).json({
-      message: "Method not allowed"
-    });
+    return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const {
-    title,
-    price,
-    userId,
-    courseId
-  } = req.body;
+  // ¡Aquí faltaba capturar courseId!
+  const { title, price, userId, courseId } = req.body;
 
   try {
-    if (!userId) {
-      return res.status(400).json({
-        error: "Falta userId"
-      });
+    if (!userId || !courseId) {
+      return res.status(400).json({ error: "Falta userId o courseId" });
     }
 
     const response = await fetch(
@@ -66,14 +58,11 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       id: data.id,
-      init_point: data.init_point,
-      sandbox_init_point: data.sandbox_init_point
+      init_point: data.init_point
     });
 
   } catch (error) {
     console.error("ERROR CREATE PREFERENCE", error);
-    return res.status(500).json({
-      error: error.message
-    });
+    return res.status(500).json({ error: error.message });
   }
 }
