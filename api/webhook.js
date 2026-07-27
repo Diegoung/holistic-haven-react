@@ -28,6 +28,12 @@ export default async function handler(req, res) {
 
     const notification = req.body;
 
+    // Si es la prueba directa del panel de Mercado Pago con el ID genérico, responder OK de inmediato
+    if (notification?.action === "payment.updated" && notification?.data?.id === "123456") {
+      console.log("Prueba del panel de Mercado Pago recibida con éxito.");
+      return res.status(200).json({ received: true });
+    }
+
     const type =
       notification?.type ||
       notification?.topic ||
@@ -51,9 +57,9 @@ export default async function handler(req, res) {
       return res.status(200).json({ received: true });
     }
 
-    // Evitar que falle si es una prueba simulada con IDs falsos de MP
-    if (paymentId === "123456" || String(paymentId).length < 5) {
-      console.log("Simulación de prueba detectada con ID de ejemplo.");
+    // Evitar que falle si es otra simulación de prueba con IDs falsos
+    if (String(paymentId).length < 5) {
+      console.log("Simulación de prueba detectada con ID corto.");
       return res.status(200).json({ received: true, test: true });
     }
 
