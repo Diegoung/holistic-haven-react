@@ -26,6 +26,13 @@ export default async function handler(req, res) {
       return res.status(200).json({ received: true, test: true });
     }
 
+    // Verificar si el evento es estrictamente un pago
+    const topic = notification?.type || notification?.topic || notification?.action?.split(".")[0];
+    if (topic && topic !== "payment") {
+      console.log("Evento ignorado (no es un pago directo):", topic);
+      return res.status(200).json({ received: true, ignored: true });
+    }
+
     let paymentId = notification?.data?.id || notification?.id || req.query?.id;
 
     if (!paymentId && notification?.resource) {
@@ -48,7 +55,7 @@ export default async function handler(req, res) {
     );
 
     if (!mpResponse.ok) {
-      console.error("Error al consultar la API de Mercado Pago:", mpResponse.status);
+      console.log(`Aviso: No se pudo consultar el pago ${paymentId} en MP (Estado: ${mpResponse.status}). Puede ser un evento de orden o credenciales de otro entorno.`);
       return res.status(200).json({ received: true });
     }
 
@@ -70,7 +77,7 @@ export default async function handler(req, res) {
 
     const [userId, cursoId] = externalReference.split("__");
 
-    // Inicializar Supabase dentro de la función para evitar fallos de arranque global
+    // Inicializar Supabase dentro de la función
     const supabase = createClient(
       "https://yzdahaabjghseosuhvzu.supabase.co",
       process.env.SUPABASE_SERVICE_ROLE_KEY
