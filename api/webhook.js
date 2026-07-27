@@ -18,32 +18,21 @@ export default async function handler(req, res) {
     const notification = req.body;
     console.log("NOTIFICACIÓN RECIBIDA:", JSON.stringify(notification));
 
-    let paymentId = null;
+    let paymentId = notification?.data?.id || notification?.id || req.query?.id;
 
-    // Detectar si es una notificación de tipo pago directo o IPN
-    if (notification?.type === "payment" || notification?.action === "payment.created" || notification?.action === "payment.updated") {
-      paymentId = notification?.data?.id;
-    } 
-    // Si viene por el sistema viejo de webhooks o query params
-    else if (notification?.id && !notification?.type) {
-      paymentId = notification.id;
-    }
-    else if (notification?.resource) {
+    if (!paymentId && notification?.resource) {
       const parts = notification.resource.split("/");
-      if (parts.includes("payments")) {
-        paymentId = parts[parts.length - 1];
-      }
+      paymentId = parts[parts.length - 1];
     }
 
-    // Si es un merchant_order o no encontramos un ID de pago directo, respondemos OK y salimos para que no tire error
-    if (!paymentId) {
-      console.log("Notificación ignorada (no es un pago directo o falta ID).");
-      return res.status(200).json({ received: true, ignored: true });
+    // Si de verdad no hay ningún ID, evitamos que rompa pero respondemos OK
+    if (!paymentId || paymentId === "123456") {
+      console.log("Notificación de prueba o sin ID detectada.");
+      return res.status(200).json({ received: true, test: true });
     }
 
-    console.log("Consultando pago ID en Mercado Pago:", paymentId);
+    console.log("Consultando pago en Mercado Pago ID:", paymentId);
 
-    // Consultar el pago en la API de Mercado Pago
     const mpResponse = await fetch(
       `https://api.mercadopago.com/v1/payments/${paymentId}`,
       {
@@ -54,7 +43,7 @@ export default async function handler(req, res) {
     );
 
     if (!mpResponse.ok) {
-      console.log(`No se pudo consultar el pago ${paymentId} en MP. Estado: ${mpResponse.status}`);
+      console.log(`No se pudo consultar el pago ${paymentId} en MP. Código: ${mpResponse.status}`);
       return res.status(200).json({ received: true });
     }
 
@@ -62,15 +51,15 @@ export default async function handler(req, res) {
     console.log("ESTADO DEL PAGO:", payment.status);
 
     if (payment.status !== "approved") {
-      console.log("El pago todavía no está aprobado.");
+      console.log("El pago no está aprobado, estado actual:", payment.status);
       return res.status(200).json({ received: true });
     }
 
     const externalReference = payment.external_reference;
-    console.log("EXTERNAL REFERENCE OBTENIDO:", externalReference);
+    console.log("EXTERNAL REFERENCE:", externalReference);
 
     if (!externalReference || !externalReference.includes("__")) {
-      console.log("El pago aprobado no tiene un external_reference válido:", externalReference);
+      console.log("External reference inválido o vacío:", externalReference);
       return res.status(200).json({ received: true });
     }
 
@@ -81,7 +70,7 @@ export default async function handler(req, res) {
       process.env.SUPABASE_SERVICE_ROLE_KEY
     );
 
-    // Verificar si ya se registró este pago para evitar duplicados
+    // Verificar duplicados
     const { data: compraExistente } = await supabase
       .from("compras")
       .select("id")
@@ -89,11 +78,11 @@ export default async function handler(req, res) {
       .maybeSingle();
 
     if (compraExistente) {
-      console.log("Esta compra ya fue registrada previamente en Supabase.");
+      console.log("La compra ya estaba registrada.");
       return res.status(200).json({ received: true, duplicate: true });
     }
 
-    // Guardar la compra en Supabase
+    // Guardar en Supabase
     const { data, error } = await supabase
       .from("compras")
       .insert([
@@ -111,11 +100,11 @@ export default async function handler(req, res) {
       return res.status(200).json({ received: true, db_error: true });
     }
 
-    console.log("¡COMPRA GUARDADA EXITOSAMENTE EN SUPABASE!:", data);
+    console.log("¡COMPRA GUARDADA EN SUPABASE EXITOSAMENTE!:", data);
     return res.status(200).json({ received: true, success: true });
 
   } catch (error) {
-    console.error("ERROR CRÍTICO EN WEBHOOK:", error.message);
+    console.error("ERROR CRÍTICO:", error.message);
     return res.status(200).json({ received: true, error: error.message });
   }
 }
