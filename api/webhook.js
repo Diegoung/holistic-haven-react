@@ -15,29 +15,35 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log("BODY RECIBIDO:", JSON.stringify(req.body));
-    
     const notification = req.body;
+    console.log("NOTIFICACIÓN RECIBIDA:", JSON.stringify(notification));
 
-    // Ignorar pruebas genéricas
-    if (notification?.data?.id === "123456" || notification?.id === "123456") {
-      return res.status(200).json({ received: true, test: true });
+    let paymentId = null;
+
+    // Detectar si es una notificación de tipo pago directo o IPN
+    if (notification?.type === "payment" || notification?.action === "payment.created" || notification?.action === "payment.updated") {
+      paymentId = notification?.data?.id;
+    } 
+    // Si viene por el sistema viejo de webhooks o query params
+    else if (notification?.id && !notification?.type) {
+      paymentId = notification.id;
+    }
+    else if (notification?.resource) {
+      const parts = notification.resource.split("/");
+      if (parts.includes("payments")) {
+        paymentId = parts[parts.length - 1];
+      }
     }
 
-    let paymentId = notification?.data?.id || notification?.id || req.query?.id;
-
-    if (!paymentId && notification?.resource) {
-      paymentId = notification.resource.split("/").pop();
-    }
-
+    // Si es un merchant_order o no encontramos un ID de pago directo, respondemos OK y salimos para que no tire error
     if (!paymentId) {
-      return res.status(200).json({ received: true });
+      console.log("Notificación ignorada (no es un pago directo o falta ID).");
+      return res.status(200).json({ received: true, ignored: true });
     }
 
-    let externalReference = null;
-    let paymentStatus = "approved"; // Por defecto asumimos aprobado si viene directo de IPN de pago
+    console.log("Consultando pago ID en Mercado Pago:", paymentId);
 
-    // Intentamos consultar la API de Mercado Pago
+    // Consultar el pago en la API de Mercado Pago
     const mpResponse = await fetch(
       `https://api.mercadopago.com/v1/payments/${paymentId}`,
       {
@@ -47,24 +53,24 @@ export default async function handler(req, res) {
       }
     );
 
-    if (mpResponse.ok) {
-      const payment = await mpResponse.json();
-      paymentStatus = payment.status;
-      externalReference = payment.external_reference;
-      console.log("ESTADO PAGO (API):", paymentStatus);
-    } else {
-      console.log("No se pudo consultar la API, intentando extraer referencia de la notificación...");
-      // Plan de respaldo: si Mercado Pago mandó datos extra en el body
-      externalReference = notification?.external_reference || notification?.data?.external_reference;
-    }
-
-    if (paymentStatus !== "approved") {
-      console.log("El pago no está aprobado:", paymentStatus);
+    if (!mpResponse.ok) {
+      console.log(`No se pudo consultar el pago ${paymentId} en MP. Estado: ${mpResponse.status}`);
       return res.status(200).json({ received: true });
     }
 
+    const payment = await mpResponse.json();
+    console.log("ESTADO DEL PAGO:", payment.status);
+
+    if (payment.status !== "approved") {
+      console.log("El pago todavía no está aprobado.");
+      return res.status(200).json({ received: true });
+    }
+
+    const externalReference = payment.external_reference;
+    console.log("EXTERNAL REFERENCE OBTENIDO:", externalReference);
+
     if (!externalReference || !externalReference.includes("__")) {
-      console.log("External reference no encontrado o inválido:", externalReference);
+      console.log("El pago aprobado no tiene un external_reference válido:", externalReference);
       return res.status(200).json({ received: true });
     }
 
@@ -75,7 +81,7 @@ export default async function handler(req, res) {
       process.env.SUPABASE_SERVICE_ROLE_KEY
     );
 
-    // Evitar duplicados
+    // Verificar si ya se registró este pago para evitar duplicados
     const { data: compraExistente } = await supabase
       .from("compras")
       .select("id")
@@ -83,11 +89,11 @@ export default async function handler(req, res) {
       .maybeSingle();
 
     if (compraExistente) {
-      console.log("La compra ya fue registrada.");
+      console.log("Esta compra ya fue registrada previamente en Supabase.");
       return res.status(200).json({ received: true, duplicate: true });
     }
 
-    // Guardar en Supabase
+    // Guardar la compra en Supabase
     const { data, error } = await supabase
       .from("compras")
       .insert([
@@ -105,11 +111,11 @@ export default async function handler(req, res) {
       return res.status(200).json({ received: true, db_error: true });
     }
 
-    console.log("COMPRA GUARDADA EXITOSAMENTE:", data);
+    console.log("¡COMPRA GUARDADA EXITOSAMENTE EN SUPABASE!:", data);
     return res.status(200).json({ received: true, success: true });
 
   } catch (error) {
-    console.error("ERROR CRITICO:", error.message);
+    console.error("ERROR CRÍTICO EN WEBHOOK:", error.message);
     return res.status(200).json({ received: true, error: error.message });
   }
 }
