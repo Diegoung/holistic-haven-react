@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { supabase } from '../supabaseClient'; // Asegurate de que la ruta apunte correctamente a tu cliente de Supabase
 
 interface Course {
   id: string;
@@ -37,39 +36,64 @@ const courses: Course[] = [
 ];
 
 const Checkout: React.FC = () => {
+  const [cursoSeleccionadoTransferencia, setCursoSeleccionadoTransferencia] = useState<Course | null>(null);
 
-  const handleMercadoPago = async (course: Course) => {
-    const { data: { user } } = await supabase.auth.getUser();
+  if (cursoSeleccionadoTransferencia) {
+    const tuNumeroWhatsApp = "5493413375533";
+    const mensajeWp = encodeURIComponent(`¡Hola! Acabo de realizar la transferencia por ARS $${priceARS.toLocaleString()} para el curso "${cursoSeleccionadoTransferencia.name}". Te adjunto el comprobante.`);
 
-    if (!user) {
-      alert("Por favor iniciá sesión para poder realizar la compra.");
-      return;
-    }
+    return (
+      <div className="min-h-screen bg-cover bg-center p-6 flex items-center justify-center" style={{ backgroundImage: 'url("/Terapiasholisticas.jpg")' }}>
+        <div className="bg-white bg-opacity-95 rounded-lg shadow-lg p-6 max-w-md w-full">
+          <h1 className="text-2xl font-bold text-center mb-2">Datos para Transferencia</h1>
+          <p className="text-sm text-gray-600 text-center mb-6">
+            Curso seleccionado: <span className="font-semibold text-indigo-600">{cursoSeleccionadoTransferencia.name}</span>
+          </p>
 
-    try {
-      const response = await fetch('/api/create-preference', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title: course.name,
-          price: priceARS,
-          userId: user.id,
-          courseId: course.id,
-        }),
-      });
+          <div className="bg-gray-50 p-4 rounded-lg space-y-3 mb-6 border border-gray-200">
+            <div>
+              <span className="text-xs text-gray-500 block">Titular de la cuenta:</span>
+              <span className="font-medium text-gray-800">Diego Martin Fragnito</span>
+            </div>
+            <div>
+              <span className="text-xs text-gray-500 block">CBU:</span>
+              <span className="font-mono font-bold text-indigo-600 select-all text-sm">4530000800012708764665</span>
+            </div>
+            <div>
+              <span className="text-xs text-gray-500 block">Alias:</span>
+              <span className="font-mono font-bold text-indigo-600 select-all text-lg">HOLISTICA.DMF</span>
+            </div>
+            <div>
+              <span className="text-xs text-gray-500 block">Importe a abonar:</span>
+              <span className="font-semibold text-gray-800">ARS ${priceARS.toLocaleString()}</span>
+            </div>
+          </div>
 
-      const data = await response.json();
+          <div className="space-y-3">
+            <p className="text-xs text-gray-600 text-center">
+              Una vez realizada la transferencia, hacé clic en el botón para enviar el comprobante directamente a nuestro WhatsApp y activar tu acceso.
+            </p>
 
-      if (data.init_point) {
-        window.location.href = data.init_point;
-      } else {
-        alert("Ocurrió un error al generar el pago. Intentá nuevamente.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Error al conectar con la pasarela de pagos.");
-    }
-  };
+            <a
+              href={`https://wa.me/${tuNumeroWhatsApp}?text=${mensajeWp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition duration-200 shadow-md text-center"
+            >
+              <span>💬 Avisar por WhatsApp</span>
+            </a>
+
+            <button
+              onClick={() => setCursoSeleccionadoTransferencia(null)}
+              className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg text-center transition-colors"
+            >
+              ← Volver al catálogo
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -77,7 +101,7 @@ const Checkout: React.FC = () => {
       style={{ backgroundImage: 'url("/Terapiasholisticas.jpg")' }}
     >
       <div className="bg-white bg-opacity-90 rounded-lg shadow-lg p-6 max-w-5xl mx-auto">
-        <h1 className="text-2xl font-bold text-center mb-6">Carrito de Compras</h1>
+        <h1 className="text-2xl font-bold text-center mb-6">Catálogo de Cursos</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {courses.map((course, index) => (
@@ -95,10 +119,10 @@ const Checkout: React.FC = () => {
               </div>
               <div className="mt-4 flex flex-col gap-2">
                 <button
-                  onClick={() => handleMercadoPago(course)}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-center cursor-pointer transition-colors"
+                  onClick={() => setCursoSeleccionadoTransferencia(course)}
+                  className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg text-center cursor-pointer transition-colors"
                 >
-                  Pagar con Mercado Pago
+                  Comprar 🏦
                 </button>
                 <a
                   href={course.paypalLink || '#'}
@@ -116,13 +140,11 @@ const Checkout: React.FC = () => {
         </div>
 
         <div className="bg-gray-100 p-4 rounded-lg text-sm text-gray-800 mt-10">
-          <p className="font-semibold mb-2">¿Querés pagar por transferencia local?</p>
-          <p>Podés hacerlo a esta cuenta bancaria:</p>
-          <p><strong>CBU:</strong> 1430001713033958540010</p>
-          <p><strong>Alias:</strong> holistica.dmf</p>
-          <p><strong>Banco:</strong> Bru Bank</p>
-          <p className="mt-2">Una vez hecho el pago, por favor enviá el comprobante a nuestro WhatsApp así enviaremos el material correspondiente.</p>
-          <p className="mt-2">Contamos con cuentas locales en su país para que pueda depositar en su moneda local, consulte....</p>
+          <p className="font-semibold mb-2">Información general de transferencia:</p>
+          <p><strong>CBU:</strong> 4530000800012708764665</p>
+          <p><strong>Alias:</strong> HOLISTICA.DMF</p>
+          <p><strong>Titular:</strong> Diego Martin Fragnito</p>
+          <p className="mt-2">Ante cualquier duda, podés comunicarte con nosotros mediante el botón de WhatsApp.</p>
         </div>
       </div>
     </div>
