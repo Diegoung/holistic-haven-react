@@ -23,15 +23,16 @@ export const Auth: React.FC = () => {
         console.log('Usuario autenticado:', data.user);
       }
     } else {
-      // REGISTRO - Verificamos en consola qué valor tiene la variable nombre
-      console.log('Enviando nombre a Supabase Auth:', nombre);
+      // REGISTRO - Enviamos el nombre limpio de espacios
+      const nombreLimpio = nombre.trim();
+      console.log('Enviando nombre a Supabase Auth:', nombreLimpio);
 
       const { error: authError } = await supabase.auth.signUp({ 
         email, 
         password,
         options: {
           data: {
-            nombre: nombre 
+            nombre: nombreLimpio 
           }
         }
       });
