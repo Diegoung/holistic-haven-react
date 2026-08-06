@@ -29,7 +29,10 @@ import {
   UserPlus,
   Info,
   CreditCard,
-  Globe
+  Globe,
+  ExternalLink,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 
 import { supabase } from '../supabaseClient';
@@ -51,9 +54,10 @@ export const Services: React.FC<ServicesProps> = ({
   session,
   onAbrirAuth
 }) => {
-  const [compras, setCompras] = useState<number[]>([]);
+  const [comprasIds, setComprasIds] = useState<number[]>([]);
   const [cursosBD, setCursosBD] = useState<CursoBD[]>([]);
   const [busqueda, setBusqueda] = useState('');
+  const [mostrarListaPack, setMostrarListaPack] = useState(false);
   
   const [cursoSeleccionadoCompra, setCursoSeleccionadoCompra] = useState<any | null>(null);
 
@@ -87,14 +91,14 @@ export const Services: React.FC<ServicesProps> = ({
         }
 
         if (dataCompras) {
-          setCompras(
+          setComprasIds(
             dataCompras.map(
               (item: any) => Number(item.curso_id)
             )
           );
         }
       } else {
-        setCompras([]);
+        setComprasIds([]);
       }
     } catch (error) {
       console.error(
@@ -105,8 +109,34 @@ export const Services: React.FC<ServicesProps> = ({
   };
 
   // ======================================
-  // LISTA DE CURSOS
+  // LINKS DEL PACK HOLISTICO (22 CURSOS)
   // ======================================
+  const linksPackHolistico = [
+    { titulo: "Pendulo hebreo", link: "https://drive.google.com/drive/folders/11qPSJYe26Q26KLkc4Ca4RqTDA03me3Rj" },
+    { titulo: "Radiestesia", link: "https://drive.google.com/drive/folders/1A1Q6cwE_gU4On6OkUyyCieNNG2RQJFC5" },
+    { titulo: "Biodescodificacion", link: "https://drive.google.com/drive/folders/14HFFAGggn8GCGcevguLfCyAhAJpHQ6FQ" },
+    { titulo: "Chakras y aura", link: "https://drive.google.com/drive/folders/19RKt9wif1UUmejPpO1JAt4mrIHB5Vyt3" },
+    { titulo: "Hoponopono", link: "https://drive.google.com/drive/folders/19H2OWgqm4xZTsL2Ls3SxlvhVeckX0ouo" },
+    { titulo: "Flores de Bach", link: "https://drive.google.com/drive/folders/1A-2jX4bcdvO8KkC6Cy0lyRlb-bUB9An2" },
+    { titulo: "Sanación árbol genealógico", link: "https://drive.google.com/drive/folders/19Qh8yloSECFFhZkS_KEQLIqY5RqKW4u9" },
+    { titulo: "Sanación niño interior", link: "https://drive.google.com/drive/folders/19JQoaeNjmblabPRMbd6mgQisFBubGob1" },
+    { titulo: "Sanación linaje femenino y rito del útero", link: "https://drive.google.com/drive/folders/19wU0zkTgs1-EazAXMcq-QWF6CH86su7c" },
+    { titulo: "Sanación con ángeles", link: "https://drive.google.com/drive/folders/19vliliO_51xjtt8JR-rsRJJ7YfJ9lfGD" },
+    { titulo: "Magia wicca", link: "https://drive.google.com/drive/folders/19VgXBuIOYBotS-jiDtWu8yLiq_pACQBE" },
+    { titulo: "Sanación popular", link: "https://drive.google.com/drive/folders/19F6PsBIlf75FHng-YntOimI8LYKyTp4g" },
+    { titulo: "Limpieza energética", link: "https://drive.google.com/drive/folders/19SmfGYSLv0rYIjR-8w7ik0my7HHc058M" },
+    { titulo: "Gemoterapia", link: "https://drive.google.com/drive/folders/19Earq10AczmdFuNNTdlOCyYx_M_f-rtz" },
+    { titulo: "Rocíos auricos y sahumos", link: "https://drive.google.com/drive/folders/1A33zQCDti8LRYl7OY8COa0Opq56Ul4AM" },
+    { titulo: "Cortes de cordones energéticos", link: "https://drive.google.com/drive/folders/1A-FycNtAsuCd5n30RBNNFhiAWm0jIbRy" },
+    { titulo: "Runas", link: "https://drive.google.com/drive/folders/19sOOHPbMrIqEcYyYFw_wHE3LL3wIoV-j" },
+    { titulo: "Magia e interpretación con velas", link: "https://drive.google.com/drive/folders/19n9orshqd7SG0Ad3MzofkibDOdXXG3FW" },
+    { titulo: "Registros akashicos", link: "https://drive.google.com/drive/folders/14Glh5lQ2LtXi_ppQEvlHzf57iCMXLrc3" },
+    { titulo: "Ayurveda", link: "https://drive.google.com/drive/folders/14CMJGg0BTK-ZLbcZqGd1vpBPKsS7qac4" },
+    { titulo: "Constelaciones familiares", link: "https://drive.google.com/drive/folders/163_eHVuMcVheZlEX-V7S0r6Css9pVaUs" },
+    { titulo: "Vidas pasadas Kharma y Dharma", link: "https://drive.google.com/drive/folders/19c7sQcZJfxNSCs6LOKh5GHg5ahXJt9Yf" },
+    { titulo: "DE REGALO: 78 LIBROS EN PDF", link: "https://drive.google.com/drive/folders/1jM8hOwePh4EIZOVXXIvYfDcsLtOAbMKv" }
+  ];
+
   const servicesList = [
     {
       icon: <Flower className="h-6 w-6 text-purple-600"/>,
@@ -307,7 +337,6 @@ export const Services: React.FC<ServicesProps> = ({
     service.title.toLowerCase().includes(busqueda.toLowerCase())
   );
 
-  // Pantalla unificada de métodos de pago (Transferencia o WhatsApp para PayPal)
   if (cursoSeleccionadoCompra) {
     const tuNumeroWhatsApp = "5493413375533";
     const mensajeTransferencia = encodeURIComponent(`¡Hola! Acabo de realizar la transferencia local por ARS $${cursoSeleccionadoCompra.precioARS.toLocaleString()} para el curso "${cursoSeleccionadoCompra.title}". Te adjunto el comprobante.`);
@@ -321,7 +350,6 @@ export const Services: React.FC<ServicesProps> = ({
             Curso: <span className="font-semibold text-indigo-600">{cursoSeleccionadoCompra.title}</span>
           </p>
 
-          {/* Opción 1: Argentina */}
           <div className="bg-gray-50 p-4 rounded-xl space-y-2 mb-4 border border-gray-200">
             <h3 className="font-bold text-sm text-purple-900 flex items-center gap-1">🇦🇷 Pago Local (Argentina)</h3>
             <div className="text-xs space-y-1">
@@ -340,7 +368,6 @@ export const Services: React.FC<ServicesProps> = ({
             </a>
           </div>
 
-          {/* Opción 2: Internacional / PayPal */}
           <div className="bg-amber-50 p-4 rounded-xl space-y-2 mb-6 border border-amber-200">
             <h3 className="font-bold text-sm text-amber-900 flex items-center gap-1">🌐 Pago Internacional (PayPal)</h3>
             <div className="text-xs space-y-1">
@@ -409,8 +436,8 @@ export const Services: React.FC<ServicesProps> = ({
             (c) => c.titulo.toLowerCase().trim() === service.title.toLowerCase().trim()
           );
 
-          const cursoId = cursoBD ? cursoBD.id : index + 1;
-          const estaComprado = compras.includes(cursoId);
+          const cursoIdReal = cursoBD ? cursoBD.id : index + 1;
+          const estaComprado = comprasIds.includes(cursoIdReal);
 
           return (
             <Card key={index} className="rounded-2xl overflow-hidden flex flex-col justify-between">
@@ -426,14 +453,43 @@ export const Services: React.FC<ServicesProps> = ({
 
               <CardContent>
                 {estaComprado ? (
-                  <a
-                    href={service.linkDriveDirecto || cursoBD?.link_drive}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-center bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold transition-colors"
-                  >
-                    Acceder al Material
-                  </a>
+                  service.esPack ? (
+                    <div className="space-y-2">
+                      <button
+                        onClick={() => setMostrarListaPack(!mostrarListaPack)}
+                        className="w-full flex items-center justify-between bg-emerald-600 hover:bg-emerald-700 text-white py-3 px-4 rounded-xl font-bold transition-colors text-sm"
+                      >
+                        <span>✨ Acceder a los 22 Cursos</span>
+                        {mostrarListaPack ? <ChevronUp className="w-4 h-4"/> : <ChevronDown className="w-4 h-4"/>}
+                      </button>
+
+                      {mostrarListaPack && (
+                        <div className="max-h-60 overflow-y-auto space-y-1.5 p-2 bg-slate-50 border rounded-xl">
+                          {linksPackHolistico.map((item, idx) => (
+                            <a
+                              key={idx}
+                              href={item.link.startsWith('http') ? item.link : `https://${item.link}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center justify-between p-2 text-xs bg-white hover:bg-purple-50 border rounded-lg text-slate-700 font-medium transition-colors"
+                            >
+                              <span>{item.titulo}</span>
+                              <ExternalLink className="w-3.5 h-3.5 text-purple-600 flex-shrink-0 ml-1"/>
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <a
+                      href={service.linkDriveDirecto || cursoBD?.link_drive}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-center bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold transition-colors"
+                    >
+                      Acceder al Material
+                    </a>
+                  )
                 ) : (
                   <div className="space-y-4 pt-2">
                     <div className="flex justify-between items-center">
