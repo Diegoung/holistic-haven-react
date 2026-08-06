@@ -23,9 +23,17 @@ export const Auth: React.FC = () => {
         console.log('Usuario autenticado:', data.user);
       }
     } else {
-      const { data: authData, error: authError } = await supabase.auth.signUp({ 
+      // REGISTRO - Verificamos en consola qué valor tiene la variable nombre
+      console.log('Enviando nombre a Supabase Auth:', nombre);
+
+      const { error: authError } = await supabase.auth.signUp({ 
         email, 
-        password 
+        password,
+        options: {
+          data: {
+            nombre: nombre 
+          }
+        }
       });
 
       if (authError) {
@@ -33,24 +41,8 @@ export const Auth: React.FC = () => {
         return;
       }
 
-      if (authData?.user) {
-        const { error: profileError } = await supabase
-          .from('perfiles')
-          .insert([
-            {
-              id: authData.user.id,
-              nombre: nombre,
-              rol: 'alumno'
-            }
-          ]);
-
-        if (profileError) {
-          alert('Error al guardar datos del perfil: ' + profileError.message);
-        } else {
-          alert('¡Registro exitoso! Ya podés iniciar sesión.');
-          setIsLogin(true);
-        }
-      }
+      alert('¡Registro exitoso! Ya podés iniciar sesión.');
+      setIsLogin(true);
     }
   };
 
