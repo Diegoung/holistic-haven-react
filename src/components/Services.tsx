@@ -339,7 +339,7 @@ export const Services: React.FC<ServicesProps> = ({
 
   if (cursoSeleccionadoCompra) {
     const tuNumeroWhatsApp = "5493413375533";
-    const mensajeTransferencia = encodeURIComponent(`¡Hola! Acabo de realizar la transferencia local por ARS $${cursoSeleccionadoCompra.precioARS.toLocaleString()} para el curso "${cursoSeleccionadoCompra.title}". Te adjunto el comprobante.`);
+    const mensajeTransferencia = encodeURIComponent(`¡Hola! Acabo de realizar la transferencia local por ARS $${cursoSeleccionadoCompra.precioARS.toLocaleString()} para el curso "${cursoSeleccionadoCompra.title}". Te adjunto el comprobante, Dejo mis Datos para que puedas habilitarme el acceso al mismo. Nombre y correo que me registre.`);
     const mensajePaypal = encodeURIComponent(`¡Hola! Quisiera abonar por PayPal (US $${cursoSeleccionadoCompra.precioUSD}) el curso "${cursoSeleccionadoCompra.title}". Por favor envíenme el link de pago.`);
 
     return (
