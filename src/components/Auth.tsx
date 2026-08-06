@@ -4,6 +4,7 @@ import { supabase } from '../supabaseClient';
 export const Auth: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [nombre, setNombre] = useState<string>('');
   const [isLogin, setIsLogin] = useState<boolean>(true);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -21,10 +22,17 @@ export const Auth: React.FC = () => {
         alert('¡Bienvenido de nuevo!');
       }
     } else {
-      // REGISTRO - Solo correo y contraseña, sin metadatos de nombre
+      // REGISTRO - Enviamos el nombre y apellido en los metadatos
+      const nombreLimpio = nombre.trim();
+
       const { error: authError } = await supabase.auth.signUp({ 
         email, 
-        password
+        password,
+        options: {
+          data: {
+            nombre: nombreLimpio
+          }
+        }
       });
 
       if (authError) {
@@ -34,6 +42,7 @@ export const Auth: React.FC = () => {
 
       alert('¡Registro exitoso! Ya podés iniciar sesión.');
       setIsLogin(true);
+      setNombre('');
     }
   };
 
@@ -52,6 +61,17 @@ export const Auth: React.FC = () => {
       </h2>
 
       <form onSubmit={handleSubmit}>
+        {!isLogin && (
+          <input 
+            type="text" 
+            placeholder="Nombre y Apellido" 
+            value={nombre} 
+            onChange={(e) => setNombre(e.target.value)} 
+            style={{ width: '100%', padding: '10px', margin: '10px 0', borderRadius: '4px', border: '1px solid #ccc', boxSizing: 'border-box' }}
+            required 
+          />
+        )}
+
         <input 
           type="email" 
           placeholder="Tu Correo Electrónico" 
