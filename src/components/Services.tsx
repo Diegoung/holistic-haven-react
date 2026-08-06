@@ -112,7 +112,7 @@ export const Services: React.FC<ServicesProps> = ({
   // LINKS DEL PACK HOLISTICO (22 CURSOS)
   // ======================================
   const linksPackHolistico = [
-    { titulo: "Pendulo hebreo", link: "https://drive.google.com/drive/folders/11qPSJYe26Q26KLkc4Ca4rQtDA03me3R" },
+    { titulo: "Pendulo hebreo", link: "https://drive.google.com/drive/folders/11qPSJYe26Q26KLkc4Ca4rQtDA03me3Rj" },
     { titulo: "Radiestesia", link: "https://drive.google.com/drive/folders/1A1Q6cwE_gU4On6OkUyyCieNNG2RQJFC5" },
     { titulo: "Biodescodificacion", link: "https://drive.google.com/drive/folders/14HFFAGggn8GCGcevguLfCyAhAJpHQ6FQ" },
     { titulo: "Chakras y aura", link: "https://drive.google.com/drive/folders/19RKt9wif1UUmejPpO1JAt4mrIHB5Vyt3" },
