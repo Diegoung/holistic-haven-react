@@ -2,29 +2,39 @@ import React, { useState } from "react";
 
 const faqs = [
   {
-    question: "¿Cómo accedo a los cursos que compro en la plataforma?",
+    question: "¿Cómo funciona la plataforma y el registro de usuarios?",
     answer:
-      "Para comprar un curso debes registrarte o iniciar sesión en la web. Una vez realizado el pago, el sistema habilitará automáticamente el botón 'Acceder al Material' para ingresar a la carpeta de Google Drive correspondiente.",
+      "Para adquirir y acceder a las formaciones, primero debés registrarte o iniciar sesión en la web con tu correo electrónico. De esta manera, el sistema vincula tus compras de forma segura a tu perfil, permitiéndote desbloquear de manera automática el acceso al material de estudio, los enlaces de descarga y tus certificados oficiales en cualquier momento.",
+  },
+  {
+    question: "¿Cómo accedo a los cursos que compro?",
+    answer:
+      "Una vez que realizas el pago y se aprueba, el sistema habilita automáticamente en tu panel los botones de acceso. Podrás ingresar directamente a carpetas de Google Drive organizadas que contienen todo el material de estudio en formato PDF y videos explicativos complementarios para estudiar a tu propio ritmo.",
+  },
+  {
+    question: "¿Los cursos cuentan con apoyo o seguimiento?",
+    answer:
+      "¡Sí! Todas nuestras formaciones cuentan con asistencia personalizada de un profesor durante todo tu proceso de aprendizaje para que puedas resolver dudas, consultar inquietudes y avanzar con total seguridad.",
   },
   {
     question: "¿Necesito experiencia previa para inscribirme?",
     answer:
-      "No. Nuestros cursos están diseñados tanto para principiantes como para personas con experiencia previa en terapias holísticas.",
+      "No. Nuestros cursos están diseñados desde cero, por lo que son ideales tanto para principiantes como para personas con experiencia previa que buscan perfeccionarse en terapias holísticas.",
   },
   {
     question: "¿Los cursos son presenciales o virtuales?",
     answer:
-      "Nuestros cursos son 100% virtuales y asincrónicos. Recibirás manuales y material audiovisual complementario cargado en Google Drive para que estudies a tu propio ritmo, junto con asistencia personalizada.",
+      "Son 100% virtuales y asincrónicos. Podrás administrar tus tiempos de lectura y práctica con los manuales en PDF y videos, respaldados siempre por la asistencia personalizada de tu profesor.",
   },
   {
-    question: "¿Entregan certificado?",
+    question: "¿Cómo se obtiene el certificado de finalización?",
     answer:
-      "Sí, cada curso incluye su certificado de participación que acredita los conocimientos adquiridos en la terapia correspondiente.",
+      "Al finalizar tu formación, podrás ingresar a tu panel y hacer clic en el botón de certificado. El sistema te permite generar y descargar tu Certificado Oficial de la academia de forma inmediata como imagen de alta calidad (ideal para visualizarse y guardarse sin problemas en cualquier celular o PC).",
   },
   {
     question: "¿Qué métodos de pago aceptan?",
     answer:
-      "Aceptamos Mercado Pago (tarjetas de crédito, débito y dinero en cuenta) directamente desde la web. Si deseas abonar por transferencia u otro método, podés contactarnos por WhatsApp.",
+      "Aceptamos pagos locales en Argentina por transferencia o medios automáticos, y pagos internacionales mediante PayPal o coordinación directa. Si tenés dudas con el pago, podés contactarnos por WhatsApp.",
   },
   {
     question: "¿Dónde puedo ver más novedades o realizar consultas directas?",
