@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toPng } from 'html-to-image';
 
 interface Props {
   curso: { id: string | number, titulo: string };
@@ -10,6 +11,7 @@ export const CertificadoModal: React.FC<Props> = ({ curso, nombreAlumno, onCerra
   const [nombre, setNombre] = useState(nombreAlumno);
   const [fecha, setFecha] = useState('');
   const [terapiaPack, setTerapiaPack] = useState('');
+  const [descargando, setDescargando] = useState(false);
 
   const esPack = curso.titulo.toLowerCase().includes('pack');
   
@@ -18,6 +20,28 @@ export const CertificadoModal: React.FC<Props> = ({ curso, nombreAlumno, onCerra
     "Biodescodificación", "Reflexología", "Aromaterapia", "Péndulo Hebreo", 
     "Sonoterapia", "Masaje Ayurvédico", "Mindfulness", "Sanación con Cristales"
   ];
+
+  // Función para descargar el certificado como imagen directamente
+  const handleDescargarImagen = async () => {
+    const node = document.getElementById('printable-certificate');
+    if (node) {
+      try {
+        setDescargando(true);
+        // Generamos la imagen con mayor calidad (pixelRatio: 2)
+        const dataUrl = await toPng(node, { cacheBust: true, pixelRatio: 2 });
+        
+        const link = document.createElement('a');
+        link.download = `Certificado_${nombre || 'Alumno'}.png`;
+        link.href = dataUrl;
+        link.click();
+      } catch (err) {
+        console.error('Error al generar la imagen del certificado:', err);
+        alert('Hubo un error al descargar. Inténtalo de nuevo.');
+      } finally {
+        setDescargando(false);
+      }
+    }
+  };
 
   return (
     <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000, padding: '15px', boxSizing: 'border-box' }}>
@@ -64,26 +88,21 @@ export const CertificadoModal: React.FC<Props> = ({ curso, nombreAlumno, onCerra
           <p style={{ marginTop: '30px', fontSize: '14px', color: '#333' }}>Fecha: {fecha ? fecha.split('-').reverse().join('/') : 'DD/MM/AAAA'}</p>
         </div>
 
-        <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <div style={{ display: 'flex', gap: '10px' }}>
-            <button 
-              onClick={() => window.print()} 
-              style={{ flex: 1, padding: '12px', backgroundColor: '#2C4A3E', color: '#fff', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer' }}
-            >
-              Descargar / Imprimir PDF 📥
-            </button>
-            <button 
-              onClick={onCerrar} 
-              style={{ padding: '12px 20px', backgroundColor: '#e74c3c', color: '#fff', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer' }}
-            >
-              Cerrar ❌
-            </button>
-          </div>
-
-          {/* Aviso para celulares */}
-          <p style={{ fontSize: '11px', color: '#666', textAlign: 'center', marginTop: '5px' }}>
-            📱 <em>Si descargas desde el celular y se ve vertical, recuerda cambiar la orientación de la página a <b>Horizontal</b> en las opciones de impresión. En PC se descarga perfecto de forma automática.</em>
-          </p>
+        {/* Botones de acción */}
+        <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
+          <button 
+            onClick={handleDescargarImagen} 
+            disabled={descargando}
+            style={{ flex: 1, padding: '12px', backgroundColor: '#2C4A3E', color: '#fff', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', opacity: descargando ? 0.7 : 1 }}
+          >
+            {descargando ? 'Generando certificado...' : 'Descargar Certificado 📥'}
+          </button>
+          <button 
+            onClick={onCerrar} 
+            style={{ padding: '12px 20px', backgroundColor: '#e74c3c', color: '#fff', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer' }}
+          >
+            Cerrar ❌
+          </button>
         </div>
 
       </div>
