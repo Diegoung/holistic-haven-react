@@ -32,7 +32,8 @@ import {
   Globe,
   ExternalLink,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Award
 } from 'lucide-react';
 
 import { supabase } from '../supabaseClient';
@@ -40,6 +41,7 @@ import { supabase } from '../supabaseClient';
 interface ServicesProps {
   session?: any;
   onAbrirAuth?: () => void;
+  onAbrirCertificado?: (curso: any) => void;
 }
 
 interface CursoBD {
@@ -52,9 +54,11 @@ interface CursoBD {
 
 export const Services: React.FC<ServicesProps> = ({
   session,
-  onAbrirAuth
+  onAbrirAuth,
+  onAbrirCertificado
 }) => {
   const [comprasIds, setComprasIds] = useState<number[]>([]);
+  const [comprasTitulos, setComprasTitulos] = useState<string[]>([]);
   const [cursosBD, setCursosBD] = useState<CursoBD[]>([]);
   const [busqueda, setBusqueda] = useState('');
   const [mostrarListaPack, setMostrarListaPack] = useState(false);
@@ -91,14 +95,19 @@ export const Services: React.FC<ServicesProps> = ({
         }
 
         if (dataCompras) {
-          setComprasIds(
-            dataCompras.map(
-              (item: any) => Number(item.curso_id)
-            )
-          );
+          const ids = dataCompras.map((item: any) => Number(item.curso_id));
+          setComprasIds(ids);
+
+          if (dataCursos) {
+            const titulosComprados = dataCursos
+              .filter((c: any) => ids.includes(Number(c.id)))
+              .map((c: any) => c.titulo.toLowerCase().trim());
+            setComprasTitulos(titulosComprados);
+          }
         }
       } else {
         setComprasIds([]);
+        setComprasTitulos([]);
       }
     } catch (error) {
       console.error(
@@ -108,9 +117,6 @@ export const Services: React.FC<ServicesProps> = ({
     }
   };
 
-  // ======================================
-  // LINKS DEL PACK HOLISTICO (22 CURSOS)
-  // ======================================
   const linksPackHolistico = [
     { titulo: "Pendulo hebreo", link: "https://drive.google.com/drive/folders/11qPSJYe26Q26KLkc4Ca4rQtDA03me3Rj" },
     { titulo: "Radiestesia", link: "https://drive.google.com/drive/folders/1A1Q6cwE_gU4On6OkUyyCieNNG2RQJFC5" },
@@ -145,22 +151,17 @@ export const Services: React.FC<ServicesProps> = ({
       precioUSD: 5,
       esPack: true,
       description: (
-        <ul className="grid grid-cols-2 gap-1 text-xs text-slate-600 mt-2">
-          <li>✨ Péndulo Hebreo</li>
-          <li>✨ Radiestesia</li>
-          <li>✨ Biodescodificación</li>
-          <li>✨ Chakras y Aura</li>
-          <li>✨ Ho'oponopono</li>
-          <li>✨ Flores de Bach</li>
-          <li>✨ Árbol Genealógico</li>
-          <li>✨ Niño Interior</li>
-          <li>✨ Linaje Femenino</li>
-          <li>✨ Sanación Ángeles</li>
-          <li>✨ Magia Wicca</li>
-          <li>✨ Limpieza Energética</li>
-          <li>✨ Gemoterapia</li>
-          <li>🎁 +78 Libros PDF</li>
-        </ul>
+        <div className="mt-2 bg-purple-50/50 p-2.5 rounded-xl border border-purple-100">
+          <p className="text-[11px] font-semibold text-purple-900 mb-1.5 uppercase tracking-wider">Incluye 22 formaciones:</p>
+          <ul className="space-y-1 text-xs text-slate-700 max-h-36 overflow-y-auto pr-1 custom-scrollbar">
+            {linksPackHolistico.map((item, idx) => (
+              <li key={idx} className="flex items-center gap-1.5">
+                <span className="text-purple-600">✨</span>
+                <span className="truncate">{item.titulo}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       )
     },
     {
@@ -437,12 +438,16 @@ export const Services: React.FC<ServicesProps> = ({
           );
 
           const cursoIdReal = cursoBD ? cursoBD.id : index + 1;
-          const estaComprado = comprasIds.includes(cursoIdReal);
+          
+          const tituloLimpio = service.title.toLowerCase().trim();
+          const estaComprado = comprasIds.includes(cursoIdReal) || 
+                               comprasTitulos.includes(tituloLimpio) ||
+                               comprasTitulos.some(t => t.includes(tituloLimpio) || tituloLimpio.includes(t));
 
           return (
-            <Card key={index} className="rounded-2xl overflow-hidden flex flex-col justify-between">
+            <Card key={index} className="rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
               <CardHeader>
-                <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center mb-1">
                   {service.icon}
                 </div>
                 <CardTitle className="text-lg">{service.title}</CardTitle>
@@ -479,29 +484,51 @@ export const Services: React.FC<ServicesProps> = ({
                           ))}
                         </div>
                       )}
+
+                      {onAbrirCertificado && (
+                        <button
+                          onClick={() => onAbrirCertificado(service)}
+                          className="w-full mt-2 flex items-center justify-center gap-2 bg-[#2C4A3E] hover:bg-[#1B3026] text-white py-2.5 px-4 rounded-xl font-bold text-sm transition-colors cursor-pointer"
+                        >
+                          <Award className="w-4 h-4" />
+                          Certificado 🎓
+                        </button>
+                      )}
                     </div>
                   ) : (
-                    <a
-                      href={service.linkDriveDirecto || cursoBD?.link_drive}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block text-center bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold transition-colors"
-                    >
-                      Acceder al Material
-                    </a>
+                    <div className="space-y-2">
+                      <a
+                        href={service.linkDriveDirecto || cursoBD?.link_drive}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block text-center bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold transition-colors"
+                      >
+                        Acceder al Material
+                      </a>
+
+                      {onAbrirCertificado && (
+                        <button
+                          onClick={() => onAbrirCertificado(service)}
+                          className="w-full flex items-center justify-center gap-2 bg-[#2C4A3E] hover:bg-[#1B3026] text-white py-2.5 px-4 rounded-xl font-bold text-sm transition-colors cursor-pointer"
+                        >
+                          <Award className="w-4 h-4" />
+                          Certificado 🎓
+                        </button>
+                      )}
+                    </div>
                   )
                 ) : (
                   <div className="space-y-4 pt-2">
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center border-t border-slate-100 pt-3">
                       <div>
-                        <span className="text-xs text-slate-500">Argentina</span>
-                        <div className="font-bold text-purple-900 text-base">
+                        <span className="text-[11px] text-slate-500">Argentina</span>
+                        <div className="font-bold text-purple-900 text-sm sm:text-base">
                           ${service.precioARS.toLocaleString()} ARS
                         </div>
                       </div>
                       <div>
-                        <span className="text-xs text-slate-500">Internacional</span>
-                        <div className="font-bold text-amber-700 text-base">
+                        <span className="text-[11px] text-slate-500">Internacional</span>
+                        <div className="font-bold text-amber-700 text-sm sm:text-base">
                           US ${service.precioUSD}
                         </div>
                       </div>
