@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Testimonials from './components/Testimonials';
-import Gallery from './components/Gallery';
+import EspacioHolistico from './components/EspacioHolistico';
 import PreguntasFrecuentes from './components/PreguntasFrecuentes';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -144,7 +144,9 @@ export const MainApp: React.FC = () => {
       <Hero />
       <Services session={session} onAbrirAuth={() => setMostrarModalAuth(true)} onAbrirCertificado={abrirCertificado} />
       <Testimonials />
-      <Gallery />
+      
+      <EspacioHolistico />
+
       <PreguntasFrecuentes />
       <Contact />
 
@@ -254,6 +256,10 @@ export const MainApp: React.FC = () => {
               <button onClick={() => window.print()} style={{ flex: 1, padding: '12px', backgroundColor: '#2C4A3E', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '15px' }}>Descargar Certificado 📥</button>
               <button onClick={() => setMostrarCertificadoVista(false)} style={{ padding: '12px 20px', backgroundColor: '#e74c3c', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>Cerrar ❌</button>
             </div>
+
+            <p style={{ fontSize: '11px', color: '#d9534f', textAlign: 'center', marginTop: '10px', fontWeight: 'bold' }}>
+              🍎 <em>Nota para celulares (iPhone/Android): Si la vista previa sale vertical, te sugerimos descargar tu certificado desde una PC o Notebook para obtener el formato horizontal automático perfecto.</em>
+            </p>
           </div>
         </div>
       )}
