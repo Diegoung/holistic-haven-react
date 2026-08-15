@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Testimonials from './components/Testimonials';
-import EspacioHolistico from './components/EspacioHolistico';
+import { EspacioHolistico } from './components/EspacioHolistico'; // ✅ Correcto
 import PreguntasFrecuentes from './components/PreguntasFrecuentes';
 import Contact from './components/Contact';
 import Footer from './components/Footer';

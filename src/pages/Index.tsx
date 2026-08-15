@@ -3,12 +3,12 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
-import Gallery from '@/components/EspacioHolistico';
+import { EspacioHolistico as Gallery } from '@/components/EspacioHolistico';
 import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import PreguntasFrecuentes from '@/components/PreguntasFrecuentes'; 
-import { Auth } from '@/components/Auth'; // ✅ Importación oficial y correcta con llaves
+import PreguntasFrecuentes from '@/components/PreguntasFrecuentes';
+import { Auth } from '@/components/Auth';
 
 const Index: React.FC = () => {
   return (

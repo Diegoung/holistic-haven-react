@@ -4,7 +4,6 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from "@/hooks/use-toast";
-import emailjs from '@emailjs/browser';
 import { Send, Mail, User, MessageSquare, Sparkles, HeartHandshake } from 'lucide-react';
 
 const Contact: React.FC = () => {
@@ -12,7 +11,7 @@ const Contact: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -21,24 +20,32 @@ const Contact: React.FC = () => {
         throw new Error("Form reference not found");
       }
 
-      const result = await emailjs.sendForm(
-        'default_service',   // Service ID
-        'template_3q72zol', // Template ID
-        form.current,       // Form reference
-        'aMWCtUQZtlShW2nBN' // Public API Key
-      );
+      const formData = new FormData(form.current);
+      const name = formData.get('from_name') as string;
+      const email = formData.get('from_email') as string;
+      const message = formData.get('message') as string;
+
+      // Armamos el texto exacto con lo que escribió el usuario
+      const textoMensaje = `Hola! Mi nombre es ${name} (Email: ${email}). Consulta: ${message}`;
+      const textEncoded = encodeURIComponent(textoMensaje);
+
+      // URL directa a tu número de WhatsApp
+      const whatsappUrl = `https://wa.me/5493413375533?text=${textEncoded}`;
+      
+      // Abrimos WhatsApp con el mensaje listo
+      window.open(whatsappUrl, '_blank');
 
       toast({
-        title: "✨ Mensaje enviado",
-        description: "Tu consulta ha sido enviada correctamente. Te responderemos a la brevedad.",
+        title: "✨ ¡Listo!",
+        description: "Se abrió WhatsApp con tu consulta redactada.",
       });
 
       form.current.reset();
     } catch (error) {
       console.error('Error completo:', error);
       toast({
-        title: "Error al enviar",
-        description: "No se pudo enviar tu mensaje. Por favor, inténtalo de nuevo o contáctanos por WhatsApp.",
+        title: "Error",
+        description: "No se pudo procesar tu mensaje. Por favor, inténtalo de nuevo.",
         variant: "destructive"
       });
     } finally {
@@ -132,11 +139,11 @@ const Contact: React.FC = () => {
                   {isSubmitting ? (
                     <span className="flex items-center gap-2">
                       <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Enviando consulta...
+                      Procesando...
                     </span>
                   ) : (
                     <>
-                      <span>Enviar Mensaje</span>
+                      <span>Enviar consulta</span>
                       <Send className="w-4 h-4" />
                     </>
                   )}
