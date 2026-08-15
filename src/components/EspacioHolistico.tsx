@@ -1271,7 +1271,7 @@ export const EspacioHolistico: React.FC = () => {
             </span>
             <h4 className="text-2xl font-extrabold tracking-tight">Descarga tu Manual Holístico Gratuito</h4>
             <p className="text-sm text-purple-200 max-w-md mx-auto">
-              Déjanos tu email y te enviaremos el acceso directo inmediato al contenido completo.
+              ingresa tu email y te daremos acceso directo inmediato al contenido completo.
             </p>
           </div>
           
