@@ -147,8 +147,8 @@ export const Services: React.FC<ServicesProps> = ({
     {
       icon: <Flower className="h-6 w-6 text-purple-600"/>,
       title: "Pack holístico 22 cursos",
-      precioARS: 3500,
-      precioUSD: 5,
+      precioARS: 2500,
+      precioUSD: 10,
       esPack: true,
       description: (
         <div className="mt-2 bg-purple-50/50 p-2.5 rounded-xl border border-purple-100">
