@@ -7,6 +7,9 @@ export const AdminPanel = () => {
   const [compras, setCompras] = useState<any[]>([]);
   const [emailBuscado, setEmailBuscado] = useState('');
   const [cursoSeleccionado, setCursoSeleccionado] = useState('');
+  
+  // Estado para el buscador de alumnos
+  const [busqueda, setBusqueda] = useState('');
 
   useEffect(() => {
     cargarDatos();
@@ -54,6 +57,18 @@ export const AdminPanel = () => {
     return compras.some(c => c.user_id === userId && String(c.curso_id) === String(cursoId));
   };
 
+  // Filtrar alumnos por Nombre, Correo o ID
+  const perfilesFiltrados = perfiles.filter(user => {
+    const termino = busqueda.toLowerCase().trim();
+    if (!termino) return true;
+
+    const nombre = (user.nombre || '').toLowerCase();
+    const correo = (user.email || user.correo || '').toLowerCase();
+    const id = (user.id || '').toLowerCase();
+
+    return nombre.includes(termino) || correo.includes(termino) || id.includes(termino);
+  });
+
   return (
     <div className="space-y-6">
       {/* 1. Formulario Rápido */}
@@ -84,45 +99,76 @@ export const AdminPanel = () => {
         </div>
       </div>
 
-      {/* 2. Lista de Usuarios (Muestra Nombre y Correo combinados) */}
+      {/* 2. Lista de Usuarios y Buscador */}
       <div className="bg-white p-4 rounded-xl shadow-sm border border-purple-100">
-        <h3 className="text-lg font-semibold text-purple-900 mb-3">Usuarios Registrados ({perfiles.length})</h3>
-        <div className="space-y-4">
-          {perfiles.map(user => {
-            const nombre = user.nombre || "Sin nombre";
-            const correo = user.email || user.correo || "";
-            
-            return (
-              <div key={user.id} className="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 pb-2 border-b border-gray-200 gap-1">
-                  <span className="text-sm font-bold text-purple-900">
-                    👤 {nombre} {correo ? `(${correo})` : ''}
-                  </span>
-                  <span className="text-xs font-mono text-gray-400 truncate">ID: {user.id}</span>
-                </div>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+          <h3 className="text-lg font-semibold text-purple-900">
+            Usuarios Registrados ({perfilesFiltrados.length} {busqueda && `de ${perfiles.length}`})
+          </h3>
 
-                <div className="flex flex-wrap gap-2">
-                  {cursos.map(curso => {
-                    const yaTiene = tieneAcceso(user.id, curso.id);
-                    return (
-                      <button 
-                        key={curso.id}
-                        onClick={() => toggleAcceso(user.id, curso.id, curso.titulo, yaTiene)}
-                        className={`text-[11px] px-2.5 py-1 rounded-md font-medium transition flex items-center gap-1 ${
-                          yaTiene 
-                            ? 'bg-green-100 hover:bg-red-100 text-green-800 hover:text-red-800 border border-green-300 hover:border-red-300' 
-                            : 'bg-purple-100 hover:bg-purple-200 text-purple-800 border border-purple-200'
-                        }`}
-                        title={yaTiene ? "Huésped con acceso. Clic para quitar" : "Clic para dar acceso"}
-                      >
-                        {yaTiene ? '✓' : '+'} {curso.titulo}
-                      </button>
-                    );
-                  })}
+          {/* Campo de Búsqueda */}
+          <div className="relative w-full sm:w-72">
+            <input
+              type="text"
+              placeholder="🔍 Buscar por nombre o correo..."
+              value={busqueda}
+              onChange={(e) => setBusqueda(e.target.value)}
+              className="w-full border border-purple-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 bg-purple-50/30"
+            />
+            {busqueda && (
+              <button
+                onClick={() => setBusqueda('')}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs px-1"
+              >
+                ✖
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Lista filtrada */}
+        <div className="space-y-4">
+          {perfilesFiltrados.length === 0 ? (
+            <p className="text-center text-sm text-gray-500 py-6">
+              No se encontraron usuarios que coincidan con "{busqueda}".
+            </p>
+          ) : (
+            perfilesFiltrados.map(user => {
+              const nombre = user.nombre || "Sin nombre";
+              const correo = user.email || user.correo || "";
+              
+              return (
+                <div key={user.id} className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 pb-2 border-b border-gray-200 gap-1">
+                    <span className="text-sm font-bold text-purple-900">
+                      👤 {nombre} {correo ? `(${correo})` : ''}
+                    </span>
+                    <span className="text-xs font-mono text-gray-400 truncate">ID: {user.id}</span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {cursos.map(curso => {
+                      const yaTiene = tieneAcceso(user.id, curso.id);
+                      return (
+                        <button 
+                          key={curso.id}
+                          onClick={() => toggleAcceso(user.id, curso.id, curso.titulo, yaTiene)}
+                          className={`text-[11px] px-2.5 py-1 rounded-md font-medium transition flex items-center gap-1 ${
+                            yaTiene 
+                              ? 'bg-green-100 hover:bg-red-100 text-green-800 hover:text-red-800 border border-green-300 hover:border-red-300' 
+                              : 'bg-purple-100 hover:bg-purple-200 text-purple-800 border border-purple-200'
+                          }`}
+                          title={yaTiene ? "Huésped con acceso. Clic para quitar" : "Clic para dar acceso"}
+                        >
+                          {yaTiene ? '✓' : '+'} {curso.titulo}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
       </div>
     </div>
