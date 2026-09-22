@@ -440,6 +440,18 @@ export const Services: React.FC<ServicesProps> = ({
               </div>
             </div>
 
+            {/* PAYPAL */}
+            <div className="bg-indigo-50/60 p-4 rounded-xl border border-indigo-100 space-y-2">
+              <h3 className="font-bold text-sm text-indigo-900 flex items-center gap-1.5">🌍 PayPal (Monto: ${cursoSeleccionadoCompra.precioUSD} USD)</h3>
+              <div className="text-xs space-y-1 text-gray-700">
+                <p><span className="text-gray-500">Titular:</span> Diego Martin Fragnito</p>
+                <p><span className="text-gray-500">Correo PayPal:</span> <span className="font-mono font-bold text-indigo-600 select-all">Diegomfragnito@gmail.com</span></p>
+                <p className="text-[11px] text-gray-600 pt-1">
+                  💡 También podés indicar tu correo vinculado de PayPal al enviar el comprobante para recibir el enlace de pago directo.
+                </p>
+              </div>
+            </div>
+
           </div>
 
           <div className="pt-2 space-y-2">
@@ -601,7 +613,7 @@ export const Services: React.FC<ServicesProps> = ({
                           <span className="font-bold text-purple-900">{service.precioUYU} UYU</span>
                         </div>
                         <div className="bg-amber-50/60 p-2 rounded-lg border border-amber-100">
-                          <span className="text-slate-500 block text-[10px]">🇪🇨 Ecuador</span>
+                          <span className="text-slate-500 block text-[10px]">🇪🇨 Ecuador / PayPal</span>
                           <span className="font-bold text-amber-800">${service.precioUSD} USD</span>
                         </div>
                       </div>
