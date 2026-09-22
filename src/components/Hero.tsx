@@ -20,4 +20,4 @@ const Hero: React.FC = () => {
   );
 };
 
-exports default Hero;
+export default Hero;
