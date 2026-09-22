@@ -3,12 +3,12 @@ import React from 'react';
 const Hero: React.FC = () => {
   return (
     <section 
-      className="relative w-full h-[70vh] md:min-h-screen overflow-hidden flex items-center justify-center bg-cover bg-center bg-no-repeat"
+      className="relative w-full min-h-[50vh] sm:min-h-[70vh] md:min-h-screen bg-[#e8eada] bg-center bg-no-repeat bg-contain md:bg-cover transition-all duration-300"
       style={{
         backgroundImage: 'url(/terapiasholisticas1.jpg)',
       }}
     >
-      {/* Contenedor adaptado para mantener la proporción visual en celulares */}
+      {/* Muestra la imagen completa sin recortar nada en el celular */}
     </section>
   );
 };
