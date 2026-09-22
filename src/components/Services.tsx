@@ -447,7 +447,7 @@ export const Services: React.FC<ServicesProps> = ({
                 <p><span className="text-gray-500">Titular:</span> Diego Martin Fragnito</p>
                 <p><span className="text-gray-500">Correo PayPal:</span> <span className="font-mono font-bold text-indigo-600 select-all">Diegomfragnito@gmail.com</span></p>
                 <p className="text-[11px] text-gray-600 pt-1">
-                  💡 También podés indicar tu correo vinculado de PayPal al enviar el comprobante para recibir el enlace de pago directo.
+                  💡 Podés realizar el envío directo de ${cursoSeleccionadoCompra.precioUSD} USD al correo indicado, o bien, enviarnos tu correo vinculado a PayPal por WhatsApp para que te generemos y enviemos el link de pago.
                 </p>
               </div>
             </div>
