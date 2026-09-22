@@ -148,6 +148,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Flower className="h-6 w-6 text-purple-600"/>,
       title: "Pack holístico 22 cursos",
       precioARS: 2500,
+      precioPEN: 38,
+      precioUYU: 405,
       precioUSD: 10,
       esPack: true,
       description: (
@@ -168,6 +170,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Heart className="h-6 w-6 text-purple-600"/>,
       title: "Taller aprender a meditar",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/1O1H5-MqV2LcmcMcpYfAmUf0ENkLIV83n?usp=drive_link",
       description: "Técnicas simples para calmar la mente, reducir el estrés y conectar con tu ser."
@@ -176,6 +180,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Sun className="h-6 w-6 text-purple-600"/>,
       title: "Yoga",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/1F4rkztkPyyM_x6yYcOC1TsWWttwDqTDb?usp=drive_link",
       description: "Técnicas posturales y respiratorias para equilibrar cuerpo, mente y energía."
@@ -184,6 +190,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Moon className="h-6 w-6 text-purple-600"/>,
       title: "Barras de access",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/1XaIvZ0Opzlfgng1rFwCngO4i4eUOcvhq?usp=sharing",
       description: "Libera bloqueos limitantes, relaja la mente y potencia tu bienestar integral."
@@ -192,6 +200,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Sun className="h-6 w-6 text-purple-600"/>,
       title: "Astrología y Numerología",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/1r3_Z-N6jInHSr86SOAPPejpPB1ZlX0Hk?usp=drive_link",
       description: "Comprende tu mapa energético, carta natal y propósito de vida."
@@ -200,6 +210,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Heart className="h-6 w-6 text-purple-600"/>,
       title: "Reiki",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/18zzzeE8mQYvq35RSlS2zmsbhiKtJZicm?usp=drive_link",
       description: "Canalización de energía vital para armonizar tus centros energéticos."
@@ -208,6 +220,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Flower className="h-6 w-6 text-purple-600"/>,
       title: "Reflexología",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/19n0e1x04jEioAch9Grzf7JGKjNJsPmnr?usp=drive_link",
       description: "Estimulación de zonas reflejas para aliviar tensiones y restaurar el equilibrio."
@@ -216,6 +230,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Moon className="h-6 w-6 text-purple-600"/>,
       title: "Mesa Radiónica y Radiestesia",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/1n8HzZdNR9YH_6vQuYY4Vc3Op7OVRVSu2?usp=sharing",
       description: "Herramientas de diagnóstico e intervención energética a distancia."
@@ -224,6 +240,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Music className="h-6 w-6 text-purple-600"/>,
       title: "Cuencos Tibetanos y Musicoterapia",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/1_0fCTAd_WQhQQ7iQq58YD4Wu_ob8NKTT?usp=drive_link",
       description: "Sanación a través de la frecuencia y vibración sonora sagrada."
@@ -232,6 +250,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <MoonIcon className="h-6 w-6 text-purple-600"/>,
       title: "Tarot Marsella",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/1jZLfTCYuzDXJIs_4_wM_5_t_BsSS8J7u?usp=sharing",
       description: "Guía arquetípica para obtener claridad espiritual y perspectiva en tu camino."
@@ -240,6 +260,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Sparkles className="h-6 w-6 text-purple-600"/>,
       title: "Sanación Pránica",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/12OQ8pS9FjE6sbrM30TtOegiIly4jYSVl?usp=sharing",
       description: "Limpieza y fortalecimiento del campo electromagnético personal."
@@ -248,6 +270,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Brain className="h-6 w-6 text-purple-600"/>,
       title: "Hipnosis y Regresiones",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/1La_aCBPE70DfgWnsJXlX42FngZSw3g-G?usp=sharing",
       description: "Acceso a memorias subconscientes para liberar patrones emocionales."
@@ -256,6 +280,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Home className="h-6 w-6 text-purple-600"/>,
       title: "Feng Shui",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/1jPMvf0vPOtAtGbR5s0osTw6DUq4fgJuP?usp=sharing",
       description: "Armonización del flujo energético en tus espacios de convivencia y trabajo."
@@ -264,6 +290,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Magnet className="h-6 w-6 text-purple-600"/>,
       title: "Biomagnetismo",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/194prwvnqY1_QA12B8taG-eZBot79HlGd?usp=drive_link",
       description: "Equilibrio energético mediante campos magnéticos."
@@ -272,6 +300,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Hand className="h-6 w-6 text-purple-600"/>,
       title: "Tapping EFT",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/14g7t5G5RJthE-3e6jyJNKQjCPECmBpPc?usp=drive_link",
       description: "Liberación emocional mediante estimulación de puntos de acupuntura."
@@ -280,6 +310,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <CandlestickChart className="h-6 w-6 text-purple-600"/>,
       title: "Velomancia",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/1j3BUOMaYborzfxt02u4exm7PARaCJEoG?usp=drive_link",
       description: "Interpretación del fuego y las ceras para potenciar intenciones sanadoras."
@@ -288,6 +320,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Eye className="h-6 w-6 text-purple-600"/>,
       title: "Activación Glándula Pineal",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/1cgj6E8nEquj-ffmX38R0lbYjMw9drE01?usp=drive_link",
       description: "Expansión de la percepción intuitiva y elevación de la conciencia."
@@ -296,6 +330,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Leaf className="h-6 w-6 text-purple-600"/>,
       title: "Medicina China",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/1rBEu100G6RY28KWxT00QPdB35yzG1KCl",
       description: "Fundamentos milenarios para preservar la salud integral y el Qi."
@@ -304,6 +340,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Moon className="h-6 w-6 text-purple-600"/>,
       title: "Método Yuen",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/1TdjrV-b_Wkwh1cT9jreBC-w82L2DmzGC?usp=sharing",
       description: "Corrección rápida de debilidades energéticas a nivel físico y mental."
@@ -312,6 +350,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Ear className="h-6 w-6 text-purple-600"/>,
       title: "Auriculoterapia",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/19zopDYZEWjchRFK5ULM3MloMHWhmaKkI?usp=drive_link",
       description: "Estimulación de microsistemas auriculares para el alivio sintomático."
@@ -320,6 +360,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Star className="h-6 w-6 text-purple-600"/>,
       title: "Cirugía Astral",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/17aJ7QNbN8XzcIJtha-isVbkBR4AIXlIX?usp=sharing",
       description: "Remoción de bloqueos profundos en la anatomía sutil."
@@ -328,6 +370,8 @@ export const Services: React.FC<ServicesProps> = ({
       icon: <Eye className="h-6 w-6 text-purple-600"/>,
       title: "Parapsicologia",
       precioARS: 5000,
+      precioPEN: 26,
+      precioUYU: 282,
       precioUSD: 7,
       linkDriveDirecto: "https://drive.google.com/drive/folders/1-OmDz_SjPAJ2zk-jTQRP4Doa3RoJ_UBZ?usp=drive_link",
       description: "Desarrollo de capacidades extrasensoriales e investigación de la mente."
@@ -340,58 +384,81 @@ export const Services: React.FC<ServicesProps> = ({
 
   if (cursoSeleccionadoCompra) {
     const tuNumeroWhatsApp = "5493413375533";
-    const mensajeTransferencia = encodeURIComponent(`¡Hola! Acabo de realizar la transferencia local por ARS $${cursoSeleccionadoCompra.precioARS.toLocaleString()} para el curso "${cursoSeleccionadoCompra.title}". Te adjunto el comprobante, Dejo mis Datos para que puedas habilitarme el acceso al mismo. Nombre y correo que me registre.`);
-    const mensajePaypal = encodeURIComponent(`¡Hola! Quisiera abonar por PayPal (US $${cursoSeleccionadoCompra.precioUSD}) el curso "${cursoSeleccionadoCompra.title}". Por favor envíenme el link de pago.`);
+    const mensajeWpGral = encodeURIComponent(`¡Hola! Acabo de realizar el pago para el curso "${cursoSeleccionadoCompra.title}". Te adjunto el comprobante. Dejo mis datos (Nombre y correo con el que me registré) para que puedas habilitarme el acceso.`);
 
     return (
-      <section id="servicios" className="py-8 px-4 max-w-7xl mx-auto flex items-center justify-center min-h-[60vh]">
-        <div className="bg-white rounded-2xl shadow-xl p-6 max-w-md w-full border border-purple-100">
-          <h2 className="text-2xl font-bold text-center mb-1 text-purple-900">Métodos de Pago</h2>
-          <p className="text-sm text-gray-600 text-center mb-6">
-            Curso: <span className="font-semibold text-indigo-600">{cursoSeleccionadoCompra.title}</span>
-          </p>
+      <section id="servicios" className="py-8 px-4 max-w-4xl mx-auto flex items-center justify-center min-h-[60vh]">
+        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 max-w-2xl w-full border border-purple-100 space-y-6">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-purple-900">Métodos de Pago Internacionales y Locales</h2>
+            <p className="text-sm text-gray-600 mt-1">
+              Curso seleccionado: <span className="font-semibold text-indigo-600">{cursoSeleccionadoCompra.title}</span>
+            </p>
+          </div>
 
-          <div className="bg-gray-50 p-4 rounded-xl space-y-2 mb-4 border border-gray-200">
-            <h3 className="font-bold text-sm text-purple-900 flex items-center gap-1">🇦🇷 Pago Local (Argentina)</h3>
-            <div className="text-xs space-y-1">
-              <p><span className="text-gray-500">Titular:</span> Diego Martin Fragnito</p>
-              <p><span className="text-gray-500">CBU:</span> <span className="font-mono font-bold text-indigo-600 select-all">4530000800012708764665</span></p>
-              <p><span className="text-gray-500">Alias:</span> <span className="font-mono font-bold text-indigo-600 select-all">HOLISTICA.DMF</span></p>
-              <p><span className="text-gray-500">Monto:</span> <strong>ARS ${cursoSeleccionadoCompra.precioARS.toLocaleString()}</strong></p>
+          <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+            
+            {/* ARGENTINA */}
+            <div className="bg-purple-50/60 p-4 rounded-xl border border-purple-100 space-y-2">
+              <h3 className="font-bold text-sm text-purple-900 flex items-center gap-1.5">🇦🇷 Argentina (Monto: ARS ${cursoSeleccionadoCompra.precioARS.toLocaleString()})</h3>
+              <div className="text-xs space-y-1 text-gray-700">
+                <p><span className="text-gray-500">Titular:</span> Diego Martin Fragnito</p>
+                <p><span className="text-gray-500">CBU:</span> <span className="font-mono font-bold text-indigo-600 select-all">4530000800012708764665</span></p>
+                <p><span className="text-gray-500">Alias:</span> <span className="font-mono font-bold text-indigo-600 select-all">HOLISTICA.DMF</span></p>
+              </div>
             </div>
+
+            {/* PERÚ */}
+            <div className="bg-blue-50/60 p-4 rounded-xl border border-blue-100 space-y-2">
+              <h3 className="font-bold text-sm text-blue-900 flex items-center gap-1.5">🇵🇪 Perú (Monto: {cursoSeleccionadoCompra.precioPEN} Soles)</h3>
+              <div className="text-xs space-y-1 text-gray-700">
+                <p><span className="text-gray-500">Titular:</span> Jessica Martinez Castillo</p>
+                <p><span className="text-gray-500">Interbank:</span> <span className="font-mono font-bold select-all">1083324352314</span></p>
+                <p><span className="text-gray-500">BCP Soles:</span> <span className="font-mono font-bold select-all">19496268797006</span></p>
+                <p><span className="text-gray-500">Interbancaria:</span> <span className="font-mono font-bold select-all">00219419626879700691</span></p>
+                <p><span className="text-gray-500">Plin o Yape:</span> <span className="font-mono font-bold text-emerald-700 select-all">999167163</span></p>
+              </div>
+            </div>
+
+            {/* ECUADOR */}
+            <div className="bg-amber-50/60 p-4 rounded-xl border border-amber-100 space-y-2">
+              <h3 className="font-bold text-sm text-amber-900 flex items-center gap-1.5">🇪🇨 Ecuador (Monto: ${cursoSeleccionadoCompra.precioUSD} USD)</h3>
+              <div className="text-xs space-y-1 text-gray-700">
+                <p><span className="text-gray-500">Nombre:</span> David Israel Acosta</p>
+                <p><span className="text-gray-500">Cuenta de Ahorros Banco Pichincha:</span> <span className="font-mono font-bold select-all">2204527510</span></p>
+                <p><span className="text-gray-500">C.I.:</span> <span className="font-mono font-bold select-all">1725720062</span></p>
+              </div>
+            </div>
+
+            {/* URUGUAY */}
+            <div className="bg-sky-50/60 p-4 rounded-xl border border-sky-100 space-y-2">
+              <h3 className="font-bold text-sm text-sky-900 flex items-center gap-1.5">🇺🇾 Uruguay (Monto: {cursoSeleccionadoCompra.precioUYU} UYU)</h3>
+              <div className="text-xs space-y-1 text-gray-700">
+                <p><span className="text-gray-500">Titular:</span> Diego Martin Fragnito</p>
+                <p><span className="text-gray-500">PREX Uruguay:</span> <span className="font-mono font-bold select-all">1577930</span></p>
+                <p><span className="text-gray-500">Cédula / DNI:</span> <span className="font-mono font-bold select-all">32139800</span></p>
+              </div>
+            </div>
+
+          </div>
+
+          <div className="pt-2 space-y-2">
             <a
-              href={`https://wa.me/${tuNumeroWhatsApp}?text=${mensajeTransferencia}`}
+              href={`https://wa.me/${tuNumeroWhatsApp}?text=${mensajeWpGral}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-3 rounded-lg flex items-center justify-center gap-2 text-xs transition duration-200"
+              className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 text-xs transition duration-200"
             >
               <span>💬 Enviar comprobante por WhatsApp</span>
             </a>
-          </div>
 
-          <div className="bg-amber-50 p-4 rounded-xl space-y-2 mb-6 border border-amber-200">
-            <h3 className="font-bold text-sm text-amber-900 flex items-center gap-1">🌐 Pago Internacional (PayPal)</h3>
-            <div className="text-xs space-y-1">
-              <p><span className="text-gray-600">Monto:</span> <strong>US ${cursoSeleccionadoCompra.precioUSD}</strong></p>
-              <p className="text-gray-600 text-[11px]">Contactanos por WhatsApp para solicitar el link de pago o transferir directamente.</p>
-            </div>
-            <a
-              href={`https://wa.me/${tuNumeroWhatsApp}?text=${mensajePaypal}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2.5 px-3 rounded-lg flex items-center justify-center gap-2 text-xs transition duration-200"
+            <button
+              onClick={() => setCursoSeleccionadoCompra(null)}
+              className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2.5 px-4 rounded-xl text-center text-xs transition-colors"
             >
-              <Globe className="w-4 h-4"/>
-              <span>Pedir link de PayPal por WhatsApp</span>
-            </a>
+              ← Volver al catálogo
+            </button>
           </div>
-
-          <button
-            onClick={() => setCursoSeleccionadoCompra(null)}
-            className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-xl text-center text-xs transition-colors"
-          >
-            ← Volver al catálogo
-          </button>
         </div>
       </section>
     );
@@ -519,17 +586,23 @@ export const Services: React.FC<ServicesProps> = ({
                   )
                 ) : (
                   <div className="space-y-4 pt-2">
-                    <div className="flex justify-between items-center border-t border-slate-100 pt-3">
-                      <div>
-                        <span className="text-[11px] text-slate-500">Argentina</span>
-                        <div className="font-bold text-purple-900 text-sm sm:text-base">
-                          ${service.precioARS.toLocaleString()} ARS
+                    <div className="border-t border-slate-100 pt-3 space-y-2">
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div className="bg-purple-50/60 p-2 rounded-lg border border-purple-100">
+                          <span className="text-slate-500 block text-[10px]">🇦🇷 Argentina</span>
+                          <span className="font-bold text-purple-900">${service.precioARS.toLocaleString()} ARS</span>
                         </div>
-                      </div>
-                      <div>
-                        <span className="text-[11px] text-slate-500">Internacional</span>
-                        <div className="font-bold text-amber-700 text-sm sm:text-base">
-                          US ${service.precioUSD}
+                        <div className="bg-purple-50/60 p-2 rounded-lg border border-purple-100">
+                          <span className="text-slate-500 block text-[10px]">🇵🇪 Perú</span>
+                          <span className="font-bold text-purple-900">{service.precioPEN} Soles</span>
+                        </div>
+                        <div className="bg-purple-50/60 p-2 rounded-lg border border-purple-100">
+                          <span className="text-slate-500 block text-[10px]">🇺🇾 Uruguay</span>
+                          <span className="font-bold text-purple-900">{service.precioUYU} UYU</span>
+                        </div>
+                        <div className="bg-amber-50/60 p-2 rounded-lg border border-amber-100">
+                          <span className="text-slate-500 block text-[10px]">🇪🇨 Ecuador</span>
+                          <span className="font-bold text-amber-800">${service.precioUSD} USD</span>
                         </div>
                       </div>
                     </div>
@@ -540,7 +613,7 @@ export const Services: React.FC<ServicesProps> = ({
                         className="w-full flex items-center justify-center gap-2 bg-purple-700 hover:bg-purple-800 text-white px-4 py-3 rounded-xl font-bold text-sm transition-colors cursor-pointer"
                       >
                         <CreditCard className="w-4 h-4"/>
-                        Comprar Curso 🏦 / 🌐
+                        Ver Datos de Pago 🌍
                       </button>
                     ) : (
                       <button
