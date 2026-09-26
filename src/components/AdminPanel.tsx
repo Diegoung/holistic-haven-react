@@ -57,6 +57,25 @@ export const AdminPanel = () => {
     return compras.some(c => c.user_id === userId && String(c.curso_id) === String(cursoId));
   };
 
+  // Función para eliminar el usuario por completo (Auth + Base de Datos)
+  const borrarUsuario = async (userId: string, nombreUsuario: string) => {
+    if (!window.confirm(`¿Estás seguro de eliminar a "${nombreUsuario}"? Podrá volver a registrarse si lo desea.`)) return;
+
+    try {
+      const { error } = await supabase.rpc('borrar_usuario_admin', {
+        user_id_to_delete: userId
+      });
+
+      if (error) throw error;
+
+      alert('¡Usuario eliminado con éxito! Ya puede volver a registrarse.');
+      cargarDatos(); // Recarga los datos para actualizar la lista
+    } catch (error: any) {
+      console.error('Error al eliminar:', error.message);
+      alert('Hubo un error al eliminar el usuario: ' + error.message);
+    }
+  };
+
   // Filtrar alumnos por Nombre, Correo o ID
   const perfilesFiltrados = perfiles.filter(user => {
     const termino = busqueda.toLowerCase().trim();
@@ -139,11 +158,22 @@ export const AdminPanel = () => {
               
               return (
                 <div key={user.id} className="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 pb-2 border-b border-gray-200 gap-1">
-                    <span className="text-sm font-bold text-purple-900">
-                      👤 {nombre} {correo ? `(${correo})` : ''}
-                    </span>
-                    <span className="text-xs font-mono text-gray-400 truncate">ID: {user.id}</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 pb-2 border-b border-gray-200 gap-2">
+                    <div>
+                      <span className="text-sm font-bold text-purple-900 block">
+                        👤 {nombre} {correo ? `(${correo})` : ''}
+                      </span>
+                      <span className="text-xs font-mono text-gray-400 truncate">ID: {user.id}</span>
+                    </div>
+
+                    {/* Botón para eliminar usuario */}
+                    <button
+                      onClick={() => borrarUsuario(user.id, nombre)}
+                      className="bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 self-start sm:self-auto"
+                      title="Eliminar usuario del sistema para que pueda volver a registrarse"
+                    >
+                      🗑️ Eliminar Usuario
+                    </button>
                   </div>
 
                   <div className="flex flex-wrap gap-2">
