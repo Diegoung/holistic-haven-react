@@ -12,22 +12,40 @@ export const CertificadoModal: React.FC<Props> = ({ curso, nombreAlumno, onCerra
   const [fecha, setFecha] = useState('');
   const [terapiaPack, setTerapiaPack] = useState('');
   const [descargando, setDescargando] = useState(false);
+  const [abrirDropdown, setAbrirDropdown] = useState(false);
 
   const esPack = curso.titulo.toLowerCase().includes('pack');
   
   const opcionesPack = [
-    "Registros Akáshicos", "Biomagnetismo", "Tarot Terapéutico", "Flores de Bach", 
-    "Biodescodificación", "Reflexología", "Aromaterapia", "Péndulo Hebreo", 
-    "Sonoterapia", "Masaje Ayurvédico", "Mindfulness", "Sanación con Cristales"
+    "Cuencos Tibetanos y Musicoterapia",
+    "Tarot Marsella",
+    "Yoga",
+    "Barras de Access",
+    "Astrología y Numerología",
+    "Reiki",
+    "Reflexología",
+    "Mesa Radiónica y Radiestesia",
+    "Sanación Pránica",
+    "Hipnosis y Regresiones",
+    "Feng Shui",
+    "Biomagnetismo",
+    "Tapping EFT",
+    "Velomancia",
+    "Activación Glándula Pineal",
+    "Medicina China",
+    "Método Yuen",
+    "Auriculoterapia",
+    "Cirugía Astral",
+    "Parapsicología",
+    "Taller aprender a meditar",
+    "Registros Akáshicos"
   ];
 
-  // Función para descargar el certificado como imagen directamente
   const handleDescargarImagen = async () => {
     const node = document.getElementById('printable-certificate');
     if (node) {
       try {
         setDescargando(true);
-        // Generamos la imagen con mayor calidad (pixelRatio: 2)
         const dataUrl = await toPng(node, { cacheBust: true, pixelRatio: 2 });
         
         const link = document.createElement('a');
@@ -49,28 +67,48 @@ export const CertificadoModal: React.FC<Props> = ({ curso, nombreAlumno, onCerra
       <div style={{ backgroundColor: 'white', padding: '25px', borderRadius: '15px', maxWidth: '900px', width: '100%', maxHeight: '95vh', overflowY: 'auto', boxSizing: 'border-box' }}>
         
         {/* Controles de edición */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px', backgroundColor: '#f0f0f0', padding: '12px', borderRadius: '8px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px', backgroundColor: '#f0f0f0', padding: '12px', borderRadius: '8px', alignItems: 'center' }}>
           <input 
             type="text" 
             value={nombre} 
             onChange={e => setNombre(e.target.value)} 
             placeholder="Nombre" 
-            style={{ flex: 1, padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
+            style={{ flex: 1, minWidth: '200px', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
           />
           <input 
             type="date" 
             onChange={e => setFecha(e.target.value)} 
             style={{ padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
           />
+
           {esPack && (
-            <select 
-              value={terapiaPack} 
-              onChange={e => setTerapiaPack(e.target.value)}
-              style={{ flex: 1, padding: '8px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#fff' }}
-            >
-              <option value="">-- Seleccionar Terapia del Pack --</option>
-              {opcionesPack.map(t => <option key={t} value={t}>{t}</option>)}
-            </select>
+            <div style={{ position: 'relative', flex: 1, minWidth: '250px' }}>
+              <div 
+                onClick={() => setAbrirDropdown(!abrirDropdown)}
+                style={{ padding: '8px 12px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#fff', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', userSelect: 'none' }}
+              >
+                <span style={{ color: terapiaPack ? '#000' : '#666', fontSize: '14px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {terapiaPack || '-- Seleccionar Terapia del Pack --'}
+                </span>
+                <span style={{ fontSize: '12px', marginLeft: '5px' }}>▼</span>
+              </div>
+
+              {abrirDropdown && (
+                <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, maxHeight: '200px', overflowY: 'auto', backgroundColor: '#fff', border: '1px solid #ccc', borderRadius: '4px', zIndex: 2000, boxShadow: '0px 4px 10px rgba(0,0,0,0.15)', marginTop: '2px' }}>
+                  {opcionesPack.map(t => (
+                    <div 
+                      key={t} 
+                      onClick={() => { setTerapiaPack(t); setAbrirDropdown(false); }}
+                      style={{ padding: '10px 12px', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', fontSize: '14px', backgroundColor: terapiaPack === t ? '#e8f5e9' : '#fff' }}
+                      onMouseEnter={e => e.currentTarget.style.backgroundColor = '#f5f5f5'}
+                      onMouseLeave={e => e.currentTarget.style.backgroundColor = terapiaPack === t ? '#e8f5e9' : '#fff'}
+                    >
+                      {t}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           )}
         </div>
 
