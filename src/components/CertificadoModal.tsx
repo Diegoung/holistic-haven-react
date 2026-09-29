@@ -77,7 +77,7 @@ export const CertificadoModal: React.FC<Props> = ({
         backgroundColor: 'rgba(0, 0, 0, 0.85)',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'flex-start', // Soluciona el corte superior permitiendo scroll vertical limpio
+        alignItems: 'flex-start',
         padding: '20px 10px',
         overflowY: 'auto',
         boxSizing: 'border-box',
@@ -91,7 +91,7 @@ export const CertificadoModal: React.FC<Props> = ({
           borderRadius: '12px',
           width: '100%',
           maxWidth: '480px',
-          margin: 'auto', // Centrado automático fluido
+          margin: 'auto',
           boxShadow: '0 25px 50px rgba(0,0,0,0.5)',
           boxSizing: 'border-box',
           display: 'flex',
@@ -435,6 +435,11 @@ export const CertificadoModal: React.FC<Props> = ({
         >
           {descargando ? 'Generando certificado...' : 'Descargar Certificado 📥'}
         </button>
+
+        {/* NOTA PARA CELULARES */}
+        <p style={{ fontSize: '11px', color: '#d9534f', textAlign: 'center', marginTop: '10px', fontWeight: 'bold' }}>
+          ⚠️ <em>Para una mejor experiencia visual y un resultado óptimo, se recomienda realizar la descarga directamente desde una PC o Notebook.</em>
+        </p>
       </div>
     </div>
   );

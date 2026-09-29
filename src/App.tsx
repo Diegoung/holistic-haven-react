@@ -258,8 +258,8 @@ export const MainApp: React.FC = () => {
             </div>
 
             <p style={{ fontSize: '11px', color: '#d9534f', textAlign: 'center', marginTop: '10px', fontWeight: 'bold' }}>
-              🍎 <em>Nota para celulares (iPhone/Android): Si la vista previa sale vertical, te sugerimos descargar tu certificado desde una PC o Notebook para obtener el formato horizontal automático perfecto.</em>
-            </p>
+          ⚠️ <em>Para una mejor experiencia visual y un resultado óptimo, se recomienda realizar la descarga directamente desde una PC o Notebook.</em>
+        </p>
           </div>
         </div>
       )}
