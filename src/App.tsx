@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Testimonials from './components/Testimonials';
-import { EspacioHolistico } from './components/EspacioHolistico'; // ✅ Correcto
+import { EspacioHolistico } from './components/EspacioHolistico';
 import PreguntasFrecuentes from './components/PreguntasFrecuentes';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -173,8 +173,8 @@ export const MainApp: React.FC = () => {
       )}
 
       {mostrarCertificadoVista && cursoSeleccionadoCert && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.8)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000, overflowY: 'auto', padding: '20px' }}>
-          <div style={{ backgroundColor: '#fff', padding: '25px', borderRadius: '10px', maxWidth: '950px', width: '100%', boxSizing: 'border-box' }}>
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.8)', display: 'flex', justifyContent: 'center', alignItems: 'flex-start', zIndex: 1000, overflowY: 'auto', padding: '30px 15px', boxSizing: 'border-box' }}>
+          <div style={{ backgroundColor: '#fff', padding: '25px', borderRadius: '10px', maxWidth: '950px', width: '100%', margin: 'auto', boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }}>
             <h3 style={{ color: '#2C4A3E', textAlign: 'center', marginBottom: '15px', fontFamily: 'Arial, sans-serif' }}>Configurar tu Certificado Profesional</h3>
             
             <div style={{ display: 'grid', gridTemplateColumns: esPackHolistico ? '1fr 1fr 1fr' : '1fr 1fr', gap: '15px', marginBottom: '20px', backgroundColor: '#f4f6f5', padding: '15px', borderRadius: '8px' }}>

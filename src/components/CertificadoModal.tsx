@@ -47,12 +47,10 @@ export const CertificadoModal: React.FC<Props> = ({
 
   const handleDescargarImagen = async () => {
     const node = document.getElementById('printable-certificate');
-
     if (!node) return;
 
     try {
       setDescargando(true);
-
       const dataUrl = await toPng(node, {
         cacheBust: true,
         pixelRatio: 2,
@@ -63,11 +61,7 @@ export const CertificadoModal: React.FC<Props> = ({
       link.href = dataUrl;
       link.click();
     } catch (err) {
-      console.error(
-        'Error al generar la imagen del certificado:',
-        err
-      );
-
+      console.error('Error al generar la imagen del certificado:', err);
       alert('Hubo un error al descargar. Inténtalo de nuevo.');
     } finally {
       setDescargando(false);
@@ -83,8 +77,8 @@ export const CertificadoModal: React.FC<Props> = ({
         backgroundColor: 'rgba(0, 0, 0, 0.85)',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'flex-start',
-        padding: '15px',
+        alignItems: 'flex-start', // Soluciona el corte superior permitiendo scroll vertical limpio
+        padding: '20px 10px',
         overflowY: 'auto',
         boxSizing: 'border-box',
       }}
@@ -93,17 +87,15 @@ export const CertificadoModal: React.FC<Props> = ({
       <div
         style={{
           backgroundColor: '#ffffff',
-          padding: '12px 18px',
+          padding: '14px',
           borderRadius: '12px',
           width: '100%',
-          maxWidth: '620px',
-          maxHeight: 'calc(100vh - 30px)',
-          overflowY: 'auto',
-          boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
-          margin: '0 auto',
+          maxWidth: '480px',
+          margin: 'auto', // Centrado automático fluido
+          boxShadow: '0 25px 50px rgba(0,0,0,0.5)',
+          boxSizing: 'border-box',
           display: 'flex',
           flexDirection: 'column',
-          boxSizing: 'border-box',
         }}
       >
         {/* CABECERA */}
@@ -112,7 +104,7 @@ export const CertificadoModal: React.FC<Props> = ({
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginBottom: '7px',
+            marginBottom: '8px',
           }}
         >
           <span
@@ -132,8 +124,8 @@ export const CertificadoModal: React.FC<Props> = ({
               color: '#fff',
               border: 'none',
               borderRadius: '50%',
-              width: '24px',
-              height: '24px',
+              width: '26px',
+              height: '26px',
               fontSize: '12px',
               cursor: 'pointer',
               fontWeight: 'bold',
@@ -150,45 +142,45 @@ export const CertificadoModal: React.FC<Props> = ({
         <div
           style={{
             display: 'flex',
-            flexWrap: 'wrap',
+            flexDirection: 'column',
             gap: '6px',
-            marginBottom: '8px',
+            marginBottom: '10px',
             backgroundColor: '#f4f6f5',
-            padding: '7px',
+            padding: '8px',
             borderRadius: '8px',
-            alignItems: 'center',
           }}
         >
-          {/* NOMBRE */}
-          <input
-            type="text"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-            placeholder="Nombre del alumno"
-            style={{
-              flex: 1,
-              minWidth: '130px',
-              padding: '5px 8px',
-              borderRadius: '4px',
-              border: '1px solid #ccc',
-              fontSize: '12px',
-              boxSizing: 'border-box',
-            }}
-          />
+          <div style={{ display: 'flex', gap: '6px' }}>
+            {/* NOMBRE */}
+            <input
+              type="text"
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+              placeholder="Nombre del alumno"
+              style={{
+                flex: 1,
+                padding: '6px 8px',
+                borderRadius: '4px',
+                border: '1px solid #ccc',
+                fontSize: '12px',
+                boxSizing: 'border-box',
+              }}
+            />
 
-          {/* FECHA */}
-          <input
-            type="date"
-            value={fecha}
-            onChange={(e) => setFecha(e.target.value)}
-            style={{
-              padding: '5px 8px',
-              borderRadius: '4px',
-              border: '1px solid #ccc',
-              fontSize: '12px',
-              boxSizing: 'border-box',
-            }}
-          />
+            {/* FECHA */}
+            <input
+              type="date"
+              value={fecha}
+              onChange={(e) => setFecha(e.target.value)}
+              style={{
+                padding: '6px 8px',
+                borderRadius: '4px',
+                border: '1px solid #ccc',
+                fontSize: '12px',
+                boxSizing: 'border-box',
+              }}
+            />
+          </div>
 
           {/* SELECTOR PACK */}
           {esPack && (
@@ -196,8 +188,7 @@ export const CertificadoModal: React.FC<Props> = ({
               type="button"
               onClick={() => setMostrarSelector(true)}
               style={{
-                flex: 1,
-                minWidth: '100%',
+                width: '100%',
                 padding: '6px 8px',
                 borderRadius: '4px',
                 border: '1px solid #2C4A3E',
@@ -219,11 +210,8 @@ export const CertificadoModal: React.FC<Props> = ({
                   textOverflow: 'ellipsis',
                 }}
               >
-                {terapiaPack
-                  ? `Terapia: ${terapiaPack}`
-                  : '🔍 Seleccionar Terapia del Pack'}
+                {terapiaPack ? `Terapia: ${terapiaPack}` : '🔍 Seleccionar Terapia del Pack'}
               </span>
-
               <span>▼</span>
             </button>
           )}
@@ -248,43 +236,35 @@ export const CertificadoModal: React.FC<Props> = ({
               style={{
                 backgroundColor: '#fff',
                 width: '100%',
-                maxWidth: '420px',
-                maxHeight: '80vh',
+                maxWidth: '400px',
+                maxHeight: '75vh',
                 borderRadius: '10px',
-                padding: '15px',
+                padding: '12px',
                 display: 'flex',
                 flexDirection: 'column',
                 boxShadow: '0 5px 25px rgba(0,0,0,0.4)',
                 boxSizing: 'border-box',
               }}
             >
-              {/* CABECERA SELECTOR */}
               <div
                 style={{
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  marginBottom: '10px',
+                  marginBottom: '8px',
                   borderBottom: '1px solid #eee',
-                  paddingBottom: '8px',
+                  paddingBottom: '6px',
                 }}
               >
-                <h3
-                  style={{
-                    margin: 0,
-                    color: '#2C4A3E',
-                    fontSize: '14px',
-                  }}
-                >
+                <h3 style={{ margin: 0, color: '#2C4A3E', fontSize: '13px' }}>
                   Seleccione la Terapia
                 </h3>
-
                 <button
                   onClick={() => setMostrarSelector(false)}
                   style={{
                     background: 'none',
                     border: 'none',
-                    fontSize: '16px',
+                    fontSize: '15px',
                     cursor: 'pointer',
                     fontWeight: 'bold',
                   }}
@@ -293,7 +273,6 @@ export const CertificadoModal: React.FC<Props> = ({
                 </button>
               </div>
 
-              {/* LISTA */}
               <div
                 style={{
                   overflowY: 'auto',
@@ -311,15 +290,11 @@ export const CertificadoModal: React.FC<Props> = ({
                       setMostrarSelector(false);
                     }}
                     style={{
-                      padding: '8px 10px',
+                      padding: '8px',
                       borderRadius: '6px',
                       cursor: 'pointer',
-                      backgroundColor:
-                        terapiaPack === t ? '#e8f5e9' : '#fafafa',
-                      border:
-                        terapiaPack === t
-                          ? '1px solid #2e7d32'
-                          : '1px solid #eee',
+                      backgroundColor: terapiaPack === t ? '#e8f5e9' : '#fafafa',
+                      border: terapiaPack === t ? '1px solid #2e7d32' : '1px solid #eee',
                       fontSize: '12px',
                       color: '#333',
                     }}
@@ -332,21 +307,22 @@ export const CertificadoModal: React.FC<Props> = ({
           </div>
         )}
 
-        {/* CERTIFICADO */}
+        {/* CONTENEDOR VISUALIZADOR DEL CERTIFICADO */}
         <div
           style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            margin: '3px 0',
+            width: '100%',
             overflow: 'hidden',
+            margin: '4px 0',
           }}
         >
           <div
             id="printable-certificate"
             style={{
               border: '3px solid #2C4A3E',
-              padding: '8px 14px',
+              padding: '10px 14px',
               textAlign: 'center',
               fontFamily: 'Georgia, serif',
               backgroundImage: 'url(/terapiasholisticas1.jpg)',
@@ -354,19 +330,17 @@ export const CertificadoModal: React.FC<Props> = ({
               backgroundPosition: 'center',
               backgroundColor: '#fff',
               boxSizing: 'border-box',
-              width: '430px',
-              maxWidth: '100%',
-              flexShrink: 0,
+              width: '100%',
+              maxWidth: '410px',
             }}
           >
             {/* TITULO */}
             <h1
               style={{
-                fontSize: '13px',
+                fontSize: '12px',
                 color: '#2C4A3E',
                 margin: '2px 0',
-                textShadow:
-                  '0px 1px 2px rgba(255,255,255,0.9)',
+                textShadow: '0px 1px 2px rgba(255,255,255,0.9)',
               }}
             >
               CERTIFICADO DE PARTICIPACIÓN
@@ -377,8 +351,8 @@ export const CertificadoModal: React.FC<Props> = ({
               style={{
                 fontStyle: 'italic',
                 color: '#555',
-                margin: '1px 0',
-                fontSize: '10px',
+                margin: '2px 0',
+                fontSize: '9px',
               }}
             >
               Se otorga a:
@@ -389,12 +363,11 @@ export const CertificadoModal: React.FC<Props> = ({
               style={{
                 borderBottom: '2px solid #2C4A3E',
                 display: 'inline-block',
-                width: '75%',
-                margin: '3px 0',
-                fontSize: '14px',
+                width: '80%',
+                margin: '4px 0',
+                fontSize: '13px',
                 color: '#1a237e',
-                textShadow:
-                  '0px 1px 2px rgba(255,255,255,0.9)',
+                textShadow: '0px 1px 2px rgba(255,255,255,0.9)',
                 wordBreak: 'break-word',
               }}
             >
@@ -406,8 +379,8 @@ export const CertificadoModal: React.FC<Props> = ({
               style={{
                 fontStyle: 'italic',
                 color: '#555',
-                margin: '1px 0',
-                fontSize: '10px',
+                margin: '2px 0',
+                fontSize: '9px',
               }}
             >
               Por haber completado el curso de:
@@ -419,32 +392,25 @@ export const CertificadoModal: React.FC<Props> = ({
                 color: '#2e7d32',
                 fontSize: '11px',
                 textTransform: 'uppercase',
-                margin: '3px 0',
-                textShadow:
-                  '0px 1px 2px rgba(255,255,255,0.9)',
+                margin: '4px 0',
+                textShadow: '0px 1px 2px rgba(255,255,255,0.9)',
                 wordBreak: 'break-word',
               }}
             >
-              {esPack
-                ? terapiaPack || 'Seleccione una terapia'
-                : curso.titulo}
+              {esPack ? terapiaPack || 'Seleccione una terapia' : curso.titulo}
             </h3>
 
             {/* FECHA */}
             <p
               style={{
-                marginTop: '5px',
+                marginTop: '6px',
                 marginBottom: '2px',
-                fontSize: '10px',
+                fontSize: '9px',
                 color: '#333',
-                textShadow:
-                  '0px 1px 2px rgba(255,255,255,0.9)',
+                textShadow: '0px 1px 2px rgba(255,255,255,0.9)',
               }}
             >
-              Fecha:{' '}
-              {fecha
-                ? fecha.split('-').reverse().join('/')
-                : 'DD/MM/AAAA'}
+              Fecha: {fecha ? fecha.split('-').reverse().join('/') : 'DD/MM/AAAA'}
             </p>
           </div>
         </div>
@@ -464,12 +430,10 @@ export const CertificadoModal: React.FC<Props> = ({
             cursor: descargando ? 'default' : 'pointer',
             opacity: descargando ? 0.7 : 1,
             fontSize: '12px',
-            marginTop: '5px',
+            marginTop: '6px',
           }}
         >
-          {descargando
-            ? 'Generando certificado...'
-            : 'Descargar Certificado 📥'}
+          {descargando ? 'Generando certificado...' : 'Descargar Certificado 📥'}
         </button>
       </div>
     </div>
