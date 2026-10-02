@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 
 export default function PruebaPackHolistico() {
-  const [whatsapp, setWhatsapp] = useState('');
-  const [accesoConcedido, setAccesoConcedido] = useState(false);
-  const [cargando, setCargando] = useState(false);
-
   // Todos los enlaces oficiales de las categorías del Pack Holístico y del catálogo general
   const todosLosEnlaces = [
     // --- Pack Holístico (23 ítems) ---
@@ -58,117 +54,82 @@ export default function PruebaPackHolistico() {
 
   const [cursoActivo, setCursoActivo] = useState<any>(todosLosEnlaces[0]);
 
-  const accederAlContenido = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!whatsapp.trim()) return;
-
-    setCargando(true);
-    setTimeout(() => {
-      setAccesoConcedido(true);
-      setCursoActivo(todosLosEnlaces[0]);
-      setCargando(false);
-    }, 400);
-  };
-
   return (
     <div className="max-w-5xl mx-auto my-10 bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-purple-200">
       <div className="text-center mb-6">
         <span className="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full font-semibold">✨ Demostración Interactiva General</span>
         <h2 className="text-2xl font-bold text-purple-900 mt-2">Explora Todo el Contenido Formativo</h2>
-        <p className="text-sm text-slate-600 mt-1">Ingresa tu WhatsApp para acceder al índice completo de carpetas y materiales de la escuela.</p>
+        <p className="text-sm text-slate-600 mt-1">Selecciona cualquier curso o taller para examinar el material de forma protegida.</p>
       </div>
 
-      {!accesoConcedido ? (
-        <form onSubmit={accederAlContenido} className="space-y-4 max-w-md mx-auto">
-          <div>
-            <input
-              type="text"
-              placeholder="Ej: 5493413375533"
-              value={whatsapp}
-              onChange={(e) => setWhatsapp(e.target.value)}
-              className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-slate-800 text-sm"
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={cargando}
-            className="w-full bg-purple-700 text-white font-semibold py-3 rounded-xl hover:bg-purple-800 transition shadow text-sm disabled:opacity-50"
-          >
-            {cargando ? 'Verificando...' : 'Ver Catálogo Completo 🚀'}
-          </button>
-        </form>
-      ) : (
-        <div className="space-y-6">
-          {/* Aviso superior de modo protegido libre */}
-          <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-3.5 rounded-xl font-medium text-center text-xs shadow-sm flex items-center justify-center space-x-2">
-            <span>🛡️ Modo de visualización libre activo. Puedes deslizar la lista de archivos con total normalidad.</span>
-          </div>
-
-          {/* Contenedor principal */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-            
-            {/* Menú lateral con todas las categorías de la escuela */}
-            <div className="md:col-span-5 bg-slate-50 border border-slate-200 rounded-2xl p-4">
-              <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3 px-1">Selecciona un Curso o Taller:</h3>
-              <div className="space-y-1.5 max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
-                {todosLosEnlaces.map((item, index) => {
-                  const esSeleccionado = cursoActivo?.titulo === item.titulo;
-                  return (
-                    <button
-                      key={index}
-                      onClick={() => setCursoActivo(item)}
-                      className={`w-full text-left p-2.5 rounded-xl text-xs font-medium transition flex items-center justify-between ${
-                        esSeleccionado
-                          ? 'bg-purple-700 text-white shadow-md'
-                          : item.titulo.includes('REGALO')
-                            ? 'bg-amber-100 text-amber-900 font-bold hover:bg-amber-200 border border-amber-300'
-                            : 'bg-white text-slate-700 hover:bg-purple-100 hover:text-purple-900 border border-slate-100'
-                      }`}
-                    >
-                      <span className="truncate pr-2">{item.titulo}</span>
-                      <span className="text-[10px] whitespace-nowrap">{esSeleccionado ? '👁️ Viendo' : 'Ver ➔'}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Visor protegido con ascensor libre */}
-            <div className="md:col-span-7 bg-white border border-slate-200 rounded-2xl p-4 flex flex-col h-[540px] shadow-sm relative">
-              <div className="flex items-center justify-between mb-3 border-b pb-2">
-                <h4 className="text-sm font-bold text-purple-900 truncate">
-                  📂 {cursoActivo ? cursoActivo.titulo : 'Selecciona una carpeta'}
-                </h4>
-                <span className="bg-purple-100 text-purple-800 text-[10px] px-2.5 py-1 rounded-full font-semibold">🔒 Solo Vista Protegida</span>
-              </div>
-
-              {cursoActivo ? (
-                <div className="flex-1 w-full h-full rounded-xl overflow-hidden border border-slate-200 bg-slate-50 relative">
-                  {/* Visor embebido de Google Drive */}
-                  <iframe
-                    src={cursoActivo.link}
-                    title={cursoActivo.titulo}
-                    className="w-full h-full border-0"
-                  />
-                  
-                  {/* 🛡️ Capa inteligente: Bloquea clics en los archivos, dejando libre el margen derecho para la barra de desplazamiento */}
-                  <div 
-                    className="absolute top-0 bottom-0 left-0 right-[35px] bg-transparent z-20 cursor-not-allowed" 
-                    title="Contenido protegido - Utiliza la barra lateral para deslizar"
-                  ></div>
-                </div>
-              ) : (
-                <div className="flex-1 flex items-center justify-center text-slate-400 text-xs text-center p-6">
-                  Elige una categoría de la izquierda para ver todos sus archivos.
-                </div>
-              )}
-            </div>
-
-          </div>
+      <div className="space-y-6">
+        {/* Aviso superior de modo protegido libre */}
+        <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-3.5 rounded-xl font-medium text-center text-xs shadow-sm flex items-center justify-center space-x-2">
+          <span>🛡️ Modo de visualización libre activo. Puedes deslizar la lista de archivos con total normalidad.</span>
         </div>
-      )}
+
+        {/* Contenedor principal */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+          
+          {/* Menú lateral con todas las categorías de la escuela */}
+          <div className="md:col-span-5 bg-slate-50 border border-slate-200 rounded-2xl p-4">
+            <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3 px-1">Selecciona un Curso o Taller:</h3>
+            <div className="space-y-1.5 max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
+              {todosLosEnlaces.map((item, index) => {
+                const esSeleccionado = cursoActivo?.titulo === item.titulo;
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setCursoActivo(item)}
+                    className={`w-full text-left p-2.5 rounded-xl text-xs font-medium transition flex items-center justify-between ${
+                      esSeleccionado
+                        ? 'bg-purple-700 text-white shadow-md'
+                        : item.titulo.includes('REGALO')
+                          ? 'bg-amber-100 text-amber-900 font-bold hover:bg-amber-200 border border-amber-300'
+                          : 'bg-white text-slate-700 hover:bg-purple-100 hover:text-purple-900 border border-slate-100'
+                    }`}
+                  >
+                    <span className="truncate pr-2">{item.titulo}</span>
+                    <span className="text-[10px] whitespace-nowrap">{esSeleccionado ? '👁️ Viendo' : 'Ver ➔'}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Visor protegido con ascensor libre */}
+          <div className="md:col-span-7 bg-white border border-slate-200 rounded-2xl p-4 flex flex-col h-[540px] shadow-sm relative">
+            <div className="flex items-center justify-between mb-3 border-b pb-2">
+              <h4 className="text-sm font-bold text-purple-900 truncate">
+                📂 {cursoActivo ? cursoActivo.titulo : 'Selecciona una carpeta'}
+              </h4>
+              <span className="bg-purple-100 text-purple-800 text-[10px] px-2.5 py-1 rounded-full font-semibold">🔒 Solo Vista Protegida</span>
+            </div>
+
+            {cursoActivo ? (
+              <div className="flex-1 w-full h-full rounded-xl overflow-hidden border border-slate-200 bg-slate-50 relative">
+                {/* Visor embebido de Google Drive */}
+                <iframe
+                  src={cursoActivo.link}
+                  title={cursoActivo.titulo}
+                  className="w-full h-full border-0"
+                />
+                
+                {/* 🛡️ Capa inteligente: Bloquea clics en los archivos, dejando libre el margen derecho para la barra de desplazamiento */}
+                <div 
+                  className="absolute top-0 bottom-0 left-0 right-[35px] bg-transparent z-20 cursor-not-allowed" 
+                  title="Contenido protegido - Utiliza la barra lateral para deslizar"
+                ></div>
+              </div>
+            ) : (
+              <div className="flex-1 flex items-center justify-center text-slate-400 text-xs text-center p-6">
+                Elige una categoría de la izquierda para ver todos sus archivos.
+              </div>
+            )}
+          </div>
+
+        </div>
+      </div>
     </div>
   );
 }
