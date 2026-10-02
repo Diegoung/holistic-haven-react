@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { supabase } from './supabaseClient';
 import imagenCertificado from './assets/certificado.jpg';
 
@@ -15,6 +15,7 @@ import WhatsAppButton from './components/WhatsAppButton';
 import { Auth } from './components/Auth';
 import { AdminPanel } from './components/AdminPanel';
 import { PortalTerapeuta } from './components/PortalTerapeuta';
+import PruebaPackHolistico from './components/PruebaPackHolistico'; // 👈 Importado correctamente
 
 // Componente de Promoción del Portal del Terapeuta con enlaces directos a WhatsApp
 const PromocionPortalTerapeuta: React.FC = () => {
@@ -456,7 +457,10 @@ export const MainApp: React.FC = () => {
 export const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <MainApp />
+      <Routes>
+        <Route path="/" element={<MainApp />} />
+        <Route path="/prueba" element={<PruebaPackHolistico />} />
+      </Routes>
     </BrowserRouter>
   );
 };
