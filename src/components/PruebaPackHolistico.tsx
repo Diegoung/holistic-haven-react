@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 
 export default function PruebaPackHolistico() {
-  // Todos los enlaces oficiales de las categorías del Pack Holístico y del catálogo general
   const todosLosEnlaces = [
-    // --- Pack Holístico (23 ítems) ---
     { titulo: "Péndulo hebreo", link: "https://drive.google.com/embeddedfolderview?id=11qPSJYe26Q26KLkc4Ca4rQtDA03me3Rj#list" },
     { titulo: "Radiestesia", link: "https://drive.google.com/embeddedfolderview?id=1A1Q6cwE_gU4On6OkUyyCieNNG2RQJFC5#list" },
     { titulo: "Biodescodificación", link: "https://drive.google.com/embeddedfolderview?id=14HFFAGggn8GCGcevguLfCyAhAJpHQ6FQ#list" },
@@ -27,8 +25,6 @@ export default function PruebaPackHolistico() {
     { titulo: "Constelaciones familiares", link: "https://drive.google.com/embeddedfolderview?id=163_eHVuMcVheZlEX-V7S0r6Css9pVaUs#list" },
     { titulo: "Vidas pasadas Kharma y Dharma", link: "https://drive.google.com/embeddedfolderview?id=19c7sQcZJfxNSCs6LOKh5GHg5ahXJt9Yf#list" },
     { titulo: "DE REGALO: 78 LIBROS EN PDF", link: "https://drive.google.com/embeddedfolderview?id=1jM8hOwePh4EIZOVXXIvYfDcsLtOAbMKv#list" },
-
-    // --- Demás Cursos del Catálogo General ---
     { titulo: "Taller aprender a meditar", link: "https://drive.google.com/embeddedfolderview?id=1O1H5-MqV2LcmcMcpYfAmUf0ENkLIV83n#list" },
     { titulo: "Yoga", link: "https://drive.google.com/embeddedfolderview?id=1F4rkztkPyyM_x6yYcOC1TsWWttwDqTDb#list" },
     { titulo: "Barras de access", link: "https://drive.google.com/embeddedfolderview?id=1XaIvZ0Opzlfgng1rFwCngO4i4eUOcvhq#list" },
@@ -55,26 +51,25 @@ export default function PruebaPackHolistico() {
   const [cursoActivo, setCursoActivo] = useState<any>(todosLosEnlaces[0]);
 
   return (
-    <div className="max-w-5xl mx-auto my-10 bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-purple-200">
+    <div className="max-w-6xl mx-auto my-6 px-3 sm:px-6 bg-white rounded-2xl shadow-xl py-6 border border-purple-200">
       <div className="text-center mb-6">
         <span className="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full font-semibold">✨ Demostración Interactiva General</span>
-        <h2 className="text-2xl font-bold text-purple-900 mt-2">Explora Todo el Contenido Formativo</h2>
-        <p className="text-sm text-slate-600 mt-1">Selecciona cualquier curso o taller para examinar el material de forma protegida.</p>
+        <h2 className="text-xl sm:text-2xl font-bold text-purple-900 mt-2">Explora Todo el Contenido Formativo</h2>
+        <p className="text-xs sm:text-sm text-slate-600 mt-1">Selecciona cualquier curso o taller para examinar el material de forma protegida.</p>
       </div>
 
       <div className="space-y-6">
-        {/* Aviso superior de modo protegido libre */}
-        <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-3.5 rounded-xl font-medium text-center text-xs shadow-sm flex items-center justify-center space-x-2">
+        <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-3 rounded-xl font-medium text-center text-xs shadow-sm">
           <span>🛡️ Modo de visualización libre activo. Puedes deslizar la lista de archivos con total normalidad.</span>
         </div>
 
-        {/* Contenedor principal */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+        {/* Contenedor Adaptable: en celular se apila ordenadamente, en PC va lado a lado */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
-          {/* Menú lateral con todas las categorías de la escuela */}
-          <div className="md:col-span-5 bg-slate-50 border border-slate-200 rounded-2xl p-4">
+          {/* Menú lateral / superior para elegir categoría */}
+          <div className="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-2xl p-4">
             <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3 px-1">Selecciona un Curso o Taller:</h3>
-            <div className="space-y-1.5 max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
+            <div className="space-y-1.5 max-h-[350px] lg:max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
               {todosLosEnlaces.map((item, index) => {
                 const esSeleccionado = cursoActivo?.titulo === item.titulo;
                 return (
@@ -97,28 +92,29 @@ export default function PruebaPackHolistico() {
             </div>
           </div>
 
-          {/* Visor protegido con ascensor libre */}
-          <div className="md:col-span-7 bg-white border border-slate-200 rounded-2xl p-4 flex flex-col h-[540px] shadow-sm relative">
+          {/* Visor protegido optimizado para táctil y scroll */}
+          <div className="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-4 flex flex-col h-[480px] sm:h-[540px] shadow-sm relative">
             <div className="flex items-center justify-between mb-3 border-b pb-2">
-              <h4 className="text-sm font-bold text-purple-900 truncate">
+              <h4 className="text-xs sm:text-sm font-bold text-purple-900 truncate pr-2">
                 📂 {cursoActivo ? cursoActivo.titulo : 'Selecciona una carpeta'}
               </h4>
-              <span className="bg-purple-100 text-purple-800 text-[10px] px-2.5 py-1 rounded-full font-semibold">🔒 Solo Vista Protegida</span>
+              <span className="bg-purple-100 text-purple-800 text-[10px] px-2 py-0.5 rounded-full font-semibold whitespace-nowrap">🔒 Solo Vista</span>
             </div>
 
             {cursoActivo ? (
               <div className="flex-1 w-full h-full rounded-xl overflow-hidden border border-slate-200 bg-slate-50 relative">
-                {/* Visor embebido de Google Drive */}
                 <iframe
                   src={cursoActivo.link}
                   title={cursoActivo.titulo}
                   className="w-full h-full border-0"
                 />
                 
-                {/* 🛡️ Capa inteligente: Bloquea clics en los archivos, dejando libre el margen derecho para la barra de desplazamiento */}
+                {/* Capa de protección inteligente adaptada: en móviles deja espacio para scroll táctil */}
                 <div 
-                  className="absolute top-0 bottom-0 left-0 right-[35px] bg-transparent z-20 cursor-not-allowed" 
-                  title="Contenido protegido - Utiliza la barra lateral para deslizar"
+                  className="absolute top-0 bottom-0 left-0 right-[30px] sm:right-[35px] bg-transparent z-20 pointer-events-auto"
+                  onClick={(e) => e.stopPropagation()}
+                  style={{ touchAction: 'pan-y' }}
+                  title="Contenido protegido"
                 ></div>
               </div>
             ) : (
