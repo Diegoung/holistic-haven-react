@@ -7,6 +7,11 @@ const faqs = [
       "Para adquirir y acceder a las formaciones, primero debés registrarte o iniciar sesión en la web con tu correo electrónico. De esta manera, el sistema vincula tus compras de forma segura a tu perfil, permitiéndote desbloquear de manera automática el acceso al material de estudio, los enlaces de descarga y tus certificados oficiales en cualquier momento.",
   },
   {
+    question: "¿Qué es el Portal del Terapeuta y cómo obtengo el mes gratis para alumnos?",
+    answer:
+      "Es nuestro software profesional exclusivo para organizar consultorios holísticos (con agenda inteligente, historias clínicas para más de 43 disciplinas y recordatorios automáticos por WhatsApp). Por ser alumno/a de la escuela, tienes 1 mes 100% gratis para probarlo. Solo debes ingresar a la web, revisar los planes y escribirnos por WhatsApp indicando que eres estudiante para activar tu beneficio sin cargo.",
+  },
+  {
     question: "¿Cómo accedo a los cursos que compro?",
     answer:
       "Una vez que realizas el pago y se aprueba, el sistema habilita automáticamente en tu panel los botones de acceso. Podrás ingresar directamente a carpetas de Google Drive organizadas que contienen todo el material de estudio en formato PDF y videos explicativos complementarios para estudiar a tu propio ritmo.",
