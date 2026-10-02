@@ -63,13 +63,12 @@ export default function PruebaPackHolistico() {
           <span>🛡️ Modo de visualización libre activo. Puedes deslizar la lista de archivos con total normalidad.</span>
         </div>
 
-        {/* Contenedor Adaptable: en celular se apila ordenadamente, en PC va lado a lado */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
-          {/* Menú lateral / superior para elegir categoría */}
+          {/* Menú lateral de cursos */}
           <div className="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-2xl p-4">
             <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3 px-1">Selecciona un Curso o Taller:</h3>
-            <div className="space-y-1.5 max-h-[350px] lg:max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
+            <div className="space-y-1.5 max-h-[350px] lg:max-h-[500px] overflow-y-auto pr-1">
               {todosLosEnlaces.map((item, index) => {
                 const esSeleccionado = cursoActivo?.titulo === item.titulo;
                 return (
@@ -92,8 +91,8 @@ export default function PruebaPackHolistico() {
             </div>
           </div>
 
-          {/* Visor protegido optimizado para táctil y scroll */}
-          <div className="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-4 flex flex-col h-[480px] sm:h-[540px] shadow-sm relative">
+          {/* Visor con barra de desplazamiento interna propia (garantiza el "ascensor" visible) */}
+          <div className="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-4 flex flex-col h-[520px] sm:h-[580px] shadow-sm relative">
             <div className="flex items-center justify-between mb-3 border-b pb-2">
               <h4 className="text-xs sm:text-sm font-bold text-purple-900 truncate pr-2">
                 📂 {cursoActivo ? cursoActivo.titulo : 'Selecciona una carpeta'}
@@ -102,20 +101,22 @@ export default function PruebaPackHolistico() {
             </div>
 
             {cursoActivo ? (
-              <div className="flex-1 w-full h-full rounded-xl overflow-hidden border border-slate-200 bg-slate-50 relative">
-                <iframe
-                  src={cursoActivo.link}
-                  title={cursoActivo.titulo}
-                  className="w-full h-full border-0"
-                />
-                
-                {/* Capa de protección inteligente adaptada: en móviles deja espacio para scroll táctil */}
-                <div 
-                  className="absolute top-0 bottom-0 left-0 right-[30px] sm:right-[35px] bg-transparent z-20 pointer-events-auto"
-                  onClick={(e) => e.stopPropagation()}
-                  style={{ touchAction: 'pan-y' }}
-                  title="Contenido protegido"
-                ></div>
+              <div className="flex-1 w-full h-full rounded-xl overflow-y-auto border border-slate-200 bg-slate-50 relative custom-scrollbar">
+                {/* Forzamos altura extra dentro del contenedor scrolleable para que aparezca siempre la barra lateral */}
+                <div className="w-full h-[650px] relative">
+                  <iframe
+                    src={cursoActivo.link}
+                    title={cursoActivo.titulo}
+                    className="w-full h-full border-0 pointer-events-auto"
+                  />
+                  
+                  {/* Capa de protección inteligente que bloquea clics en los archivos pero deja libre el margen derecho para la barra de scroll */}
+                  <div 
+                    className="absolute top-0 bottom-0 left-0 right-[35px] bg-transparent z-20"
+                    style={{ touchAction: 'pan-y' }}
+                    title="Contenido protegido"
+                  ></div>
+                </div>
               </div>
             ) : (
               <div className="flex-1 flex items-center justify-center text-slate-400 text-xs text-center p-6">
