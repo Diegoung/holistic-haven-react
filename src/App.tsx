@@ -14,6 +14,144 @@ import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import { Auth } from './components/Auth';
 import { AdminPanel } from './components/AdminPanel';
+import { PortalTerapeuta } from './components/PortalTerapeuta';
+
+// Componente de Promoción del Portal del Terapeuta con enlaces directos a WhatsApp
+const PromocionPortalTerapeuta: React.FC = () => {
+  const telefonoWhatsApp = "5493413375533";
+
+  const generarUrlWhatsApp = (pais: string) => {
+    const mensaje = `Hola! Me interesa contratar el Portal del Terapeuta para ${pais}. ¿Me brindan más información y los medios de pago? ✨`;
+    return `https://wa.me/${telefonoWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+  };
+
+  return (
+    <section style={{ padding: '60px 20px', backgroundColor: '#f4f8f6', fontFamily: 'Arial, sans-serif', color: '#333' }}>
+      <div style={{ maxWidth: '1200px', margin: 'auto' }}>
+        
+        {/* Cabecera explicativa */}
+        <div style={{ textAlign: 'center', marginBottom: '45px' }}>
+          <span style={{ background: '#e8f8f5', color: '#117a65', padding: '6px 16px', borderRadius: '20px', fontSize: '13px', fontWeight: 'bold' }}>
+            ✨ Software Profesional Exclusivo para Terapeutas y Sanadores
+          </span>
+          <h2 style={{ color: '#2C4A3E', fontSize: '32px', margin: '15px 0 12px 0' }}>
+            Lleva tu Consultorio Holístico al Siguiente Nivel con Automatización Total
+          </h2>
+          <p style={{ fontSize: '16px', color: '#555', maxWidth: '850px', margin: 'auto', lineHeight: '1.6' }}>
+            Una plataforma diseñada a medida para organizar tu práctica profesional. Olvídate de las agendas de papel y el desorden administrativo: gestiona turnos de forma inteligente, mantén historias clínicas avanzadas adaptadas a más de 43 disciplinas y comunícate con tus consultantes mediante avisos automáticos por WhatsApp.
+          </p>
+        </div>
+
+        {/* Características principales */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '25px', marginBottom: '50px' }}>
+          <div style={{ background: '#fff', padding: '25px', borderRadius: '12px', border: '1px solid #e0e8e4', boxShadow: '0 4px 10px rgba(0,0,0,0.03)' }}>
+            <div style={{ fontSize: '30px', marginBottom: '10px' }}>📅</div>
+            <h3 style={{ color: '#2C4A3E', margin: '0 0 10px 0', fontSize: '18px' }}>Agenda y Calendario Interactivo</h3>
+            <p style={{ fontSize: '14px', color: '#555', lineHeight: '1.5', margin: 0 }}>
+              Visualiza tus turnos por día u hora, configura tus franjas laborales y mantén un control absoluto de tus espacios disponibles.
+            </p>
+          </div>
+
+          <div style={{ background: '#fff', padding: '25px', borderRadius: '12px', border: '1px solid #e0e8e4', boxShadow: '0 4px 10px rgba(0,0,0,0.03)' }}>
+            <div style={{ fontSize: '30px', marginBottom: '10px' }}>💬</div>
+            <h3 style={{ color: '#2C4A3E', margin: '0 0 10px 0', fontSize: '18px' }}>Recordatorios Automáticos por WhatsApp</h3>
+            <p style={{ fontSize: '14px', color: '#555', lineHeight: '1.5', margin: 0 }}>
+              Envía mensajes personalizados directamente al WhatsApp de tus pacientes con un solo clic, incluyendo el nombre de tu espacio y los detalles del turno.
+            </p>
+          </div>
+
+          <div style={{ background: '#fff', padding: '25px', borderRadius: '12px', border: '1px solid #e0e8e4', boxShadow: '0 4px 10px rgba(0,0,0,0.03)' }}>
+            <div style={{ fontSize: '30px', marginBottom: '10px' }}>📂</div>
+            <h3 style={{ color: '#2C4A3E', margin: '0 0 10px 0', fontSize: '18px' }}>Historias Clínicas por Terapia</h3>
+            <p style={{ fontSize: '14px', color: '#555', lineHeight: '1.5', margin: 0 }}>
+              Fichas específicas para más de 43 disciplinas (Péndulo Hebreo, Biodescodificación, Reiki, Tarot, etc.) con parámetros únicos de evolución.
+            </p>
+          </div>
+        </div>
+
+        {/* Título de Planes y Valores */}
+        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+          <h3 style={{ color: '#2C4A3E', fontSize: '26px', margin: 0 }}>Planes de Acceso y Valores por País</h3>
+          <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Elige el tiempo de suscripción y potencia tu consultorio hoy mismo.</p>
+        </div>
+
+        {/* Carteles de Precios Multimoneda */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px' }}>
+          
+          {/* ARGENTINA */}
+          <div style={{ background: '#fff', border: '2px solid #27ae60', borderRadius: '14px', padding: '25px', textAlign: 'center', boxShadow: '0 4px 12px rgba(39, 174, 96, 0.1)' }}>
+            <span style={{ fontSize: '32px' }}>🇦🇷</span>
+            <h4 style={{ margin: '10px 0 15px 0', color: '#2C4A3E', fontSize: '20px' }}>Argentina</h4>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>1 Mes: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>$2.000</strong></div>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>3 Meses: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>$5.500</strong></div>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>6 Meses: <strong style={{ color: '#27ae60', fontSize: '17px' }}>$11.000</strong></div>
+            <a 
+              href={generarUrlWhatsApp('Argentina')}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: 'block', width: '100%', boxSizing: 'border-box', textAlign: 'center', textDecoration: 'none', marginTop: '15px', background: '#2C4A3E', color: '#fff', padding: '10px', borderRadius: '6px', fontWeight: 'bold' }}
+            >
+              Contratar Plan (Arg)
+            </a>
+          </div>
+
+          {/* ECUADOR */}
+          <div style={{ background: '#fff', border: '2px solid #2980b9', borderRadius: '14px', padding: '25px', textAlign: 'center', boxShadow: '0 4px 12px rgba(41, 128, 185, 0.1)' }}>
+            <span style={{ fontSize: '32px' }}>🇪🇨</span>
+            <h4 style={{ margin: '10px 0 15px 0', color: '#2C4A3E', fontSize: '20px' }}>Ecuador</h4>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>1 Mes: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>$2 USD</strong></div>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>3 Meses: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>$5 USD</strong></div>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>6 Meses: <strong style={{ color: '#2980b9', fontSize: '17px' }}>$10 USD</strong></div>
+            <a 
+              href={generarUrlWhatsApp('Ecuador')}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: 'block', width: '100%', boxSizing: 'border-box', textAlign: 'center', textDecoration: 'none', marginTop: '15px', background: '#2C4A3E', color: '#fff', padding: '10px', borderRadius: '6px', fontWeight: 'bold' }}
+            >
+              Contratar Plan (Ecu)
+            </a>
+          </div>
+
+          {/* PERÚ */}
+          <div style={{ background: '#fff', border: '2px solid #e67e22', borderRadius: '14px', padding: '25px', textAlign: 'center', boxShadow: '0 4px 12px rgba(230, 126, 34, 0.1)' }}>
+            <span style={{ fontSize: '32px' }}>🇵🇪</span>
+            <h4 style={{ margin: '10px 0 15px 0', color: '#2C4A3E', fontSize: '20px' }}>Perú</h4>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>1 Mes: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>S/ 76</strong></div>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>3 Meses: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>S/ 190</strong></div>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>6 Meses: <strong style={{ color: '#e67e22', fontSize: '17px' }}>S/ 380</strong></div>
+            <a 
+              href={generarUrlWhatsApp('Perú')}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: 'block', width: '100%', boxSizing: 'border-box', textAlign: 'center', textDecoration: 'none', marginTop: '15px', background: '#2C4A3E', color: '#fff', padding: '10px', borderRadius: '6px', fontWeight: 'bold' }}
+            >
+              Contratar Plan (Per)
+            </a>
+          </div>
+
+          {/* URUGUAY */}
+          <div style={{ background: '#fff', border: '2px solid #8e44ad', borderRadius: '14px', padding: '25px', textAlign: 'center', boxShadow: '0 4px 12px rgba(142, 68, 173, 0.1)' }}>
+            <span style={{ fontSize: '32px' }}>🇺🇾</span>
+            <h4 style={{ margin: '10px 0 15px 0', color: '#2C4A3E', fontSize: '20px' }}>Uruguay</h4>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>1 Mes: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>$82 UYU</strong></div>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>3 Meses: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>$205 UYU</strong></div>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>6 Meses: <strong style={{ color: '#8e44ad', fontSize: '17px' }}>$410 UYU</strong></div>
+            <a 
+              href={generarUrlWhatsApp('Uruguay')}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: 'block', width: '100%', boxSizing: 'border-box', textAlign: 'center', textDecoration: 'none', marginTop: '15px', background: '#2C4A3E', color: '#fff', padding: '10px', borderRadius: '6px', fontWeight: 'bold' }}
+            >
+              Contratar Plan (Uru)
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+};
 
 export const MainApp: React.FC = () => {
   const [session, setSession] = useState<any>(null);
@@ -23,6 +161,9 @@ export const MainApp: React.FC = () => {
   const [nombreAlumnoCert, setNombreAlumnoCert] = useState<string>('');
   const [fechaCert, setFechaCert] = useState<string>('');
   const [mostrarCertificadoVista, setMostrarCertificadoVista] = useState<boolean>(false);
+
+  // Estados para controlar si el usuario logueado es terapeuta activo
+  const [esTerapeutaActivo, setEsTerapeutaActivo] = useState<boolean>(false);
 
   const listaCursosPack = [
     "Pendulo hebreo",
@@ -57,14 +198,18 @@ export const MainApp: React.FC = () => {
       setSession(session);
       if (session?.user) {
         cargarPerfil(session.user.id);
+        verificarPermisosTerapeuta(session.user.id);
       }
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
-      if (session) {
+      if (session?.user) {
         setMostrarModalAuth(false);
         cargarPerfil(session.user.id);
+        verificarPermisosTerapeuta(session.user.id);
+      } else {
+        setEsTerapeutaActivo(false);
       }
     });
 
@@ -79,6 +224,35 @@ export const MainApp: React.FC = () => {
       .single();
     if (data?.nombre) {
       setNombreAlumnoCert(data.nombre);
+    }
+  };
+
+  const verificarPermisosTerapeuta = async (userId: string) => {
+    try {
+      const { data: perfil, error } = await supabase
+        .from('perfiles')
+        .select('rol, suscripcion_hasta')
+        .eq('id', userId)
+        .single();
+
+      if (error || !perfil) {
+        setEsTerapeutaActivo(false);
+        return;
+      }
+
+      const esRolTerapeuta = perfil.rol === 'terapeuta';
+      let suscripcionVigente = false;
+
+      if (perfil.suscripcion_hasta) {
+        const hoy = new Date();
+        const vencimiento = new Date(perfil.suscripcion_hasta);
+        suscripcionVigente = vencimiento >= hoy;
+      }
+
+      setEsTerapeutaActivo(esRolTerapeuta && suscripcionVigente);
+    } catch (err) {
+      console.error('Error al verificar permisos de terapeuta:', err);
+      setEsTerapeutaActivo(false);
     }
   };
 
@@ -99,7 +273,6 @@ export const MainApp: React.FC = () => {
   return (
     <div className="min-h-screen bg-holistic-beige text-holistic-dark relative">
       
-      {/* 🔹 ESTILOS ESTRICTOS PARA 1 SOLA PÁGINA A4 HORIZONTAL SIN DUPLICAR */}
       <style>{`
         @media print {
           @page {
@@ -142,11 +315,23 @@ export const MainApp: React.FC = () => {
 
       <Navbar session={session} onAbrirAuth={() => setMostrarModalAuth(true)} />
       <Hero />
+      
+      {/* 🔹 Sección de Promoción y Precios del Portal del Terapeuta debajo de la imagen principal */}
+      <PromocionPortalTerapeuta />
+
+      {/* 🌿 Si el usuario logueado es terapeuta activo, mostramos su Portal del Terapeuta */}
+      {session && esTerapeutaActivo && (
+        <div className="my-12 p-6 bg-white border-2 border-green-300 rounded-3xl max-w-6xl mx-auto shadow-lg">
+          <div className="text-center mb-6 border-b pb-4">
+            <span className="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-semibold">✨ Beneficio Exclusivo: Portal del Terapeuta Activo</span>
+          </div>
+          <PortalTerapeuta />
+        </div>
+      )}
+
       <Services session={session} onAbrirAuth={() => setMostrarModalAuth(true)} onAbrirCertificado={abrirCertificado} />
       <Testimonials />
-      
       <EspacioHolistico />
-
       <PreguntasFrecuentes />
       <Contact />
 
@@ -258,8 +443,8 @@ export const MainApp: React.FC = () => {
             </div>
 
             <p style={{ fontSize: '11px', color: '#d9534f', textAlign: 'center', marginTop: '10px', fontWeight: 'bold' }}>
-          ⚠️ <em>Para una mejor experiencia visual y un resultado óptimo, se recomienda realizar la descarga directamente desde una PC o Notebook.</em>
-        </p>
+              ⚠️ <em>Para una mejor experiencia visual y un resultado óptimo, se recomienda realizar la descarga directamente desde una PC o Notebook.</em>
+            </p>
           </div>
         </div>
       )}

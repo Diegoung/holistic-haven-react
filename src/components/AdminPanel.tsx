@@ -57,6 +57,20 @@ export const AdminPanel = () => {
     return compras.some(c => c.user_id === userId && String(c.curso_id) === String(cursoId));
   };
 
+  // Función para actualizar el Rol o la Fecha de Viges de la Suscripción del Terapeuta
+  const actualizarRolOTerapeuta = async (userId: string, campo: string, valor: any) => {
+    const { error } = await supabase
+      .from('perfiles')
+      .update({ [campo]: valor })
+      .eq('id', userId);
+
+    if (error) {
+      alert("❌ Error al actualizar: " + error.message);
+    } else {
+      cargarDatos();
+    }
+  };
+
   // Función para eliminar el usuario por completo (Auth + Base de Datos)
   const borrarUsuario = async (userId: string, nombreUsuario: string) => {
     if (!window.confirm(`¿Estás seguro de eliminar a "${nombreUsuario}"? Podrá volver a registrarse si lo desea.`)) return;
@@ -69,7 +83,7 @@ export const AdminPanel = () => {
       if (error) throw error;
 
       alert('¡Usuario eliminado con éxito! Ya puede volver a registrarse.');
-      cargarDatos(); // Recarga los datos para actualizar la lista
+      cargarDatos(); 
     } catch (error: any) {
       console.error('Error al eliminar:', error.message);
       alert('Hubo un error al eliminar el usuario: ' + error.message);
@@ -166,14 +180,40 @@ export const AdminPanel = () => {
                       <span className="text-xs font-mono text-gray-400 truncate">ID: {user.id}</span>
                     </div>
 
-                    {/* Botón para eliminar usuario */}
-                    <button
-                      onClick={() => borrarUsuario(user.id, nombre)}
-                      className="bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 self-start sm:self-auto"
-                      title="Eliminar usuario del sistema para que pueda volver a registrarse"
-                    >
-                      🗑️ Eliminar Usuario
-                    </button>
+                    {/* Controles de Rol Terapeuta y Fecha de Vencimiento */}
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <div className="flex items-center gap-1 bg-green-50 border border-green-200 rounded-lg px-2 py-1">
+                        <span className="text-[11px] font-bold text-green-800">Rol:</span>
+                        <select
+                          value={user.rol || 'alumno'}
+                          onChange={(e) => actualizarRolOTerapeuta(user.id, 'rol', e.target.value)}
+                          className="bg-white border border-green-300 text-xs rounded px-1 py-0.5 font-medium text-green-900 focus:outline-none"
+                        >
+                          <option value="alumno">Alumno</option>
+                          <option value="terapeuta">Terapeuta</option>
+                        </select>
+                      </div>
+
+                      <div className="flex items-center gap-1 bg-green-50 border border-green-200 rounded-lg px-2 py-1">
+                        <span className="text-[11px] font-bold text-green-800">Vence:</span>
+                        <input
+                          type="date"
+                          value={user.suscripcion_hasta ? user.suscripcion_hasta.split('T')[0] : ''}
+                          onChange={(e) => actualizarRolOTerapeuta(user.id, 'suscripcion_hasta', e.target.value)}
+                          className="bg-white border border-green-300 text-xs rounded px-1 py-0.5 font-medium text-green-900 focus:outline-none"
+                          title="Fecha límite de vigencia del Portal del Terapeuta"
+                        />
+                      </div>
+
+                      {/* Botón para eliminar usuario */}
+                      <button
+                        onClick={() => borrarUsuario(user.id, nombre)}
+                        className="bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1"
+                        title="Eliminar usuario del sistema para que pueda volver a registrarse"
+                      >
+                        🗑️ Eliminar
+                      </button>
+                    </div>
                   </div>
 
                   <div className="flex flex-wrap gap-2">
