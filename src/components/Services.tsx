@@ -33,7 +33,8 @@ import {
   ExternalLink,
   ChevronDown,
   ChevronUp,
-  Award
+  Award,
+  EyeIcon
 } from 'lucide-react';
 
 import { supabase } from '../supabaseClient';
@@ -154,7 +155,7 @@ export const Services: React.FC<ServicesProps> = ({
       esPack: true,
       description: (
         <div className="mt-2 bg-purple-50/50 p-2.5 rounded-xl border border-purple-100">
-          <p className="text-[11px] font-semibold text-purple-900 mb-1.5 uppercase tracking-wider">Incluye 22 formaciones:</p>
+          <p className="text-[11px] font-semibold text-purple-900 mb-1.5 uppercase tracking-wider">Incluye los 22 cursos + libros de regalo:</p>
           <ul className="space-y-1 text-xs text-slate-700 max-h-36 overflow-y-auto pr-1 custom-scrollbar">
             {linksPackHolistico.map((item, idx) => (
               <li key={idx} className="flex items-center gap-1.5">
@@ -400,7 +401,7 @@ export const Services: React.FC<ServicesProps> = ({
             
             {/* ARGENTINA */}
             <div className="bg-purple-50/60 p-4 rounded-xl border border-purple-100 space-y-2">
-              <h3 className="font-bold text-sm text-purple-900 flex items-center gap-1.5">🇦🇷 Argentina (Monto: ARS ${cursoSeleccionadoCompra.precioARS.toLocaleString()})</h3>
+              <h3 className="font-bold text-sm text-purple-900 flex items-center gap-1.5">🇦🇷 Argentina (Monto: ARS ${cursoSeleccionadoCompra.precioARS.toLocaleString()} - Pago único)</h3>
               <div className="text-xs space-y-1 text-gray-700">
                 <p><span className="text-gray-500">Titular:</span> Diego Martin Fragnito</p>
                 <p><span className="text-gray-500">CBU:</span> <span className="font-mono font-bold text-indigo-600 select-all">4530000800012708764665</span></p>
@@ -410,7 +411,7 @@ export const Services: React.FC<ServicesProps> = ({
 
             {/* PERÚ */}
             <div className="bg-blue-50/60 p-4 rounded-xl border border-blue-100 space-y-2">
-              <h3 className="font-bold text-sm text-blue-900 flex items-center gap-1.5">🇵🇪 Perú (Monto: {cursoSeleccionadoCompra.precioPEN} Soles)</h3>
+              <h3 className="font-bold text-sm text-blue-900 flex items-center gap-1.5">🇵🇪 Perú (Monto: {cursoSeleccionadoCompra.precioPEN} Soles - Pago único)</h3>
               <div className="text-xs space-y-1 text-gray-700">
                 <p><span className="text-gray-500">Titular:</span> Jessica Martinez Castillo</p>
                 <p><span className="text-gray-500">Interbank:</span> <span className="font-mono font-bold select-all">1083324352314</span></p>
@@ -422,7 +423,7 @@ export const Services: React.FC<ServicesProps> = ({
 
             {/* ECUADOR */}
             <div className="bg-amber-50/60 p-4 rounded-xl border border-amber-100 space-y-2">
-              <h3 className="font-bold text-sm text-amber-900 flex items-center gap-1.5">🇪🇨 Ecuador (Monto: ${cursoSeleccionadoCompra.precioUSD} USD)</h3>
+              <h3 className="font-bold text-sm text-amber-900 flex items-center gap-1.5">🇪🇨 Ecuador (Monto: ${cursoSeleccionadoCompra.precioUSD} USD - Pago único)</h3>
               <div className="text-xs space-y-1 text-gray-700">
                 <p><span className="text-gray-500">Nombre:</span> David Israel Acosta</p>
                 <p><span className="text-gray-500">Cuenta de Ahorros Banco Pichincha:</span> <span className="font-mono font-bold select-all">2204527510</span></p>
@@ -432,7 +433,7 @@ export const Services: React.FC<ServicesProps> = ({
 
             {/* URUGUAY */}
             <div className="bg-sky-50/60 p-4 rounded-xl border border-sky-100 space-y-2">
-              <h3 className="font-bold text-sm text-sky-900 flex items-center gap-1.5">🇺🇾 Uruguay (Monto: {cursoSeleccionadoCompra.precioUYU} UYU)</h3>
+              <h3 className="font-bold text-sm text-sky-900 flex items-center gap-1.5">🇺🇾 Uruguay (Monto: {cursoSeleccionadoCompra.precioUYU} UYU - Pago único)</h3>
               <div className="text-xs space-y-1 text-gray-700">
                 <p><span className="text-gray-500">Titular:</span> Diego Martin Fragnito</p>
                 <p><span className="text-gray-500">PREX Uruguay:</span> <span className="font-mono font-bold select-all">1577930</span></p>
@@ -442,7 +443,7 @@ export const Services: React.FC<ServicesProps> = ({
 
             {/* PAYPAL */}
             <div className="bg-indigo-50/60 p-4 rounded-xl border border-indigo-100 space-y-2">
-              <h3 className="font-bold text-sm text-indigo-900 flex items-center gap-1.5">🌍 PayPal (Monto: ${cursoSeleccionadoCompra.precioUSD} USD)</h3>
+              <h3 className="font-bold text-sm text-indigo-900 flex items-center gap-1.5">🌍 PayPal (Monto: ${cursoSeleccionadoCompra.precioUSD} USD - Pago único)</h3>
               <div className="text-xs space-y-1 text-gray-700">
                 <p><span className="text-gray-500">Titular:</span> Diego Martin Fragnito</p>
                 <p><span className="text-gray-500">Correo PayPal:</span> <span className="font-mono font-bold text-indigo-600 select-all">Diegomfragnito@gmail.com</span></p>
@@ -543,7 +544,7 @@ export const Services: React.FC<ServicesProps> = ({
                         onClick={() => setMostrarListaPack(!mostrarListaPack)}
                         className="w-full flex items-center justify-between bg-emerald-600 hover:bg-emerald-700 text-white py-3 px-4 rounded-xl font-bold transition-colors text-sm"
                       >
-                        <span>✨ Acceder a los 22 Cursos</span>
+                        <span>✨ Acceder al Material</span>
                         {mostrarListaPack ? <ChevronUp className="w-4 h-4"/> : <ChevronDown className="w-4 h-4"/>}
                       </button>
 
@@ -577,7 +578,7 @@ export const Services: React.FC<ServicesProps> = ({
                   ) : (
                     <div className="space-y-2">
                       <a
-                        href={service.linkDriveDirecto || cursoBD?.link_drive}
+                        href={(service as any).linkDriveDirecto || cursoBD?.link_drive}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block text-center bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold transition-colors"
@@ -603,38 +604,62 @@ export const Services: React.FC<ServicesProps> = ({
                         <div className="bg-purple-50/60 p-2 rounded-lg border border-purple-100">
                           <span className="text-slate-500 block text-[10px]">🇦🇷 Argentina</span>
                           <span className="font-bold text-purple-900">${service.precioARS.toLocaleString()} ARS</span>
+                          <span className="text-[10px] text-purple-700 block font-medium">Pago único</span>
                         </div>
                         <div className="bg-purple-50/60 p-2 rounded-lg border border-purple-100">
                           <span className="text-slate-500 block text-[10px]">🇵🇪 Perú</span>
                           <span className="font-bold text-purple-900">{service.precioPEN} Soles</span>
+                          <span className="text-[10px] text-purple-700 block font-medium">Pago único</span>
                         </div>
                         <div className="bg-purple-50/60 p-2 rounded-lg border border-purple-100">
                           <span className="text-slate-500 block text-[10px]">🇺🇾 Uruguay</span>
                           <span className="font-bold text-purple-900">{service.precioUYU} UYU</span>
+                          <span className="text-[10px] text-purple-700 block font-medium">Pago único</span>
                         </div>
                         <div className="bg-amber-50/60 p-2 rounded-lg border border-amber-100">
                           <span className="text-slate-500 block text-[10px]">🇪🇨 Ecuador / PayPal</span>
                           <span className="font-bold text-amber-800">${service.precioUSD} USD</span>
+                          <span className="text-[10px] text-amber-700 block font-medium">Pago único</span>
                         </div>
                       </div>
                     </div>
 
                     {session ? (
-                      <button
-                        onClick={() => setCursoSeleccionadoCompra(service)}
-                        className="w-full flex items-center justify-center gap-2 bg-purple-700 hover:bg-purple-800 text-white px-4 py-3 rounded-xl font-bold text-sm transition-colors cursor-pointer"
-                      >
-                        <CreditCard className="w-4 h-4"/>
-                        Ver Datos de Pago 🌍
-                      </button>
+                      <div className="space-y-2">
+                        <button
+                          onClick={() => setCursoSeleccionadoCompra(service)}
+                          className="w-full flex items-center justify-center gap-2 bg-purple-700 hover:bg-purple-800 text-white px-4 py-3 rounded-xl font-bold text-sm transition-colors cursor-pointer"
+                        >
+                          <CreditCard className="w-4 h-4"/>
+                          Ver Datos de Pago 🌍
+                        </button>
+
+                        <a
+                          href={`/prueba?curso=${encodeURIComponent(service.title)}`}
+                          className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-all shadow-md transform hover:scale-[1.02]"
+                        >
+                          <EyeIcon className="w-4 h-4 animate-pulse"/>
+                          👁️ ¡Revisá el material antes de comprar!
+                        </a>
+                      </div>
                     ) : (
-                      <button
-                        onClick={onAbrirAuth}
-                        className="w-full bg-purple-900 hover:bg-purple-950 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer"
-                      >
-                        <Lock className="w-4 h-4 inline mr-1"/>
-                        Ingresar para Comprar
-                      </button>
+                      <div className="space-y-2">
+                        <button
+                          onClick={onAbrirAuth}
+                          className="w-full bg-purple-900 hover:bg-purple-950 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer"
+                        >
+                          <Lock className="w-4 h-4 inline mr-1"/>
+                          Ingresar para Comprar
+                        </button>
+
+                        <a
+                          href={`/prueba?curso=${encodeURIComponent(service.title)}`}
+                          className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-all shadow-md transform hover:scale-[1.02]"
+                        >
+                          <EyeIcon className="w-4 h-4 animate-pulse"/>
+                          👁️ ¡Revisá el material antes de comprar!
+                        </a>
+                      </div>
                     )}
                   </div>
                 )}

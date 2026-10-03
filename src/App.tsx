@@ -33,7 +33,7 @@ const PromocionPortalTerapeuta: React.FC = () => {
         {/* Cabecera explicativa */}
         <div style={{ textAlign: 'center', marginBottom: '45px' }}>
           <span style={{ background: '#e8f8f5', color: '#117a65', padding: '6px 16px', borderRadius: '20px', fontSize: '13px', fontWeight: 'bold' }}>
-            ✨ Software Profesional Exclusivo para Terapeutas y Sanadores
+            ✨ Software Profesional Exclusivo para Terapeutas
           </span>
           <h2 style={{ color: '#2C4A3E', fontSize: '32px', margin: '15px 0 12px 0' }}>
             Lleva tu Consultorio Holístico al Siguiente Nivel con Automatización Total
@@ -72,7 +72,7 @@ const PromocionPortalTerapeuta: React.FC = () => {
 
         {/* Título de Planes y Valores */}
         <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-          <h3 style={{ color: '#2C4A3E', fontSize: '26px', margin: 0 }}>Planes de Acceso y Valores por País</h3>
+          <h3 style={{ color: '#2C4A3E', fontSize: '26px', margin: 0 }}>Planes de Acceso mensuales y Valores por País</h3>
           <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Elige el tiempo de suscripción y potencia tu consultorio hoy mismo.</p>
         </div>
 
