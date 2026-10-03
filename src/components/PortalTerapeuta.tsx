@@ -50,7 +50,7 @@ const CONFIG_TERAPIAS: Record<string, { campoEspecifico: string; placeholder: st
 const LISTA_TERAPIAS = Object.keys(CONFIG_TERAPIAS);
 
 export const PortalTerapeuta = () => {
-  const [vistaActiva, setVistaActiva] = useState<'agenda' | 'disponibilidad' | 'pacientes'>('agenda');
+  const [vistaActiva, setVistaActiva] = useState<'agenda' | 'disponibilidad' | 'pacientes' | 'guia'>('agenda');
   
   const [userId, setUserId] = useState<string | null>(null);
   const [nombreTerapeuta, setNombreTerapeuta] = useState<string>('Terapeuta');
@@ -331,6 +331,18 @@ export const PortalTerapeuta = () => {
           >
             📂 Pacientes ({pacientes.length})
           </button>
+
+          <button 
+            onClick={() => setVistaActiva('guia')}
+            style={{
+              padding: '10px 20px',
+              backgroundColor: vistaActiva === 'guia' ? '#2C4A3E' : '#ecf0f1',
+              color: vistaActiva === 'guia' ? '#fff' : '#333',
+              border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold'
+            }}
+          >
+            📖 Guía de Uso
+          </button>
         </div>
       </header>
 
@@ -594,6 +606,219 @@ export const PortalTerapeuta = () => {
                 <p style={{ margin: '4px 0', fontSize: '13px', color: '#333' }}>📝 <strong>Panorama / Evolución:</strong> {paciente.notas_generales || paciente.notasGenerales || 'Sin notas'}</p>
               </div>
             ))}
+          </div>
+        </section>
+      )}
+
+      {/* VISTA 4: GUÍA OFICIAL DE USO */}
+      {vistaActiva === 'guia' && (
+        <section>
+          <div style={{
+            background: '#fff',
+            border: '1px solid #ddd',
+            borderRadius: '10px',
+            padding: '25px',
+            boxShadow: '0 2px 5px rgba(0,0,0,0.05)'
+          }}>
+            <div style={{
+              borderBottom: '2px solid #eaeaea',
+              paddingBottom: '18px',
+              marginBottom: '25px'
+            }}>
+              <h2 style={{ color: '#2C4A3E', margin: '0 0 8px 0' }}>
+                📖 Guía Oficial de Uso: Portal del Terapeuta DMF
+              </h2>
+              <p style={{ color: '#666', margin: 0, fontSize: '15px' }}>
+                Organiza tu espacio holístico, automatiza tus turnos y lleva historias clínicas profesionales en un solo lugar.
+              </p>
+            </div>
+
+            {/* PASO 1 */}
+            <div style={{
+              marginBottom: '25px',
+              padding: '20px',
+              background: '#f8fbfa',
+              border: '1px solid #dfeae6',
+              borderRadius: '8px'
+            }}>
+              <h3 style={{ color: '#2C4A3E', marginTop: 0 }}>
+                📌 Paso 1: Acceso y Configuración Inicial de tu Marca
+              </h3>
+
+              <p style={{ color: '#555', lineHeight: '1.6' }}>
+                Al ingresar por primera vez con tu cuenta de terapeuta activo, el sistema te dará la bienvenida y vinculará tu sesión de forma segura.
+              </p>
+
+              <p style={{ color: '#555', lineHeight: '1.6' }}>
+                <strong>Tu Nombre Profesional:</strong> El sistema detectará automáticamente tu nombre registrado en el perfil.
+              </p>
+
+              <p style={{ color: '#555', lineHeight: '1.6' }}>
+                <strong>Nombre de tu Espacio / Marca:</strong> En la parte superior derecha de tu panel encontrarás un casillero editable con el nombre de tu marca (ej. Espacio de [Tu Nombre]). Puedes cambiarlo y personalizarlo cuando quieras; este nombre aparecerá automáticamente en los mensajes de WhatsApp que envíes a tus consultantes.
+              </p>
+
+              <p style={{ color: '#555', lineHeight: '1.6', marginBottom: 0 }}>
+                <strong>Estado de Suscripción:</strong> Verás un aviso visible que te indica exactamente hasta qué fecha se encuentra activo tu acceso al portal.
+              </p>
+            </div>
+
+            {/* PASO 2 */}
+            <div style={{
+              marginBottom: '25px',
+              padding: '20px',
+              background: '#f8fbfa',
+              border: '1px solid #dfeae6',
+              borderRadius: '8px'
+            }}>
+              <h3 style={{ color: '#2C4A3E', marginTop: 0 }}>
+                📅 Paso 2: Gestión de la Agenda y Turnos
+              </h3>
+
+              <p style={{ color: '#555', lineHeight: '1.6' }}>
+                La pestaña <strong>"📅 Mi Agenda"</strong> es tu centro de control diario para organizar los encuentros con tus consultantes.
+              </p>
+
+              <h4 style={{ color: '#2C4A3E', marginBottom: '8px' }}>
+                Cómo agendar un nuevo turno:
+              </h4>
+
+              <ul style={{ color: '#555', lineHeight: '1.8', paddingLeft: '25px' }}>
+                <li>Completa el Nombre del paciente.</li>
+                <li>Ingresa su Teléfono/WhatsApp (con código de país y área, ej: 549341...).</li>
+                <li>Selecciona la Disciplina o Terapia que realizarán dentro de la lista desplegable de más de 43 opciones disponibles.</li>
+                <li>Elige la Fecha y la Hora.</li>
+                <li>Haz clic en <strong>"Agendar Turno 📅"</strong>. El turno quedará guardado al instante en Supabase.</li>
+              </ul>
+
+              <h4 style={{ color: '#2C4A3E', marginBottom: '8px' }}>
+                Enviar recordatorio automático por WhatsApp:
+              </h4>
+
+              <ul style={{ color: '#555', lineHeight: '1.8', paddingLeft: '25px' }}>
+                <li>Al lado de cada turno agendado verás un botón verde con el ícono de WhatsApp (💬).</li>
+                <li>Al presionarlo, el sistema abrirá automáticamente tu WhatsApp con un mensaje preconfigurado que dice:</li>
+              </ul>
+
+              <div style={{
+                background: '#fff',
+                borderLeft: '4px solid #25D366',
+                padding: '12px 15px',
+                margin: '10px 0 15px 0',
+                color: '#555',
+                fontStyle: 'italic',
+                lineHeight: '1.6'
+              }}>
+                "Hola [Nombre]! Te escribo de [Tu Espacio] (Terapeuta: [Tu Nombre]) para recordarte tu turno de [Terapia] programado para el día [Fecha] a las [Hora] hs. ¡Te esperamos! ✨"
+              </div>
+
+              <p style={{ color: '#555', lineHeight: '1.6' }}>
+                Solo debes hacer clic en enviar y tu paciente recibirá el aviso de manera inmediata.
+              </p>
+
+              <p style={{ color: '#555', lineHeight: '1.6', marginBottom: 0 }}>
+                <strong>Eliminar turnos:</strong> Si un turno se cancela o reprograma, puedes retirarlo de la agenda haciendo clic en el botón de eliminar (🗑️).
+              </p>
+            </div>
+
+            {/* PASO 3 */}
+            <div style={{
+              marginBottom: '25px',
+              padding: '20px',
+              background: '#f8fbfa',
+              border: '1px solid #dfeae6',
+              borderRadius: '8px'
+            }}>
+              <h3 style={{ color: '#2C4A3E', marginTop: 0 }}>
+                🗓️ Paso 3: Configuración de Días, Horarios y Calendario Diario
+              </h3>
+
+              <p style={{ color: '#555', lineHeight: '1.6' }}>
+                En la pestaña <strong>"🗓️ Días y Calendario de Turnos"</strong> organizas tus tiempos de trabajo y visualizas las franjas libres del día.
+              </p>
+
+              <h4 style={{ color: '#2C4A3E', marginBottom: '8px' }}>
+                Definir tus horarios laborales:
+              </h4>
+
+              <ul style={{ color: '#555', lineHeight: '1.8', paddingLeft: '25px' }}>
+                <li>Selecciona el día (Lunes, Martes, etc. o bloques como Lunes a Viernes).</li>
+                <li>Ingresa la hora de inicio y de fin de tu jornada de atención.</li>
+                <li>Haz clic en <strong>"Agregar Franja ➕"</strong>.</li>
+              </ul>
+
+              <h4 style={{ color: '#2C4A3E', marginBottom: '8px' }}>
+                Calendario Interactivo por Día:
+              </h4>
+
+              <ul style={{ color: '#555', lineHeight: '1.8', paddingLeft: '25px', marginBottom: 0 }}>
+                <li>Utiliza el selector de fecha para elegir el día que deseas consultar.</li>
+                <li>El sistema te mostrará franjas horarias marcadas en <strong style={{ color: '#27ae60' }}>VERDE (DISPONIBLE)</strong> o <strong style={{ color: '#b7950b' }}>AMARILLO (OCUPADO)</strong> con el detalle del paciente.</li>
+                <li>Si una franja está libre y deseas agendar un turno en ese preciso momento, simplemente haz clic en el botón <strong>"+ Agendar en este horario"</strong> y te llevará directo al formulario con la hora ya cargada.</li>
+              </ul>
+            </div>
+
+            {/* PASO 4 */}
+            <div style={{
+              marginBottom: '10px',
+              padding: '20px',
+              background: '#f8fbfa',
+              border: '1px solid #dfeae6',
+              borderRadius: '8px'
+            }}>
+              <h3 style={{ color: '#2C4A3E', marginTop: 0 }}>
+                📂 Paso 4: Historias Clínicas y Fichas de Pacientes
+              </h3>
+
+              <p style={{ color: '#555', lineHeight: '1.6' }}>
+                En la pestaña <strong>"📂 Pacientes"</strong> mantienes un historial clínico ordenado y adaptado a la especificidad de las terapias holísticas.
+              </p>
+
+              <h4 style={{ color: '#2C4A3E', marginBottom: '8px' }}>
+                Crear una nueva ficha:
+              </h4>
+
+              <ul style={{ color: '#555', lineHeight: '1.8', paddingLeft: '25px' }}>
+                <li>Rellena el Nombre y Apellido y el Teléfono del consultante.</li>
+                <li>Selecciona su Terapia Principal de la lista (ej: Péndulo Hebreo, Registros Akashicos, Reiki, Biodescodificación, etc.).</li>
+              </ul>
+
+              <h4 style={{ color: '#2C4A3E', marginBottom: '8px' }}>
+                Parámetro Específico Dinámico:
+              </h4>
+
+              <p style={{ color: '#555', lineHeight: '1.6' }}>
+                Al elegir la terapia, el sistema cambiará automáticamente el campo específico pidiéndote el dato exacto de esa disciplina (por ejemplo: si elegiste Péndulo Hebreo, te pedirá "Etiquetas / Miasmas detectados"; si elegiste Flores de Bach, te pedirá la "Fórmula Floral Personalizada").
+              </p>
+
+              <h4 style={{ color: '#2C4A3E', marginBottom: '8px' }}>
+                Notas Generales y Evolución:
+              </h4>
+
+              <p style={{ color: '#555', lineHeight: '1.6' }}>
+                Utiliza el cuadro de texto inferior para apuntar observaciones emocionales, sensaciones o pautas para la próxima sesión.
+              </p>
+
+              <h4 style={{ color: '#2C4A3E', marginBottom: '8px' }}>
+                Guardado en la Nube:
+              </h4>
+
+              <p style={{ color: '#555', lineHeight: '1.6', marginBottom: 0 }}>
+                Haz clic en <strong>"Guardar Nuevo Paciente ➕"</strong>. Cada ficha se ordenará en una cuadrícula visual con todas las notas y datos listos para consultar en tus próximas consultas.
+              </p>
+            </div>
+
+            <div style={{
+              marginTop: '25px',
+              padding: '18px 20px',
+              background: '#e8f8f5',
+              border: '1px solid #a3e4d7',
+              borderRadius: '8px',
+              color: '#117a65',
+              lineHeight: '1.6',
+              fontWeight: 'bold'
+            }}>
+              🌟 ¡Listo! Con estos simples pasos, cualquier terapeuta de la comunidad podrá exprimir al 100% el potencial de su nuevo sistema automatizado.
+            </div>
           </div>
         </section>
       )}
