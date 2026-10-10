@@ -53,7 +53,15 @@ const Navbar: React.FC<NavbarProps> = ({ session, onAbrirAuth }) => {
           </a>
 
           {/* Menú Desktop (Navegación + Botón de Registro) */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
+            <button 
+              onClick={() => {
+                window.scrollTo({ top: 400, behavior: 'smooth' });
+              }} 
+              className="text-emerald-700 font-semibold text-sm transition-all hover:scale-105 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200"
+            >
+              💻 Software Terapeutas
+            </button>
             <button 
               onClick={() => scrollToSection('servicios')} 
               className="text-slate-700 hover:text-purple-700 font-medium text-sm transition-all hover:scale-105"
@@ -130,6 +138,15 @@ const Navbar: React.FC<NavbarProps> = ({ session, onAbrirAuth }) => {
       {isMenuOpen && (
         <div className="md:hidden bg-white/95 backdrop-blur-lg border-b border-purple-100 py-6 px-6 shadow-xl animate-fade-in">
           <div className="flex flex-col space-y-4">
+            <button 
+              onClick={() => {
+                setIsMenuOpen(false);
+                window.scrollTo({ top: 400, behavior: 'smooth' });
+              }} 
+              className="text-left text-emerald-800 font-bold py-2 border-b border-purple-50 bg-emerald-50/50 px-3 rounded-lg"
+            >
+              💻 Software Terapeutas (1 Mes Gratis)
+            </button>
             <button 
               onClick={() => scrollToSection('servicios')} 
               className="text-left text-slate-800 hover:text-purple-700 font-semibold py-2 border-b border-purple-50"

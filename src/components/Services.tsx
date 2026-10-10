@@ -33,8 +33,7 @@ import {
   ExternalLink,
   ChevronDown,
   ChevronUp,
-  Award,
-  EyeIcon
+  Award
 } from 'lucide-react';
 
 import { supabase } from '../supabaseClient';
@@ -479,6 +478,18 @@ export const Services: React.FC<ServicesProps> = ({
 
   return (
     <section id="servicios" className="py-8 px-4 max-w-7xl mx-auto">
+      
+      {/* Insignia Profesional: Diferenciador Visual de Cursos (Pago Único) */}
+      <div className="mb-8 text-center bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 text-white p-6 rounded-3xl shadow-lg border border-purple-300/30">
+        <span className="bg-purple-700/80 text-purple-100 text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 inline-block">
+          📚 Academia & Formación Holística
+        </span>
+        <h2 className="text-2xl md:text-3xl font-bold mt-1">Cursos y Packs de Capacitación</h2>
+        <p className="text-purple-200 text-xs md:text-sm mt-1 max-w-xl mx-auto">
+          Adquirí formación profesional especializada con <span className="font-semibold text-white underline decoration-purple-400">acceso ilimitado de por vida y un único pago</span> (sin abonos mensuales).
+        </p>
+      </div>
+
       {!session && (
         <div className="mb-8 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
@@ -521,16 +532,22 @@ export const Services: React.FC<ServicesProps> = ({
           
           const tituloLimpio = service.title.toLowerCase().trim();
           const estaComprado = comprasIds.includes(cursoIdReal) || 
-                               comprasTitulos.includes(tituloLimpio) ||
-                               comprasTitulos.some(t => t.includes(tituloLimpio) || tituloLimpio.includes(t));
+                                comprasTitulos.includes(tituloLimpio) ||
+                                comprasTitulos.some(t => t.includes(tituloLimpio) || tituloLimpio.includes(t));
 
           return (
-            <Card key={index} className="rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
-              <CardHeader>
+            <Card key={index} className="rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow relative border border-purple-100/60">
+              
+              {/* Etiqueta flotante indicando claramente el modelo comercial */}
+              <div className="absolute top-3 right-3 bg-purple-100 text-purple-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm flex items-center gap-1">
+                <span>✨ Pago Único</span>
+              </div>
+
+              <CardHeader className="pt-6">
                 <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center mb-1">
                   {service.icon}
                 </div>
-                <CardTitle className="text-lg">{service.title}</CardTitle>
+                <CardTitle className="text-lg pr-16">{service.title}</CardTitle>
                 <div className="text-sm text-slate-600">
                   {service.description}
                 </div>
@@ -633,14 +650,6 @@ export const Services: React.FC<ServicesProps> = ({
                           <CreditCard className="w-4 h-4"/>
                           Ver Datos de Pago 🌍
                         </button>
-
-                        <a
-                          href={`/prueba?curso=${encodeURIComponent(service.title)}`}
-                          className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-all shadow-md transform hover:scale-[1.02]"
-                        >
-                          <EyeIcon className="w-4 h-4 animate-pulse"/>
-                          👁️ ¡Revisá el material antes de comprar!
-                        </a>
                       </div>
                     ) : (
                       <div className="space-y-2">
@@ -651,14 +660,6 @@ export const Services: React.FC<ServicesProps> = ({
                           <Lock className="w-4 h-4 inline mr-1"/>
                           Ingresar para Comprar
                         </button>
-
-                        <a
-                          href={`/prueba?curso=${encodeURIComponent(service.title)}`}
-                          className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-all shadow-md transform hover:scale-[1.02]"
-                        >
-                          <EyeIcon className="w-4 h-4 animate-pulse"/>
-                          👁️ ¡Revisá el material antes de comprar!
-                        </a>
                       </div>
                     )}
                   </div>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { supabase } from './supabaseClient';
 import imagenCertificado from './assets/certificado.jpg';
-
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -15,27 +14,26 @@ import WhatsAppButton from './components/WhatsAppButton';
 import { Auth } from './components/Auth';
 import { AdminPanel } from './components/AdminPanel';
 import { PortalTerapeuta } from './components/PortalTerapeuta';
-import PruebaPackHolistico from './components/PruebaPackHolistico'; // 👈 Importado correctamente
+import PruebaPackHolistico from './components/PruebaPackHolistico'; 
+import Verificacion from './components/Verificacion';
 
-// Componente de Promoción del Portal del Terapeuta con enlaces directos a WhatsApp
+
 const PromocionPortalTerapeuta: React.FC = () => {
   const telefonoWhatsApp = "5493413375533";
-
   const generarUrlWhatsApp = (pais: string) => {
-    const mensaje = `Hola! Me interesa contratar el Portal del Terapeuta para ${pais}. ¿Me brindan más información y los medios de pago? ✨`;
+    const mensaje = `¡Hola! Me interesa probar la plataforma/software para terapeutas en ${pais} y aprovechar el 1 mes GRATIS de prueba. ¿Me brindan más información para comenzar? ✨`;
     return `https://wa.me/${telefonoWhatsApp}?text=${encodeURIComponent(mensaje)}`;
   };
-
   return (
     <section style={{ padding: '60px 20px', backgroundColor: '#f4f8f6', fontFamily: 'Arial, sans-serif', color: '#333' }}>
       <div style={{ maxWidth: '1200px', margin: 'auto' }}>
         
         {/* Cabecera explicativa */}
         <div style={{ textAlign: 'center', marginBottom: '45px' }}>
-          <span style={{ background: '#e8f8f5', color: '#117a65', padding: '6px 16px', borderRadius: '20px', fontSize: '13px', fontWeight: 'bold' }}>
-            ✨ Software Profesional Exclusivo para Terapeutas
+          <span style={{ background: '#e8f8f5', color: '#117a65', padding: '6px 16px', borderRadius: '20px', fontSize: '13px', fontWeight: 'bold', display: 'inline-block', marginBottom: '10px' }}>
+            💻 SOFTWARE DE GESTIÓN PARA CONSULTORIOS • SUSCRIPCIÓN MENSUAL
           </span>
-          <h2 style={{ color: '#2C4A3E', fontSize: '32px', margin: '15px 0 12px 0' }}>
+          <h2 style={{ color: '#2C4A3E', fontSize: '32px', margin: '10px 0 12px 0' }}>
             Lleva tu Consultorio Holístico al Siguiente Nivel con Automatización Total
           </h2>
           <p style={{ fontSize: '16px', color: '#555', maxWidth: '850px', margin: 'auto', lineHeight: '1.6' }}>
@@ -72,8 +70,11 @@ const PromocionPortalTerapeuta: React.FC = () => {
 
         {/* Título de Planes y Valores */}
         <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-          <h3 style={{ color: '#2C4A3E', fontSize: '26px', margin: 0 }}>Planes de Acceso mensuales y Valores por País</h3>
-          <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Elige el tiempo de suscripción y potencia tu consultorio hoy mismo.</p>
+          <span style={{ background: '#fef3c7', color: '#92400e', padding: '4px 12px', borderRadius: '12px', fontSize: '12px', fontWeight: 'bold' }}>
+            🎁 ¡PROMO ESPECIAL: 1 MES GRATIS DE PRUEBA!
+          </span>
+          <h3 style={{ color: '#2C4A3E', fontSize: '26px', margin: '10px 0 0 0' }}>Planes de Suscripción Mensual por País</h3>
+          <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Comenzá hoy con 1 mes gratis y luego elegí el plan que mejor se adapte a tu consultorio.</p>
         </div>
 
         {/* Carteles de Precios Multimoneda */}
@@ -82,73 +83,76 @@ const PromocionPortalTerapeuta: React.FC = () => {
           {/* ARGENTINA */}
           <div style={{ background: '#fff', border: '2px solid #27ae60', borderRadius: '14px', padding: '25px', textAlign: 'center', boxShadow: '0 4px 12px rgba(39, 174, 96, 0.1)' }}>
             <span style={{ fontSize: '32px' }}>🇦🇷</span>
-            <h4 style={{ margin: '10px 0 15px 0', color: '#2C4A3E', fontSize: '20px' }}>Argentina</h4>
-            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>1 Mes: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>$2.000</strong></div>
+            <h4 style={{ margin: '10px 0 5px 0', color: '#2C4A3E', fontSize: '20px' }}>Argentina</h4>
+            <div style={{ fontSize: '11px', color: '#27ae60', fontWeight: 'bold', marginBottom: '10px' }}>✨ 1 Mes de Prueba Gratis</div>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>1 Mes: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>$2.000 / mes</strong></div>
             <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>3 Meses: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>$5.500</strong></div>
             <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>6 Meses: <strong style={{ color: '#27ae60', fontSize: '17px' }}>$11.000</strong></div>
             <a 
               href={generarUrlWhatsApp('Argentina')}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ display: 'block', width: '100%', boxSizing: 'border-box', textAlign: 'center', textDecoration: 'none', marginTop: '15px', background: '#2C4A3E', color: '#fff', padding: '10px', borderRadius: '6px', fontWeight: 'bold' }}
+              style={{ display: 'block', width: '100%', boxSizing: 'border-box', textAlign: 'center', textDecoration: 'none', marginTop: '15px', background: '#27ae60', color: '#fff', padding: '10px', borderRadius: '6px', fontWeight: 'bold', fontSize: '13px' }}
             >
-              Contratar Plan (Arg)
+              🚀 Probar 1 Mes Gratis (Arg)
             </a>
           </div>
 
           {/* ECUADOR */}
           <div style={{ background: '#fff', border: '2px solid #2980b9', borderRadius: '14px', padding: '25px', textAlign: 'center', boxShadow: '0 4px 12px rgba(41, 128, 185, 0.1)' }}>
             <span style={{ fontSize: '32px' }}>🇪🇨</span>
-            <h4 style={{ margin: '10px 0 15px 0', color: '#2C4A3E', fontSize: '20px' }}>Ecuador</h4>
-            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>1 Mes: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>$2 USD</strong></div>
+            <h4 style={{ margin: '10px 0 5px 0', color: '#2C4A3E', fontSize: '20px' }}>Ecuador</h4>
+            <div style={{ fontSize: '11px', color: '#2980b9', fontWeight: 'bold', marginBottom: '10px' }}>✨ 1 Mes de Prueba Gratis</div>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>1 Mes: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>$2 USD / mes</strong></div>
             <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>3 Meses: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>$5 USD</strong></div>
             <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>6 Meses: <strong style={{ color: '#2980b9', fontSize: '17px' }}>$10 USD</strong></div>
             <a 
               href={generarUrlWhatsApp('Ecuador')}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ display: 'block', width: '100%', boxSizing: 'border-box', textAlign: 'center', textDecoration: 'none', marginTop: '15px', background: '#2C4A3E', color: '#fff', padding: '10px', borderRadius: '6px', fontWeight: 'bold' }}
+              style={{ display: 'block', width: '100%', boxSizing: 'border-box', textAlign: 'center', textDecoration: 'none', marginTop: '15px', background: '#2980b9', color: '#fff', padding: '10px', borderRadius: '6px', fontWeight: 'bold', fontSize: '13px' }}
             >
-              Contratar Plan (Ecu)
+              🚀 Probar 1 Mes Gratis (Ecu)
             </a>
           </div>
 
           {/* PERÚ */}
           <div style={{ background: '#fff', border: '2px solid #e67e22', borderRadius: '14px', padding: '25px', textAlign: 'center', boxShadow: '0 4px 12px rgba(230, 126, 34, 0.1)' }}>
             <span style={{ fontSize: '32px' }}>🇵🇪</span>
-            <h4 style={{ margin: '10px 0 15px 0', color: '#2C4A3E', fontSize: '20px' }}>Perú</h4>
-            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>1 Mes: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>S/ 76</strong></div>
+            <h4 style={{ margin: '10px 0 5px 0', color: '#2C4A3E', fontSize: '20px' }}>Perú</h4>
+            <div style={{ fontSize: '11px', color: '#e67e22', fontWeight: 'bold', marginBottom: '10px' }}>✨ 1 Mes de Prueba Gratis</div>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>1 Mes: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>S/ 76 / mes</strong></div>
             <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>3 Meses: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>S/ 190</strong></div>
             <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>6 Meses: <strong style={{ color: '#e67e22', fontSize: '17px' }}>S/ 380</strong></div>
             <a 
               href={generarUrlWhatsApp('Perú')}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ display: 'block', width: '100%', boxSizing: 'border-box', textAlign: 'center', textDecoration: 'none', marginTop: '15px', background: '#2C4A3E', color: '#fff', padding: '10px', borderRadius: '6px', fontWeight: 'bold' }}
+              style={{ display: 'block', width: '100%', boxSizing: 'border-box', textAlign: 'center', textDecoration: 'none', marginTop: '15px', background: '#e67e22', color: '#fff', padding: '10px', borderRadius: '6px', fontWeight: 'bold', fontSize: '13px' }}
             >
-              Contratar Plan (Per)
+              🚀 Probar 1 Mes Gratis (Per)
             </a>
           </div>
 
           {/* URUGUAY */}
           <div style={{ background: '#fff', border: '2px solid #8e44ad', borderRadius: '14px', padding: '25px', textAlign: 'center', boxShadow: '0 4px 12px rgba(142, 68, 173, 0.1)' }}>
             <span style={{ fontSize: '32px' }}>🇺🇾</span>
-            <h4 style={{ margin: '10px 0 15px 0', color: '#2C4A3E', fontSize: '20px' }}>Uruguay</h4>
-            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>1 Mes: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>$82 UYU</strong></div>
+            <h4 style={{ margin: '10px 0 5px 0', color: '#2C4A3E', fontSize: '20px' }}>Uruguay</h4>
+            <div style={{ fontSize: '11px', color: '#8e44ad', fontWeight: 'bold', marginBottom: '10px' }}>✨ 1 Mes de Prueba Gratis</div>
+            <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>1 Mes: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>$82 UYU / mes</strong></div>
             <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>3 Meses: <strong style={{ color: '#2C4A3E', fontSize: '15px' }}>$205 UYU</strong></div>
             <div style={{ margin: '8px 0', fontSize: '14px', color: '#555' }}>6 Meses: <strong style={{ color: '#8e44ad', fontSize: '17px' }}>$410 UYU</strong></div>
             <a 
               href={generarUrlWhatsApp('Uruguay')}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ display: 'block', width: '100%', boxSizing: 'border-box', textAlign: 'center', textDecoration: 'none', marginTop: '15px', background: '#2C4A3E', color: '#fff', padding: '10px', borderRadius: '6px', fontWeight: 'bold' }}
+              style={{ display: 'block', width: '100%', boxSizing: 'border-box', textAlign: 'center', textDecoration: 'none', marginTop: '15px', background: '#8e44ad', color: '#fff', padding: '10px', borderRadius: '6px', fontWeight: 'bold', fontSize: '13px' }}
             >
-              Contratar Plan (Uru)
+              🚀 Probar 1 Mes Gratis (Uru)
             </a>
           </div>
 
         </div>
-
       </div>
     </section>
   );
@@ -157,13 +161,10 @@ const PromocionPortalTerapeuta: React.FC = () => {
 export const MainApp: React.FC = () => {
   const [session, setSession] = useState<any>(null);
   const [mostrarModalAuth, setMostrarModalAuth] = useState<boolean>(false);
-
   const [cursoSeleccionadoCert, setCursoSeleccionadoCert] = useState<any>(null);
   const [nombreAlumnoCert, setNombreAlumnoCert] = useState<string>('');
   const [fechaCert, setFechaCert] = useState<string>('');
   const [mostrarCertificadoVista, setMostrarCertificadoVista] = useState<boolean>(false);
-
-  // Estados para controlar si el usuario logueado es terapeuta activo
   const [esTerapeutaActivo, setEsTerapeutaActivo] = useState<boolean>(false);
 
   const listaCursosPack = [
@@ -368,12 +369,10 @@ export const MainApp: React.FC = () => {
                 <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', fontSize: '12px', color: '#333' }}>Nombre y Apellido:</label>
                 <input type="text" value={nombreAlumnoCert} onChange={(e) => setNombreAlumnoCert(e.target.value)} placeholder="Tu nombre completo" style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc', boxSizing: 'border-box' }} />
               </div>
-
               <div>
                 <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', fontSize: '12px', color: '#333' }}>Fecha de finalización:</label>
                 <input type="date" value={fechaCert} onChange={(e) => setFechaCert(e.target.value)} style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc', boxSizing: 'border-box' }} />
               </div>
-
               {esPackHolistico && (
                 <div>
                   <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', fontSize: '12px', color: '#2C4A3E' }}>Seleccionar Terapia del Pack:</label>
@@ -388,7 +387,7 @@ export const MainApp: React.FC = () => {
 
             <div id="printable-certificate" style={{ width: '100%', maxWidth: '900px', aspectRatio: '1.414 / 1', position: 'relative', margin: '0 auto', boxShadow: '0 4px 15px rgba(0,0,0,0.3)', overflow: 'hidden', boxSizing: 'border-box', backgroundColor: '#fff' }}>
               <img src={imagenCertificado} alt="Fondo Certificado" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 1 }} />
-
+              
               <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', textAlign: 'center', padding: '30px 40px 20px 32%', boxSizing: 'border-box', fontFamily: 'Georgia, serif' }}>
                 
                 <div>
@@ -401,7 +400,6 @@ export const MainApp: React.FC = () => {
                   <h1 style={{ borderBottom: '2px solid #2C4A3E', color: '#1a237e', margin: '0 auto 8px auto', fontSize: '26px', fontWeight: 'bold', paddingBottom: '2px', width: '80%', fontFamily: 'Arial, sans-serif' }}>
                     {nombreAlumnoCert || 'Nombre del Estudiante'}
                   </h1>
-
                   <p style={{ color: '#555', fontSize: '12px', margin: '0 0 5px 0', fontStyle: 'italic' }}>El cual ha completado satisfactoriamente el curso intensivo de:</p>
                   
                   <h3 style={{ color: '#1B3026', fontSize: '21px', margin: '0', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold', fontFamily: 'Arial, sans-serif' }}>
@@ -424,13 +422,57 @@ export const MainApp: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ width: '100%', textAlign: 'center' }}>
-                  <p style={{ margin: '0 0 2px 0', fontFamily: 'Brush Script MT, cursive, serif', fontSize: '22px', color: '#1B3026' }}>Diego Martin</p>
-                  <div style={{ width: '130px', height: '1px', backgroundColor: '#2C4A3E', margin: '0 auto 3px auto' }}></div>
-                  <p style={{ margin: '0', fontSize: '9px', color: '#555', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Diego Martin • Terapeuta con 10 años de experiencia en terapias holísticas</p>
+                {/* ✍️ SECCIÓN DE FIRMA DIGITALIZADA Y CÓDIGO QR DE VERIFICACIÓN */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginTop: '5px', padding: '0 10px', boxSizing: 'border-box' }}>
+                  
+                  {/* CÓDIGO QR DINÁMICO DE VERIFICACIÓN */}
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    <img
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
+                        'https://www.terapiasholisticasdmf.com/verificar?alumno=' + 
+                        (nombreAlumnoCert || '') + 
+                        '&curso=' + 
+                        (esPackHolistico ? terapiaElegidaPack || '' : tituloCursoActual || '') + 
+                        '&fecha=' + 
+                        (fechaCert || '')
+                      )}`}
+                      alt="QR Verificación"
+                      style={{
+                        width: '80px',
+                        height: '80px',
+                        backgroundColor: '#fff',
+                        padding: '2px',
+                        border: '1px solid #2C4A3E',
+                        borderRadius: '4px',
+                      }}
+                    />
+                    <span style={{ fontSize: '6px', color: '#333', marginTop: '2px', fontWeight: 'bold' }}>
+                      ESCANEE PARA VERIFICAR
+                    </span>
+                  </div>
+
+                  {/* FIRMA Y ACLARACIÓN */}
+                  <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, marginLeft: '10px' }}>
+                    <img
+                      src="/firma-diego.png" 
+                      alt="Firma Diego Martín" 
+                      style={{ 
+                        maxHeight: '105px', 
+                        objectFit: 'contain', 
+                        marginBottom: '6px',
+                        transform: 'translateY(-15px)',
+                        pointerEvents: 'none'
+                      }} 
+                    />
+                    <div style={{ width: '160px', height: '1.5px', backgroundColor: '#2C4A3E', margin: '-10px auto 4px auto' }}></div>
+                    <p style={{ margin: '0', fontSize: '9px', color: '#555', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                      Diego Martin • Terapeuta con 10 años de experiencia en terapias holísticas
+                    </p>
+                  </div>
+
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', fontSize: '9px', color: '#555', borderTop: '1px solid rgba(44,74,62,0.2)', paddingTop: '6px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', fontSize: '9px', color: '#555', borderTop: '1px solid rgba(44,74,62,0.2)', paddingTop: '4px' }}>
                   <span>🌐 www.terapiasholisticasdmf.com</span>
                   <span>🇦🇷 Formación con propósito, para una vida más consciente.</span>
                 </div>
@@ -442,14 +484,13 @@ export const MainApp: React.FC = () => {
               <button onClick={() => window.print()} style={{ flex: 1, padding: '12px', backgroundColor: '#2C4A3E', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '15px' }}>Descargar Certificado 📥</button>
               <button onClick={() => setMostrarCertificadoVista(false)} style={{ padding: '12px 20px', backgroundColor: '#e74c3c', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>Cerrar ❌</button>
             </div>
-
+            
             <p style={{ fontSize: '11px', color: '#d9534f', textAlign: 'center', marginTop: '10px', fontWeight: 'bold' }}>
               ⚠️ <em>Para una mejor experiencia visual y un resultado óptimo, se recomienda realizar la descarga directamente desde una PC o Notebook.</em>
             </p>
           </div>
         </div>
       )}
-
     </div>
   );
 };
@@ -460,6 +501,8 @@ export const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<MainApp />} />
         <Route path="/prueba" element={<PruebaPackHolistico />} />
+        {/* 🛡️ RUTA DE VERIFICACIÓN DE CERTIFICADOS */}
+        <Route path="/verificar" element={<Verificacion />} />
       </Routes>
     </BrowserRouter>
   );

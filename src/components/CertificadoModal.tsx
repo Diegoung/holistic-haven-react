@@ -322,7 +322,7 @@ export const CertificadoModal: React.FC<Props> = ({
             id="printable-certificate"
             style={{
               border: '3px solid #2C4A3E',
-              padding: '10px 14px',
+              padding: '12px 16px',
               textAlign: 'center',
               fontFamily: 'Georgia, serif',
               backgroundImage: 'url(/terapiasholisticas1.jpg)',
@@ -331,19 +331,36 @@ export const CertificadoModal: React.FC<Props> = ({
               backgroundColor: '#fff',
               boxSizing: 'border-box',
               width: '100%',
-              maxWidth: '410px',
+              maxWidth: '430px',
+              position: 'relative',
             }}
           >
+            {/* ENCABEZADO INSTITUCIONAL */}
+            <p
+              style={{
+                fontSize: '8px',
+                letterSpacing: '1.5px',
+                color: '#2C4A3E',
+                fontWeight: 'bold',
+                margin: '0 0 2px 0',
+                textTransform: 'uppercase',
+              }}
+            >
+              Escuela de Terapias Holísticas D.M.F
+            </p>
+
             {/* TITULO */}
             <h1
               style={{
-                fontSize: '12px',
+                fontSize: '13px',
                 color: '#2C4A3E',
                 margin: '2px 0',
+                fontWeight: 'bold',
+                letterSpacing: '1px',
                 textShadow: '0px 1px 2px rgba(255,255,255,0.9)',
               }}
             >
-              CERTIFICADO DE PARTICIPACIÓN
+            CERTIFICADO DE PARTICIPACIÓN
             </h1>
 
             {/* OTORGA */}
@@ -351,7 +368,7 @@ export const CertificadoModal: React.FC<Props> = ({
               style={{
                 fontStyle: 'italic',
                 color: '#555',
-                margin: '2px 0',
+                margin: '3px 0 1px 0',
                 fontSize: '9px',
               }}
             >
@@ -361,14 +378,16 @@ export const CertificadoModal: React.FC<Props> = ({
             {/* NOMBRE */}
             <h2
               style={{
-                borderBottom: '2px solid #2C4A3E',
+                borderBottom: '1.5px solid #1a237e',
                 display: 'inline-block',
-                width: '80%',
-                margin: '4px 0',
-                fontSize: '13px',
+                width: '75%',
+                margin: '2px 0 4px 0',
+                fontSize: '14px',
                 color: '#1a237e',
+                fontWeight: 'bold',
                 textShadow: '0px 1px 2px rgba(255,255,255,0.9)',
                 wordBreak: 'break-word',
+                paddingBottom: '2px',
               }}
             >
               {nombre || 'Nombre del Alumno'}
@@ -383,35 +402,135 @@ export const CertificadoModal: React.FC<Props> = ({
                 fontSize: '9px',
               }}
             >
-              Por haber completado el curso de:
+              El cual ha completado satisfactoriamente el curso intensivo de:
             </p>
 
             {/* NOMBRE TERAPIA */}
             <h3
               style={{
-                color: '#2e7d32',
+                color: '#111',
                 fontSize: '11px',
+                fontWeight: 'bold',
                 textTransform: 'uppercase',
-                margin: '4px 0',
+                margin: '3px 0 8px 0',
+                letterSpacing: '1px',
                 textShadow: '0px 1px 2px rgba(255,255,255,0.9)',
                 wordBreak: 'break-word',
               }}
             >
-              {esPack ? terapiaPack || 'Seleccione una terapia' : curso.titulo}
+              {esPack ? terapiaPack || 'SELEACCIONE UNA TERAPIA' : curso?.titulo}
             </h3>
 
-            {/* FECHA */}
-            <p
+            {/* DETALLES DEL CURSO Y FECHA */}
+            <div
               style={{
-                marginTop: '6px',
-                marginBottom: '2px',
-                fontSize: '9px',
+                display: 'flex',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+                margin: '8px 0 10px 0',
+                fontSize: '8px',
                 color: '#333',
-                textShadow: '0px 1px 2px rgba(255,255,255,0.9)',
               }}
             >
-              Fecha: {fecha ? fecha.split('-').reverse().join('/') : 'DD/MM/AAAA'}
-            </p>
+              <div>
+                <span style={{ fontWeight: 'bold', display: 'block' }}>📅 FECHA</span>
+                {fecha ? fecha.split('-').reverse().join('/') : 'DD/MM/AAAA'}
+              </div>
+              <div>
+                <span style={{ fontWeight: 'bold', display: 'block' }}>🎓 DURACIÓN</span>
+                Curso Intensivo
+              </div>
+              <div>
+                <span style={{ fontWeight: 'bold', display: 'block' }}>📜 MODALIDAD</span>
+                Formación Integral
+              </div>
+            </div>
+
+            {/* SECCIÓN FIRMA Y CÓDIGO QR DE VERIFICACIÓN */}
+            <div
+              style={{
+                marginTop: '10px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '0 15px',
+              }}
+            >
+              {/* CÓDIGO QR DINÁMICO */}
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <img
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
+                    'https://www.terapiasholisticasdmf.com/verificar?alumno=' + 
+                    (nombre || '') + 
+                    '&curso=' + 
+                    (esPack ? terapiaPack || '' : curso?.titulo || '') + 
+                    '&fecha=' + 
+                    (fecha || '')
+                  )}`}
+                  alt="QR Verificación"
+                  style={{
+                    width: '38px',
+                    height: '38px',
+                    backgroundColor: '#fff',
+                    padding: '2px',
+                    border: '1px solid #1a237e',
+                    borderRadius: '4px',
+                  }}
+                />
+                <span style={{ fontSize: '6px', color: '#333', marginTop: '2px', fontWeight: 'bold' }}>
+                  ESCANEE PARA VERIFICAR
+                </span>
+              </div>
+
+              {/* SECCIÓN FIRMA DE PUÑO Y LETRA */}
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flex: 1,
+                  marginLeft: '10px',
+                }}
+              >
+                {/* IMAGEN DE LA FIRMA DIGITALIZADA */}
+                <img
+                  src="/firma-diego.png"
+                  alt="Firma Diego Martín"
+                  style={{
+                    height: '42px',
+                    objectFit: 'contain',
+                    marginBottom: '-5px',
+                    pointerEvents: 'none',
+                  }}
+                />
+
+                {/* ACLARACIÓN DE LA FIRMA */}
+                <p
+                  style={{
+                    fontSize: '7px',
+                    color: '#333',
+                    textTransform: 'uppercase',
+                    fontWeight: 'bold',
+                    letterSpacing: '0.5px',
+                    margin: 0,
+                    borderTop: '1px solid #777',
+                    paddingTop: '2px',
+                    width: '90%',
+                    textAlign: 'center',
+                  }}
+                >
+                  Diego Martin • Terapeuta con 10 años de experiencia en Terapias Holísticas
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
