@@ -398,7 +398,7 @@ export const MainApp: React.FC = () => {
             <div id="printable-certificate" style={{ width: '100%', maxWidth: '900px', aspectRatio: '1.414 / 1', position: 'relative', margin: '0 auto', boxShadow: '0 4px 15px rgba(0,0,0,0.3)', overflow: 'hidden', boxSizing: 'border-box', backgroundColor: '#fff' }}>
               <img src={imagenCertificado} alt="Fondo Certificado" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 1 }} />
               
-              <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', textAlign: 'center', padding: '30px 40px 20px 32%', boxSizing: 'border-box', fontFamily: 'Georgia, serif' }}>
+              <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', textAlign: 'center', padding: '30px 40px 20px 22%', boxSizing: 'border-box', fontFamily: 'Georgia, serif' }}>
                 
                 <div>
                   <p style={{ fontSize: '10px', letterSpacing: '3px', color: '#444', margin: '0 0 3px 0', textTransform: 'uppercase', fontWeight: 'bold' }}>ESCUELA DE TERAPIAS HOLÍSTICAS D.M.F</p>
@@ -407,12 +407,15 @@ export const MainApp: React.FC = () => {
                 </div>
 
                 <div style={{ width: '100%' }}>
-                  <h1 style={{ borderBottom: '2px solid #2C4A3E', color: '#1a237e', margin: '0 auto 8px auto', fontSize: '26px', fontWeight: 'bold', paddingBottom: '2px', width: '80%', fontFamily: 'Arial, sans-serif' }}>
+                  {/* 👇 PARA SUBIR/BAJAR EL NOMBRE DEL ALUMNO: Modifica el primer valor del 'margin' (ej: '-10px auto 8px auto' para subirlo) */}
+                  <h1 style={{ borderBottom: '2px solid #2C4A3E', color: '#1a237e', margin: '-15px auto 8px auto', fontSize: '35px', fontWeight: 'bold', paddingBottom: '2px', width: '80%', fontFamily: 'Arial, sans-serif' }}>
                     {nombreAlumnoCert || 'Nombre del Estudiante'}
                   </h1>
+                  
                   <p style={{ color: '#555', fontSize: '12px', margin: '0 0 5px 0', fontStyle: 'italic' }}>El cual ha completado satisfactoriamente el curso intensivo de:</p>
                   
-                  <h3 style={{ color: '#1B3026', fontSize: '21px', margin: '0', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold', fontFamily: 'Arial, sans-serif' }}>
+                  {/* 👇 PARA SUBIR/BAJAR EL NOMBRE DE LA TERAPIA: Modifica el primer valor del 'margin' (ej: '12px 0 0 0' para bajarlo) */}
+                  <h3 style={{ color: '#1B3026', fontSize: '40px', margin: '45px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold', fontFamily: 'Arial, sans-serif' }}>
                     {esPackHolistico ? terapiaElegidaPack : tituloCursoActual}
                   </h3>
                 </div>
@@ -433,7 +436,7 @@ export const MainApp: React.FC = () => {
                 </div>
 
                 {/* ✍️ SECCIÓN DE FIRMA DIGITALIZADA Y CÓDIGO QR DE VERIFICACIÓN */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginTop: '5px', padding: '0 10px', boxSizing: 'border-box' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginTop: '5px', padding: '0 50px', boxSizing: 'border-box' }}>
                   
                   {/* CÓDIGO QR DINÁMICO DE VERIFICACIÓN */}
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
