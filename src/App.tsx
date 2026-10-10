@@ -17,7 +17,6 @@ import { PortalTerapeuta } from './components/PortalTerapeuta';
 import PruebaPackHolistico from './components/PruebaPackHolistico'; 
 import Verificacion from './components/Verificacion';
 
-
 const PromocionPortalTerapeuta: React.FC = () => {
   const telefonoWhatsApp = "5493413375533";
   const generarUrlWhatsApp = (pais: string) => {
@@ -40,7 +39,6 @@ const PromocionPortalTerapeuta: React.FC = () => {
             Una plataforma diseñada a medida para organizar tu práctica profesional. Olvídate de las agendas de papel y el desorden administrativo: gestiona turnos de forma inteligente, mantén historias clínicas avanzadas adaptadas a más de 43 disciplinas y comunícate con tus consultantes mediante avisos automáticos por WhatsApp.
           </p>
         </div>
-
         {/* Características principales */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '25px', marginBottom: '50px' }}>
           <div style={{ background: '#fff', padding: '25px', borderRadius: '12px', border: '1px solid #e0e8e4', boxShadow: '0 4px 10px rgba(0,0,0,0.03)' }}>
@@ -50,7 +48,6 @@ const PromocionPortalTerapeuta: React.FC = () => {
               Visualiza tus turnos por día u hora, configura tus franjas laborales y mantén un control absoluto de tus espacios disponibles.
             </p>
           </div>
-
           <div style={{ background: '#fff', padding: '25px', borderRadius: '12px', border: '1px solid #e0e8e4', boxShadow: '0 4px 10px rgba(0,0,0,0.03)' }}>
             <div style={{ fontSize: '30px', marginBottom: '10px' }}>💬</div>
             <h3 style={{ color: '#2C4A3E', margin: '0 0 10px 0', fontSize: '18px' }}>Recordatorios Automáticos por WhatsApp</h3>
@@ -58,7 +55,6 @@ const PromocionPortalTerapeuta: React.FC = () => {
               Envía mensajes personalizados directamente al WhatsApp de tus pacientes con un solo clic, incluyendo el nombre de tu espacio y los detalles del turno.
             </p>
           </div>
-
           <div style={{ background: '#fff', padding: '25px', borderRadius: '12px', border: '1px solid #e0e8e4', boxShadow: '0 4px 10px rgba(0,0,0,0.03)' }}>
             <div style={{ fontSize: '30px', marginBottom: '10px' }}>📂</div>
             <h3 style={{ color: '#2C4A3E', margin: '0 0 10px 0', fontSize: '18px' }}>Historias Clínicas por Terapia</h3>
@@ -67,7 +63,6 @@ const PromocionPortalTerapeuta: React.FC = () => {
             </p>
           </div>
         </div>
-
         {/* Título de Planes y Valores */}
         <div style={{ textAlign: 'center', marginBottom: '30px' }}>
           <span style={{ background: '#fef3c7', color: '#92400e', padding: '4px 12px', borderRadius: '12px', fontSize: '12px', fontWeight: 'bold' }}>
@@ -76,7 +71,6 @@ const PromocionPortalTerapeuta: React.FC = () => {
           <h3 style={{ color: '#2C4A3E', fontSize: '26px', margin: '10px 0 0 0' }}>Planes de Suscripción Mensual por País</h3>
           <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Comenzá hoy con 1 mes gratis y luego elegí el plan que mejor se adapte a tu consultorio.</p>
         </div>
-
         {/* Carteles de Precios Multimoneda */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px' }}>
           
@@ -97,7 +91,6 @@ const PromocionPortalTerapeuta: React.FC = () => {
               🚀 Probar 1 Mes Gratis (Arg)
             </a>
           </div>
-
           {/* ECUADOR */}
           <div style={{ background: '#fff', border: '2px solid #2980b9', borderRadius: '14px', padding: '25px', textAlign: 'center', boxShadow: '0 4px 12px rgba(41, 128, 185, 0.1)' }}>
             <span style={{ fontSize: '32px' }}>🇪🇨</span>
@@ -115,7 +108,6 @@ const PromocionPortalTerapeuta: React.FC = () => {
               🚀 Probar 1 Mes Gratis (Ecu)
             </a>
           </div>
-
           {/* PERÚ */}
           <div style={{ background: '#fff', border: '2px solid #e67e22', borderRadius: '14px', padding: '25px', textAlign: 'center', boxShadow: '0 4px 12px rgba(230, 126, 34, 0.1)' }}>
             <span style={{ fontSize: '32px' }}>🇵🇪</span>
@@ -133,7 +125,6 @@ const PromocionPortalTerapeuta: React.FC = () => {
               🚀 Probar 1 Mes Gratis (Per)
             </a>
           </div>
-
           {/* URUGUAY */}
           <div style={{ background: '#fff', border: '2px solid #8e44ad', borderRadius: '14px', padding: '25px', textAlign: 'center', boxShadow: '0 4px 12px rgba(142, 68, 173, 0.1)' }}>
             <span style={{ fontSize: '32px' }}>🇺🇾</span>
@@ -151,7 +142,6 @@ const PromocionPortalTerapeuta: React.FC = () => {
               🚀 Probar 1 Mes Gratis (Uru)
             </a>
           </div>
-
         </div>
       </div>
     </section>
@@ -191,7 +181,6 @@ export const MainApp: React.FC = () => {
     "Constelaciones familiares",
     "Vidas pasadas Kharma y Dharma"
   ];
-
   const [terapiaElegidaPack, setTerapiaElegidaPack] = useState<string>(listaCursosPack[0]);
   const ADMIN_EMAIL = "diego56@admin.com"; 
 
@@ -203,7 +192,6 @@ export const MainApp: React.FC = () => {
         verificarPermisosTerapeuta(session.user.id);
       }
     });
-
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       if (session?.user) {
@@ -214,7 +202,6 @@ export const MainApp: React.FC = () => {
         setEsTerapeutaActivo(false);
       }
     });
-
     return () => subscription.unsubscribe();
   }, []);
 
@@ -236,21 +223,17 @@ export const MainApp: React.FC = () => {
         .select('rol, suscripcion_hasta')
         .eq('id', userId)
         .single();
-
       if (error || !perfil) {
         setEsTerapeutaActivo(false);
         return;
       }
-
       const esRolTerapeuta = perfil.rol === 'terapeuta';
       let suscripcionVigente = false;
-
       if (perfil.suscripcion_hasta) {
         const hoy = new Date();
         const vencimiento = new Date(perfil.suscripcion_hasta);
         suscripcionVigente = vencimiento >= hoy;
       }
-
       setEsTerapeutaActivo(esRolTerapeuta && suscripcionVigente);
     } catch (err) {
       console.error('Error al verificar permisos de terapeuta:', err);
@@ -274,7 +257,6 @@ export const MainApp: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-holistic-beige text-holistic-dark relative">
-      
       <style>{`
         @media print {
           @page {
@@ -314,7 +296,6 @@ export const MainApp: React.FC = () => {
           }
         }
       `}</style>
-
       <Navbar session={session} onAbrirAuth={() => setMostrarModalAuth(true)} />
       <Hero />
       
@@ -332,6 +313,35 @@ export const MainApp: React.FC = () => {
       )}
 
       <Services session={session} onAbrirAuth={() => setMostrarModalAuth(true)} onAbrirCertificado={abrirCertificado} />
+
+      {/* 📜 SECCIÓN PROMOCIONAL: CERTIFICADO OFICIAL Y VERIFICACIÓN QR (AL FINAL DEL LISTADO DE CURSOS) */}
+      <section style={{ padding: '60px 20px', backgroundColor: '#fff' }}>
+        <div style={{ maxWidth: '900px', margin: 'auto', backgroundColor: '#f8fdfa', border: '1px solid #d1e7dd', borderRadius: '16px', padding: '35px 25px', textAlign: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.04)' }}>
+          <h3 style={{ color: '#1B3026', fontSize: '24px', fontWeight: 'bold', marginBottom: '12px' }}>
+            🎓 Certificación Oficial con Verificación Digital QR
+          </h3>
+          <p style={{ color: '#4a5568', fontSize: '15px', lineHeight: '1.6', marginBottom: '25px', maxWidth: '750px', margin: '0 auto 25px auto' }}>
+            Al finalizar cualquiera de nuestras formaciones o packs de capacitación, recibirás tu <strong>Certificado Digital de Finalización</strong>. Cada diploma cuenta con un <strong>Código QR único integrado en el sello oficial</strong> de la Escuela de Terapias Holísticas D.M.F, que permite a tus consultantes o instituciones verificar la autenticidad de tus estudios en tiempo real desde nuestro sitio web oficial.
+          </p>
+
+          {/* Imagen de muestra del certificado */}
+          <div style={{ display: 'inline-block', borderRadius: '10px', overflow: 'hidden', border: '2px solid #2C4A3E', boxShadow: '0 8px 20px rgba(0,0,0,0.12)', maxWidth: '100%', marginBottom: '20px' }}>
+            <img
+              src="/Certificado.jpg" 
+              alt="Certificado de Muestra con QR - Escuela D.M.F"
+              style={{ width: '100%', maxWidth: '600px', height: 'auto', display: 'block' }}
+            />
+          </div>
+
+          {/* Destacados rápidos */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '25px', flexWrap: 'wrap', marginTop: '10px', fontSize: '14px', color: '#2C4A3E', fontWeight: 'bold' }}>
+            <span>✅ Validez Profesional</span>
+            <span>🔒 Sistema Antifraude</span>
+            <span>📲 Verificación QR Instantánea</span>
+          </div>
+        </div>
+      </section>
+
       <Testimonials />
       <EspacioHolistico />
       <PreguntasFrecuentes />
@@ -469,14 +479,30 @@ export const MainApp: React.FC = () => {
                       Diego Martin • Terapeuta con 10 años de experiencia en terapias holísticas
                     </p>
                   </div>
-
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', fontSize: '9px', color: '#555', borderTop: '1px solid rgba(44,74,62,0.2)', paddingTop: '4px' }}>
-                  <span>🌐 www.terapiasholisticasdmf.com</span>
-                  <span>🇦🇷 Formación con propósito, para una vida más consciente.</span>
-                </div>
-
+                <div style={{ 
+  display: 'flex', 
+  justifyContent: 'space-between', 
+  alignItems: 'center', 
+  width: '100%', 
+  fontSize: '11px', 
+  color: '#000', 
+  borderTop: '1px solid rgba(44,74,62,0.2)', 
+  paddingTop: '6px',
+  fontFamily: "'Montserrat', Arial, sans-serif"
+}}>
+  <span style={{ fontWeight: 'bold' }}>🌐 www.terapiasholisticasdmf.com</span>
+  <span style={{ fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '5px' }}>
+    {/* Bandera vectorial asegurada */}
+    <svg width="14" height="10" viewBox="0 0 30 20" style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+      <rect width="30" height="20" fill="#75AADB"/>
+      <rect y="6.66" width="30" height="6.66" fill="#FFFFFF"/>
+      <circle cx="15" cy="10" r="2" fill="#F4B313"/>
+    </svg>
+    Formación con propósito, para una vida más consciente.
+  </span>
+</div>
               </div>
             </div>
 
